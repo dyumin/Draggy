@@ -32,6 +32,11 @@
     self.hudWindow.opaque = NO;
     self.hudWindow.hasShadow = NO;
     self.hudWindow.backgroundColor = NSColor.clearColor;
+    self.hudWindow.ignoresMouseEvents = YES;
+    self.hudWindow.acceptsMouseMovedEvents = NO;
+    [self.hudWindow unregisterDraggedTypes];
+    
+//    [self.hudWindow becomeFirstResponder]
     
     self.hudWindow.level = NSScreenSaverWindowLevel;
     
@@ -45,6 +50,8 @@
     contentView.wantsLayer = YES;
     contentView.layer.backgroundColor = NSColor.redColor.CGColor;
     
+    [contentView unregisterDraggedTypes];
+    
     NSVisualEffectView* hudBackground = [NSVisualEffectView new];
     hudBackground.material = NSVisualEffectMaterialHUDWindow;
     hudBackground.state = NSVisualEffectStateActive;
@@ -53,6 +60,8 @@
     
     hudBackground.layer.cornerRadius = 20.0;
     hudBackground.layer.masksToBounds = YES;
+    
+    [hudBackground unregisterDraggedTypes];
     
     self.hudWindow.contentView = hudBackground;
     
@@ -149,7 +158,7 @@
         if (self.eventNumber != eventNumber)
         {
             self.eventNumber = eventNumber;
-            [self.hudWindow orderFrontRegardless];
+            [self.hudWindow orderFront:self];
             
 //            if (!contentView.layer.opacity)
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -159,10 +168,10 @@
                       //  started below have completed or been cancelled.
                        NSLog(@"All done!");
                    }];
-                [NSAnimationContext.currentContext setDuration:0.25];
+//                [NSAnimationContext.currentContext setDuration:10];
 //                NSAnimationContext.currentContext.allowsImplicitAnimation = YES;
 //                contentView.animator.layer.opacity = 1.0;
-                self.hudWindow.animator.alphaValue = 1;
+                self.hudWindow.animator.alphaValue = 0.9;
                 [NSAnimationContext endGrouping];
             });
             
@@ -173,7 +182,7 @@
 //            } completionHandler:<#^(void)completionHandler#>]
         }
         
-        [self.hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, self.hudWindow.frame.size.width, self.hudWindow.frame.size.height) display:YES animate:NO];
+        [self.hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x + 20, NSEvent.mouseLocation.y + 20, self.hudWindow.frame.size.width, self.hudWindow.frame.size.height) display:YES animate:NO];
     }];
     
 //    [ViewController takeSystemPreferencesWindowScreenshot:&CGRectNull];
