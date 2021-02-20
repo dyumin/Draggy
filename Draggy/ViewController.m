@@ -59,7 +59,11 @@
 //    [contentView unregisterDraggedTypes];
     
     NSVisualEffectView* hudBackground = [NSVisualEffectView new];
-    hudBackground.material = NSVisualEffectMaterialHUDWindow;
+    if (@available(macOS 10.14, *)) {
+        hudBackground.material = NSVisualEffectMaterialHUDWindow;
+    } else {
+        hudBackground.material = NSVisualEffectMaterialSidebar;
+    }
     hudBackground.state = NSVisualEffectStateActive;
     
     hudBackground.wantsLayer = YES;
