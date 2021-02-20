@@ -9,20 +9,20 @@
 /* Begin PBXBuildFile section */
 		CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797D7625DDE95F00DF1435 /* AppDelegate.swift */; };
 		CC797D7B25DDE96100DF1435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC797D7A25DDE96100DF1435 /* Assets.xcassets */; };
-		CC797D7E25DDE96100DF1435 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC797D7C25DDE96100DF1435 /* Main.storyboard */; };
-		CC797D8A25DDE9B400DF1435 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC797D8925DDE9B400DF1435 /* ViewController.m */; };
+		CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC797DA425E1701700DF1435 /* DragSessionManager.m */; };
+		CC797DA825E1738D00DF1435 /* DraggyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DA725E1738D00DF1435 /* DraggyApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CC797D7325DDE95F00DF1435 /* Draggy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draggy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC797D7625DDE95F00DF1435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC797D7A25DDE96100DF1435 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CC797D7D25DDE96100DF1435 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC797D7F25DDE96100DF1435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC797D8025DDE96100DF1435 /* Draggy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Draggy.entitlements; sourceTree = "<group>"; };
 		CC797D8725DDE9B300DF1435 /* Draggy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Draggy-Bridging-Header.h"; sourceTree = "<group>"; };
-		CC797D8825DDE9B400DF1435 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CC797D8925DDE9B400DF1435 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CC797DA325E1701700DF1435 /* DragSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragSessionManager.h; sourceTree = "<group>"; };
+		CC797DA425E1701700DF1435 /* DragSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragSessionManager.m; sourceTree = "<group>"; };
+		CC797DA725E1738D00DF1435 /* DraggyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggyApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +57,12 @@
 			children = (
 				CC797D7625DDE95F00DF1435 /* AppDelegate.swift */,
 				CC797D7A25DDE96100DF1435 /* Assets.xcassets */,
-				CC797D7C25DDE96100DF1435 /* Main.storyboard */,
 				CC797D7F25DDE96100DF1435 /* Info.plist */,
 				CC797D8025DDE96100DF1435 /* Draggy.entitlements */,
-				CC797D8825DDE9B400DF1435 /* ViewController.h */,
-				CC797D8925DDE9B400DF1435 /* ViewController.m */,
 				CC797D8725DDE9B300DF1435 /* Draggy-Bridging-Header.h */,
+				CC797DA325E1701700DF1435 /* DragSessionManager.h */,
+				CC797DA425E1701700DF1435 /* DragSessionManager.m */,
+				CC797DA725E1738D00DF1435 /* DraggyApp.swift */,
 			);
 			path = Draggy;
 			sourceTree = "<group>";
@@ -126,7 +126,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC797D7B25DDE96100DF1435 /* Assets.xcassets in Resources */,
-				CC797D7E25DDE96100DF1435 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +136,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC797D8A25DDE9B400DF1435 /* ViewController.m in Sources */,
+				CC797DA825E1738D00DF1435 /* DraggyApp.swift in Sources */,
+				CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */,
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CC797D7C25DDE96100DF1435 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CC797D7D25DDE96100DF1435 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CC797D8125DDE96100DF1435 /* Debug */ = {
