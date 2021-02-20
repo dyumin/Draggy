@@ -81,14 +81,14 @@
 
                     self->_lastPasteboardItems = self->_dragPasteboard.pasteboardItems;
 
-                    [NSAnimationContext beginGrouping];
-                    [NSAnimationContext.currentContext setCompletionHandler:^{
-                        NSLog(@"All done! _hudWindow close");
-                        [self->_hudWindow close];
-                    }];
-                    [NSAnimationContext.currentContext setDuration:0.3];
-                    self->_hudWindow.animator.alphaValue = 0;
-                    [NSAnimationContext endGrouping];
+//                    [NSAnimationContext beginGrouping];
+//                    [NSAnimationContext.currentContext setCompletionHandler:^{
+//                        NSLog(@"All done! _hudWindow close");
+//                        [self->_hudWindow close];
+//                    }];
+//                    [NSAnimationContext.currentContext setDuration:0.3];
+//                    self->_hudWindow.animator.alphaValue = 0;
+//                    [NSAnimationContext endGrouping];
                 }
 
                 return;
