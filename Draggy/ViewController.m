@@ -9,52 +9,50 @@
 
 @interface ViewController ()
 
-@property (nonatomic) NSWindow* hudWindow;
-@property (nonatomic) NSInteger eventNumber;
-@property (nonatomic) NSInteger ignoreEventNumber;
-@property (nonatomic) NSPasteboard* dragPasteboard;
-
-@property NSArray<NSPasteboardItem *>* lastPasteboardItems;
-
 @end
 
 @implementation ViewController
 {
-    NSArray* _classes;
+    NSArray<NSPasteboardType>* _acceptedPasteboardTypes;
+    NSWindow* _hudWindow;
+    NSInteger _eventNumber;
+    NSInteger _ignoreEventNumber;
+    NSPasteboard* _dragPasteboard;
+    NSArray<NSPasteboardItem *>* _lastPasteboardItems;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _classes = @[ NSPasteboardTypeFileURL ]; // todo: optimise
+    _acceptedPasteboardTypes = @[ NSPasteboardTypeFileURL ]; // todo: optimise
     
-    self.dragPasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
+    _dragPasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
     
-    self.hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(20, 20, 100, 150) styleMask:(NSWindowStyleMaskBorderless | NSWindowStyleMaskResizable) backing:NSBackingStoreBuffered defer:NO];
+    _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(20, 20, 100, 150) styleMask:(NSWindowStyleMaskBorderless | NSWindowStyleMaskResizable) backing:NSBackingStoreBuffered defer:NO];
     
-    self.hudWindow.releasedWhenClosed = NO;
-//    self.hudWindow.ignoresMouseEvents = YES;
+    _hudWindow.releasedWhenClosed = NO;
+//    _hudWindow.ignoresMouseEvents = YES;
     
-    self.hudWindow.opaque = NO;
-    self.hudWindow.hasShadow = NO;
-    self.hudWindow.backgroundColor = NSColor.clearColor;
-//    self.hudWindow.ignoresMouseEvents = YES;
-//    self.hudWindow.acceptsMouseMovedEvents = NO;
-//    [self.hudWindow unregisterDraggedTypes];
+    _hudWindow.opaque = NO;
+    _hudWindow.hasShadow = NO;
+    _hudWindow.backgroundColor = NSColor.clearColor;
+//    _hudWindow.ignoresMouseEvents = YES;
+//    _hudWindow.acceptsMouseMovedEvents = NO;
+//    [_hudWindow unregisterDraggedTypes];
     
-//    [self.hudWindow becomeFirstResponder]
+//    [_hudWindow becomeFirstResponder]
     
-    self.hudWindow.level = NSScreenSaverWindowLevel;
+    _hudWindow.level = NSScreenSaverWindowLevel;
     
-//    self.hudWindow.contentView = [[NSView alloc] initWithFrame:NSMakeRect(100, 200, 300, 400)];
-//    self.hudWindow.contentView.wantsLayer = YES;
-//    self.hudWindow.contentView.layer.backgroundColor = NSColor.greenColor.CGColor;
+//    _hudWindow.contentView = [[NSView alloc] initWithFrame:NSMakeRect(100, 200, 300, 400)];
+//    _hudWindow.contentView.wantsLayer = YES;
+//    _hudWindow.contentView.layer.backgroundColor = NSColor.greenColor.CGColor;
 //
-//    [self.hudWindow.contentView setNeedsDisplay:YES];
+//    [_hudWindow.contentView setNeedsDisplay:YES];
     
     NSView* contentView = [[NSView alloc] initWithFrame:NSMakeRect(100, 200, 300, 400)];
     contentView.wantsLayer = YES;
-    contentView.layer.backgroundColor = NSColor.redColor.CGColor;
+//    contentView.layer.backgroundColor = NSColor.redColor.CGColor;
     
 //    [contentView unregisterDraggedTypes];
     
@@ -73,7 +71,7 @@
     
 //    [hudBackground unregisterDraggedTypes];
     
-    self.hudWindow.contentView = hudBackground;
+    _hudWindow.contentView = hudBackground;
     
     [hudBackground addSubview:contentView];
     
@@ -90,51 +88,51 @@
     
 //    co
     
-//    self.hudWindow.contentViewController.view.frame = self.hudWindow.frame;
+//    _hudWindow.contentViewController.view.frame = _hudWindow.frame;
     
-    [self.hudWindow orderFront:nil];
+    [_hudWindow orderFront:nil];
     
-//    [self.dragPasteboard addObserver:self forKeyPath:@"pasteboardItems.count" options:NSKeyValueObservingOptionNew context:nil];
+//    [_dragPasteboard addObserver:self forKeyPath:@"pasteboardItems.count" options:NSKeyValueObservingOptionNew context:nil];
     
     [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskLeftMouseDragged|NSEventMaskLeftMouseUp handler:^(NSEvent * _Nonnull event)
     {
         const NSInteger eventNumber = event.eventNumber;
-        if (eventNumber == self.ignoreEventNumber)
+        if (eventNumber == _ignoreEventNumber)
         {
             // first drag event does not yep adds elements to pasteboard
-            if ([self.lastPasteboardItems isEqualToArray:self.dragPasteboard.pasteboardItems]) // todo: refactor
+            if ([_lastPasteboardItems isEqualToArray:_dragPasteboard.pasteboardItems]) // todo: refactor
             {
                 NSLog(@"return var 3");
                 return;
             }
 
-            self.ignoreEventNumber = 0;
+            _ignoreEventNumber = 0;
         }
         
         if (event.type == NSEventTypeLeftMouseUp)
         {
-            if (self.eventNumber)
+            if (_eventNumber)
             {
-                self.eventNumber = 0;
+                _eventNumber = 0;
 //                contentView.layer.opacity = 0.0;
-//                self.hudWindow.alphaValue = 0;
-//                [self.hudWindow close];
+//                _hudWindow.alphaValue = 0;
+//                [_hudWindow close];
                 
-                self.lastPasteboardItems = self.dragPasteboard.pasteboardItems;
+                _lastPasteboardItems = _dragPasteboard.pasteboardItems;
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [NSAnimationContext beginGrouping];
                     [NSAnimationContext.currentContext setCompletionHandler:^{
                           // This block will be invoked when all of the animations
                           //  started below have completed or been cancelled.
-                           NSLog(@"All done! self.hudWindow close");
-                           [self.hudWindow close];
-//                           [self.dragPasteboard clearContents]; // may break dropping
+                           NSLog(@"All done! _hudWindow close");
+                           [_hudWindow close];
+//                           [_dragPasteboard clearContents]; // may break dropping
                        }];
                     [NSAnimationContext.currentContext setDuration:0.3];
     //                NSAnimationContext.currentContext.allowsImplicitAnimation = YES;
     //                contentView.animator.layer.opacity = 1.0;
-                    self.hudWindow.animator.alphaValue = 0;
+                    _hudWindow.animator.alphaValue = 0;
                     [NSAnimationContext endGrouping];
                 });
             }
@@ -142,49 +140,49 @@
             return;
         }
         
-        if (!self.eventNumber)
+        if (!_eventNumber)
         {
-            NSArray<NSPasteboardItem *> *pasteboardItems = self.dragPasteboard.pasteboardItems;
+            NSArray<NSPasteboardItem *> *pasteboardItems = _dragPasteboard.pasteboardItems;
             
             if (!pasteboardItems.count)
             {
                 NSLog(@"return var 1");
-                self.ignoreEventNumber = eventNumber;
+                _ignoreEventNumber = eventNumber;
                 return;
             }
             
-            if ([self.lastPasteboardItems isEqualToArray:pasteboardItems])
+            if ([_lastPasteboardItems isEqualToArray:pasteboardItems])
             {
                 NSLog(@"return var 4");
-                self.ignoreEventNumber = eventNumber;
+                _ignoreEventNumber = eventNumber;
                 return;
             }
 
             // https://stackoverflow.com/questions/56199062/get-uti-of-nspasteboardtypefileurl
-//            NSArray<NSURL*>* urls = [self.dragPasteboard readObjectsForClasses:_classes options:nil];
+//            NSArray<NSURL*>* urls = [_dragPasteboard readObjectsForClasses:_classes options:nil];
             
             bool anyUrlFound = false;
             for (NSPasteboardItem* item in pasteboardItems)
             {
-                if ([item availableTypeFromArray:self->_classes] != nil)
+                if ([item availableTypeFromArray:self->_acceptedPasteboardTypes] != nil)
                 {
                     anyUrlFound = true;
                     break;
                 }
             }
-//            const bool anyUrlFound = [self.dragPasteboard availableTypeFromArray:self->_classes] != nil; // actually good but may change in future?
+//            const bool anyUrlFound = [_dragPasteboard availableTypeFromArray:self->_classes] != nil; // actually good but may change in future?
             if (!anyUrlFound)
             {
                 NSLog(@"return var 2");
-                self.ignoreEventNumber = eventNumber;
+                _ignoreEventNumber = eventNumber;
                 return;
             }
         }
     
-        if (self.eventNumber != eventNumber)
+        if (_eventNumber != eventNumber)
         {
-            self.eventNumber = eventNumber;
-            [self.hudWindow orderFrontRegardless];
+            _eventNumber = eventNumber;
+            [_hudWindow orderFrontRegardless];
             
 //            if (!contentView.layer.opacity)
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -197,18 +195,18 @@
                 [NSAnimationContext.currentContext setDuration:0.25];
 //                NSAnimationContext.currentContext.allowsImplicitAnimation = YES;
 //                contentView.animator.layer.opacity = 1.0;
-                self.hudWindow.animator.alphaValue = 1;
+                _hudWindow.animator.alphaValue = 1;
                 [NSAnimationContext endGrouping];
             });
             
-//            [self.hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, self.hudWindow.frame.size.width, self.hudWindow.frame.size.height) display:YES animate:NO];
+//            [_hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, _hudWindow.frame.size.width, _hudWindow.frame.size.height) display:YES animate:NO];
             
 //        [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
 //                <#code#>
 //            } completionHandler:<#^(void)completionHandler#>]
         }
         
-        [self.hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, self.hudWindow.frame.size.width, self.hudWindow.frame.size.height) display:YES animate:NO];
+        [_hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, _hudWindow.frame.size.width, _hudWindow.frame.size.height) display:YES animate:NO];
     }];
     
 //    [ViewController takeSystemPreferencesWindowScreenshot:&CGRectNull];
@@ -216,8 +214,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (object == self.dragPasteboard) {
-        self.ignoreEventNumber = 0;
+    if (object == _dragPasteboard) {
+        _ignoreEventNumber = 0;
         return;
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
