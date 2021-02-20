@@ -1,5 +1,5 @@
 //
-//  DraggyApp.swift
+//  App.swift
 //  Draggy
 //
 //  Created by El D on 20.02.2021.
@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class DraggyApp : NSApplication
+class App : NSApplication
 {
     let _delegate = AppDelegate()
     
