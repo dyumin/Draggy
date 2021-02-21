@@ -68,7 +68,7 @@
                 // first drag event does not yep adds elements to pasteboard
                 if ([self->_lastPasteboardItems isEqualToArray:self->_dragPasteboard.pasteboardItems]) // todo: refactor
                 {
-                    NSLog(@"return var 3");
+//                    NSLog(@"return var 3");
                     return;
                 }
 
@@ -98,13 +98,13 @@
                 NSArray<NSPasteboardItem *> *pasteboardItems = self->_dragPasteboard.pasteboardItems;
 
                 if (!pasteboardItems.count) {
-                    NSLog(@"return var 1");
+//                    NSLog(@"return var 1");
                     self->_ignoreEventNumber = eventNumber;
                     return;
                 }
 
                 if ([self->_lastPasteboardItems isEqualToArray:pasteboardItems]) {
-                    NSLog(@"return var 4");
+//                    NSLog(@"return var 4");
                     self->_ignoreEventNumber = eventNumber;
                     return;
                 }
@@ -121,7 +121,7 @@
                 }
 
                 if (!anyUrlFound) {
-                    NSLog(@"return var 2");
+//                    NSLog(@"return var 2");
                     self->_ignoreEventNumber = eventNumber;
                     return;
                 }
