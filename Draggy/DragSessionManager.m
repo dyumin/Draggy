@@ -34,7 +34,7 @@
         _hudWindow.hasShadow = NO;
         _hudWindow.backgroundColor = NSColor.clearColor;
 
-        _hudWindow.level = NSScreenSaverWindowLevel;
+        _hudWindow.level = NSPopUpMenuWindowLevel;
 
         NSView *contentView = [[NSView alloc] initWithFrame:NSMakeRect(100, 200, 300, 400)];
         contentView.wantsLayer = YES;
