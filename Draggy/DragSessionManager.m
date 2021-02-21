@@ -15,6 +15,7 @@
     NSInteger _ignoreEventNumber;
     NSPasteboard *_dragPasteboard;
     NSArray<NSPasteboardItem *> *_lastPasteboardItems;
+    bool _stopTracking;
 }
 
 - (instancetype)init {
@@ -129,14 +130,20 @@
 
             if (self->_eventNumber != eventNumber) {
                 self->_eventNumber = eventNumber;
+                self->_stopTracking = false;
                 [self->_hudWindow orderFrontRegardless]; // todo: what if previous (close) animation still active
                 [NSAnimationContext beginGrouping];
                 [NSAnimationContext.currentContext setDuration:0.25];
+                NSAnimationContext.currentContext.completionHandler = ^
+                {
+                    self->_stopTracking = true;
+                };
                 self->_hudWindow.animator.alphaValue = 1;
                 [NSAnimationContext endGrouping];
             }
 
-            [self->_hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, self->_hudWindow.frame.size.width, self->_hudWindow.frame.size.height) display:YES animate:NO];
+            if (!self->_stopTracking)
+                [self->_hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, self->_hudWindow.frame.size.width, self->_hudWindow.frame.size.height) display:YES animate:NO];
         }];
     }
     return self;
