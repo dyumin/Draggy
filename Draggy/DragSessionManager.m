@@ -8,6 +8,8 @@
 #import "DragSessionManager.h"
 #import <Cocoa/Cocoa.h>
 
+static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
+
 @implementation DragSessionManager {
     NSArray<NSPasteboardType> *_acceptedPasteboardTypes;
     NSWindow *_hudWindow;
@@ -15,6 +17,7 @@
     NSInteger _ignoreEventNumber;
     NSPasteboard *_dragPasteboard;
     NSArray<NSPasteboardItem *> *_lastPasteboardItems;
+    __kindof NSViewController *_dragTargetViewController;
     bool _stopTracking;
 }
 
@@ -26,7 +29,7 @@
         _dragPasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
         _lastPasteboardItems = _dragPasteboard.pasteboardItems;
 
-        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(20, 20, 100, 150) styleMask:(NSWindowStyleMaskBorderless | NSWindowStyleMaskResizable) backing:NSBackingStoreBuffered defer:NO];
+        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 401, 275) styleMask:(NSWindowStyleMaskBorderless | NSWindowStyleMaskResizable) backing:NSBackingStoreBuffered defer:NO];
 
         _hudWindow.releasedWhenClosed = NO;
 
@@ -35,9 +38,6 @@
         _hudWindow.backgroundColor = NSColor.clearColor;
 
         _hudWindow.level = NSPopUpMenuWindowLevel;
-
-        NSView *contentView = [[NSView alloc] initWithFrame:NSMakeRect(100, 200, 300, 400)];
-        contentView.wantsLayer = YES;
 
         NSVisualEffectView *hudBackground = [NSVisualEffectView new];
         if (@available(macOS 10.14, *)) {
@@ -53,8 +53,14 @@
         hudBackground.layer.masksToBounds = YES;
 
         _hudWindow.contentView = hudBackground;
+        
+        NSStoryboard* dragTargetViewStoryboard = [NSStoryboard storyboardWithName:DragTargetViewStoryboardName bundle:nil];
 
+        _dragTargetViewController = dragTargetViewStoryboard.instantiateInitialController;
+        NSView *contentView = _dragTargetViewController.view;
         [hudBackground addSubview:contentView];
+        
+        contentView.wantsLayer = YES;
 
         [contentView.topAnchor constraintEqualToAnchor:hudBackground.topAnchor].active = YES;
         [contentView.bottomAnchor constraintEqualToAnchor:hudBackground.bottomAnchor].active = YES;

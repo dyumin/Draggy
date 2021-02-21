@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="DragTargetViewItem" customModule="Draggy" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="285" height="207"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b7q-Qw-i0Y">
+                    <rect key="frame" x="105" y="44" width="75" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="aDm-pm-My2"/>
+                        <constraint firstAttribute="width" constant="75" id="qbw-rq-CQD"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="gJp-bE-bAQ"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X76-9q-6td">
+                    <rect key="frame" x="124" y="20" width="37" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Im2-UM-KkL">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="X76-9q-6td" firstAttribute="centerX" secondItem="b7q-Qw-i0Y" secondAttribute="centerX" id="Jmm-Ah-sfo"/>
+                <constraint firstItem="b7q-Qw-i0Y" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="hoP-7C-txL"/>
+                <constraint firstAttribute="bottom" secondItem="X76-9q-6td" secondAttribute="bottom" constant="20" symbolic="YES" id="jMw-kN-Pti"/>
+                <constraint firstItem="X76-9q-6td" firstAttribute="top" secondItem="b7q-Qw-i0Y" secondAttribute="bottom" constant="8" symbolic="YES" id="ntK-JJ-L7U"/>
+            </constraints>
+            <point key="canvasLocation" x="-144.5" y="121.5"/>
+        </customView>
+        <customObject id="iI1-Ip-2tD" customClass="DragTargetViewItem" customModule="Draggy" customModuleProvider="target">
+            <connections>
+                <outlet property="icon" destination="b7q-Qw-i0Y" id="SoK-1P-pwz"/>
+                <outlet property="localizedName" destination="X76-9q-6td" id="1oV-3B-FZz"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="w8i-up-TnR"/>
+            </connections>
+        </customObject>
+    </objects>
+</document>

@@ -11,6 +11,11 @@
 		CC797D7B25DDE96100DF1435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC797D7A25DDE96100DF1435 /* Assets.xcassets */; };
 		CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC797DA425E1701700DF1435 /* DragSessionManager.m */; };
 		CC797DA825E1738D00DF1435 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DA725E1738D00DF1435 /* App.swift */; };
+		CC797DB025E17EF000DF1435 /* DragTargetView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC797DAF25E17EF000DF1435 /* DragTargetView.storyboard */; };
+		CC797DB725E180C300DF1435 /* DragTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DB625E180C300DF1435 /* DragTargetView.swift */; };
+		CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */; };
+		CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */; };
+		CC797DC225E1D25700DF1435 /* DragTargetViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,11 @@
 		CC797DA325E1701700DF1435 /* DragSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragSessionManager.h; sourceTree = "<group>"; };
 		CC797DA425E1701700DF1435 /* DragSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragSessionManager.m; sourceTree = "<group>"; };
 		CC797DA725E1738D00DF1435 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		CC797DAF25E17EF000DF1435 /* DragTargetView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DragTargetView.storyboard; sourceTree = "<group>"; };
+		CC797DB625E180C300DF1435 /* DragTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTargetView.swift; sourceTree = "<group>"; };
+		CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTargetViewData.swift; sourceTree = "<group>"; };
+		CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTargetViewItem.swift; sourceTree = "<group>"; };
+		CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DragTargetViewItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +73,21 @@
 				CC797DA325E1701700DF1435 /* DragSessionManager.h */,
 				CC797DA425E1701700DF1435 /* DragSessionManager.m */,
 				CC797DA725E1738D00DF1435 /* App.swift */,
+				CC797DC625E2B37A00DF1435 /* DragTargetView */,
 			);
 			path = Draggy;
+			sourceTree = "<group>";
+		};
+		CC797DC625E2B37A00DF1435 /* DragTargetView */ = {
+			isa = PBXGroup;
+			children = (
+				CC797DAF25E17EF000DF1435 /* DragTargetView.storyboard */,
+				CC797DB625E180C300DF1435 /* DragTargetView.swift */,
+				CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */,
+				CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */,
+				CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */,
+			);
+			path = DragTargetView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +148,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC797DB025E17EF000DF1435 /* DragTargetView.storyboard in Resources */,
 				CC797D7B25DDE96100DF1435 /* Assets.xcassets in Resources */,
+				CC797DC225E1D25700DF1435 /* DragTargetViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +162,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC797DA825E1738D00DF1435 /* App.swift in Sources */,
+				CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */,
 				CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */,
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
+				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
+				CC797DB725E180C300DF1435 /* DragTargetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +224,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -251,7 +279,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -276,7 +304,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.dyumin.Draggy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Draggy/Draggy-Bridging-Header.h";
@@ -301,7 +328,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.dyumin.Draggy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Draggy/Draggy-Bridging-Header.h";
