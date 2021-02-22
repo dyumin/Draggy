@@ -42,11 +42,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             if (keyValueObservedChange.kind == .insertion) {
                 self.runningApplications.insert(keyValueObservedChange.newValue!.first!, at: 0)
                 self.collectionView.performBatchUpdates {
-
                     self.collectionView.animator().insertItems(at: [IndexPath(item: 0, section: Sections.RunningApplications.rawValue)])
-
-                } completionHandler: { animationsFinished in
-
                 }
 
                 return
@@ -57,13 +53,8 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                 self.runningApplications.remove(at: index)
 
                 self.collectionView.performBatchUpdates {
-
                     self.collectionView.animator().deleteItems(at: [IndexPath(item: index, section: Sections.RunningApplications.rawValue)])
-
-                } completionHandler: { animationsFinished in
-
                 }
-
                 return
             }
 
@@ -88,13 +79,12 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
                         let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL]
                         self.suggestedApps.removeAll()
-                        if let suggestedApps = suggestedApps
-                        {
+                        if let suggestedApps = suggestedApps {
                             for url in suggestedApps {
                                 self.suggestedApps.append(Bundle(url: url)!)
                             }
                         }
-                        
+
                         DispatchQueue.main.async {
                             self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
                         }
@@ -222,6 +212,6 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
-        return NSSize(width: collectionView.frame.size.width, height: 15)
+        NSSize(width: collectionView.frame.size.width, height: 15)
     }
 }
