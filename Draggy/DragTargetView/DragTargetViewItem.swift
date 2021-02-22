@@ -10,6 +10,12 @@ import Cocoa
 class DragTargetViewItem: NSCollectionViewItem {
     
     @IBOutlet weak var icon: NSImageView!
+    {
+        didSet
+        {
+            icon.unregisterDraggedTypes() // https://stackoverflow.com/questions/5892464/cocoa-nsview-subview-blocking-drag-drop
+        }
+    }
 
     override var highlightState: NSCollectionViewItem.HighlightState
     {

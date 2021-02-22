@@ -101,7 +101,6 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         return .generic
     }
 
-    // TODO: sometimes this call isnt happening on very fast drag or if focus was lost
     func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionView.DropOperation) -> Bool {
 
         guard let targetApplication = { () -> URL? in
