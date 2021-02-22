@@ -107,6 +107,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         return .generic
     }
 
+    // TODO: sometimes this call isnt happening on very fast drag or if focus was lost
     func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionView.DropOperation) -> Bool {
 
         guard let targetApplication = { () -> URL? in
@@ -117,6 +118,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             }
             return nil
         }() else {
+
             return false
         }
 
@@ -149,12 +151,13 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
             dispatchGroup.wait()
 
-            if (error != nil) {
-                return false
+            if (error == nil) {
+                return true
             }
         } else {
             do {
                 try NSWorkspace.shared.open(urls, withApplicationAt: targetApplication, options: [NSWorkspace.LaunchOptions.async], configuration: [:])
+                return true
             } catch {
                 DispatchQueue.main.async {
                     let alert = NSAlert.init(error: error)
@@ -164,7 +167,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             }
         }
 
-        return true
+        return false
     }
 
     func numberOfSections(in collectionView: NSCollectionView) -> Int {

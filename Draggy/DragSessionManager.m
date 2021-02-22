@@ -107,6 +107,7 @@ static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
 
                     self->_lastPasteboardItems = self->_dragPasteboard.pasteboardItems;
 
+                    // TODO: debug disabled
 //                    [NSAnimationContext beginGrouping];
 //                    [NSAnimationContext.currentContext setCompletionHandler:^{
 //                        NSLog(@"All done! _hudWindow close");
@@ -160,7 +161,7 @@ static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
                 self->_stopTracking = false;
                 [self->_hudWindow orderFrontRegardless]; // todo: what if previous (close) animation still active
                 [NSAnimationContext beginGrouping];
-                [NSAnimationContext.currentContext setDuration:0.25];
+                [NSAnimationContext.currentContext setDuration:0.05];
                 NSAnimationContext.currentContext.completionHandler = ^{
                     self->_stopTracking = true;
                 };
