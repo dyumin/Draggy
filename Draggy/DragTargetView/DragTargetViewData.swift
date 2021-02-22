@@ -86,13 +86,15 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                             return
                         }
 
-                        let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)
-                        self.suggestedApps.removeAll(keepingCapacity: true)
-
-                        for url in suggestedApps!.takeUnretainedValue() as! [URL] {
-                            self.suggestedApps.append(Bundle(url: url)!)
+                        let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL]
+                        self.suggestedApps.removeAll()
+                        if let suggestedApps = suggestedApps
+                        {
+                            for url in suggestedApps {
+                                self.suggestedApps.append(Bundle(url: url)!)
+                            }
                         }
-
+                        
                         DispatchQueue.main.async {
                             self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
                         }
