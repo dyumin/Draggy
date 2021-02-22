@@ -58,8 +58,8 @@ static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
         hudBackground.wantsLayer = YES;
         hudBackground.emphasized = YES;
 
-        hudBackground.layer.cornerRadius = 20.0; // TODO: ignored, use NSVisualEffectView.maskImage?
-        hudBackground.layer.masksToBounds = YES;
+        hudBackground.layer.cornerRadius = 20.0;
+        hudBackground.layer.masksToBounds = YES; // Note: NSWindowStyleMaskTitled required in order for this to take effect
 
         _hudWindow.contentView = hudBackground;
 
