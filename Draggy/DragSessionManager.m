@@ -110,7 +110,7 @@ static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
                     // TODO: debug disabled
 //                    [NSAnimationContext beginGrouping];
 //                    [NSAnimationContext.currentContext setCompletionHandler:^{
-//                        NSLog(@"All done! _hudWindow close");
+////                        NSLog(@"All done! _hudWindow close");
 //                        [self->_hudWindow close];
 //                    }];
 //                    [NSAnimationContext.currentContext setDuration:0.3];
