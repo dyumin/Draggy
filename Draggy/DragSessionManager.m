@@ -37,7 +37,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
         _dragPasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
         _lastPasteboardItems = _dragPasteboard.pasteboardItems;
 
-        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 270, 405) styleMask:(NSWindowStyleMaskResizable|NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskFullSizeContentView) backing:NSBackingStoreBuffered defer:YES /* saves a couple mb on start */];
+        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 264, 406) styleMask:(NSWindowStyleMaskResizable|NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskFullSizeContentView) backing:NSBackingStoreBuffered defer:YES /* saves a couple mb on start */];
         _hudWindow.frameAutosaveName = WindowRestorationFrameName;
 
         _hudWindow.releasedWhenClosed = NO;
