@@ -192,10 +192,10 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         let headerView = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SectionHeader"), for: indexPath) as! SectionHeader
 
         if (indexPath.section == Sections.SuggestedApps.rawValue) {
-            headerView.stringValue = NSLocalizedString("SuggestedApps", comment: "")
+            headerView.stringValue = NSLocalizedString("suggested_apps_section_header_title", comment: "")
 
         } else if (indexPath.section == Sections.RunningApplications.rawValue) {
-            headerView.stringValue = NSLocalizedString("RunningApplications", comment: "")
+            headerView.stringValue = NSLocalizedString("running_applications_section_header_title", comment: "")
         }
 
         return headerView
