@@ -89,7 +89,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
             const NSInteger eventNumber = event.eventNumber;
 
             const NSEventType eventType = event.type;
-            if (eventType == NSEventMaskPressure) { // TODO: global NSEventMaskPressure isnt working
+            if (eventType == NSEventMaskPressure) { // TODO: global NSEventMaskPressure isn't working
 
             }
 
@@ -127,7 +127,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
             if (!self->_eventNumber) {
                 NSArray<NSPasteboardItem *> *pasteboardItems = self->_dragPasteboard.pasteboardItems;
 
-                if (!pasteboardItems.count) {
+                if (pasteboardItems.count != 1) { // multiple items support currently disabled
 //                    NSLog(@"return var 1");
                     self->_ignoreEventNumber = eventNumber;
                     return;
