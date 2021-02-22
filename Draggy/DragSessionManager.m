@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
+static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWindow";
 
 @interface DragSessionManager ()
 
@@ -36,7 +37,8 @@ static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
         _dragPasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
         _lastPasteboardItems = _dragPasteboard.pasteboardItems;
 
-        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 401, 275) styleMask:(NSWindowStyleMaskResizable|NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskFullSizeContentView) backing:NSBackingStoreBuffered defer:YES /* saves a couple mb on start */];
+        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 270, 405) styleMask:(NSWindowStyleMaskResizable|NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskFullSizeContentView) backing:NSBackingStoreBuffered defer:YES /* saves a couple mb on start */];
+        _hudWindow.frameAutosaveName = WindowRestorationFrameName;
 
         _hudWindow.releasedWhenClosed = NO;
         _hudWindow.titlebarAppearsTransparent = YES;
