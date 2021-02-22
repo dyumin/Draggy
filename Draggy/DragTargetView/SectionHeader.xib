@@ -17,7 +17,7 @@
                     <rect key="frame" x="179" y="27" width="40" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="JOg-f7-gDG">
                         <font key="font" metaFont="systemBold"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
