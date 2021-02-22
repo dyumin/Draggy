@@ -13,7 +13,7 @@ private enum Sections: Int {
     case SectionsCount
 }
 
-class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionViewDelegate {
+class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionViewDelegateFlowLayout {
     var runningApplications: [NSRunningApplication]
     var runningApplicationsObservation: NSKeyValueObservation?
 
@@ -22,6 +22,8 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
     weak var collectionView: NSCollectionView! {
         didSet {
+            collectionView.register(NSNib(nibNamed: SectionHeader.Identifier.rawValue, bundle: nil), forSupplementaryViewOfKind: NSCollectionView.SupplementaryElementKind.init("UICollectionElementKindSectionHeader"), withIdentifier: SectionHeader.Identifier)
+
             collectionView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
             collectionView.reloadData()
         }
@@ -185,6 +187,20 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         return 0
     }
 
+    func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
+
+        let headerView = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SectionHeader"), for: indexPath) as! SectionHeader
+
+        if (indexPath.section == Sections.SuggestedApps.rawValue) {
+            headerView.stringValue = NSLocalizedString("SuggestedApps", comment: "")
+
+        } else if (indexPath.section == Sections.RunningApplications.rawValue) {
+            headerView.stringValue = NSLocalizedString("RunningApplications", comment: "")
+        }
+
+        return headerView
+    }
+
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DragTargetViewItem"), for: indexPath) as? DragTargetViewItem
 
@@ -201,5 +217,9 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         }
 
         return NSCollectionViewItem()
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
+        return NSSize(width: collectionView.frame.size.width, height: 15)
     }
 }

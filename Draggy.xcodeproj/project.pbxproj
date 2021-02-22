@@ -16,6 +16,8 @@
 		CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */; };
 		CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */; };
 		CC797DC225E1D25700DF1435 /* DragTargetViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */; };
+		CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4354925E403AA00E86C57 /* SectionHeader.swift */; };
+		CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF4354C25E403CD00E86C57 /* SectionHeader.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTargetViewData.swift; sourceTree = "<group>"; };
 		CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTargetViewItem.swift; sourceTree = "<group>"; };
 		CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DragTargetViewItem.xib; sourceTree = "<group>"; };
+		CCF4354925E403AA00E86C57 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		CCF4354C25E403CD00E86C57 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */,
 				CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */,
 				CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */,
+				CCF4354925E403AA00E86C57 /* SectionHeader.swift */,
+				CCF4354C25E403CD00E86C57 /* SectionHeader.xib */,
 			);
 			path = DragTargetView;
 			sourceTree = "<group>";
@@ -148,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */,
 				CC797DB025E17EF000DF1435 /* DragTargetView.storyboard in Resources */,
 				CC797D7B25DDE96100DF1435 /* Assets.xcassets in Resources */,
 				CC797DC225E1D25700DF1435 /* DragTargetViewItem.xib in Resources */,
@@ -164,6 +171,7 @@
 				CC797DA825E1738D00DF1435 /* App.swift in Sources */,
 				CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */,
 				CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */,
+				CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */,
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
 				CC797DB725E180C300DF1435 /* DragTargetView.swift in Sources */,
