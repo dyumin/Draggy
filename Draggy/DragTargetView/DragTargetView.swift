@@ -20,5 +20,5 @@ class DragTargetView: NSViewController {
         dataSource.collectionView = collectionView
 
         // Do view setup here.
-    }    
+    }
 }

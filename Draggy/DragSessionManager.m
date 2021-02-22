@@ -8,7 +8,13 @@
 #import "DragSessionManager.h"
 #import <Cocoa/Cocoa.h>
 
-static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
+static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
+
+@interface DragSessionManager ()
+
+@property(nonatomic) NSURL *current;
+
+@end
 
 @implementation DragSessionManager {
     NSArray<NSPasteboardType> *_acceptedPasteboardTypes;
@@ -19,6 +25,7 @@ static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
     NSArray<NSPasteboardItem *> *_lastPasteboardItems;
     __kindof NSViewController *_dragTargetViewController;
     bool _stopTracking;
+    bool _dontCloseOnMouseUp;
 }
 
 - (instancetype)init {
@@ -48,18 +55,19 @@ static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
         hudBackground.state = NSVisualEffectStateActive;
 
         hudBackground.wantsLayer = YES;
+        hudBackground.emphasized = YES;
 
-        hudBackground.layer.cornerRadius = 20.0;
+        hudBackground.layer.cornerRadius = 20.0; // TODO: ignored, use NSVisualEffectView.maskImage?
         hudBackground.layer.masksToBounds = YES;
 
         _hudWindow.contentView = hudBackground;
-        
-        NSStoryboard* dragTargetViewStoryboard = [NSStoryboard storyboardWithName:DragTargetViewStoryboardName bundle:nil];
+
+        NSStoryboard *dragTargetViewStoryboard = [NSStoryboard storyboardWithName:DragTargetViewStoryboardName bundle:nil];
 
         _dragTargetViewController = dragTargetViewStoryboard.instantiateInitialController;
         NSView *contentView = _dragTargetViewController.view;
         [hudBackground addSubview:contentView];
-        
+
         contentView.wantsLayer = YES;
 
         [contentView.topAnchor constraintEqualToAnchor:hudBackground.topAnchor].active = YES;
@@ -69,8 +77,19 @@ static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
 
         contentView.translatesAutoresizingMaskIntoConstraints = NO;
 
-        [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskLeftMouseDragged | NSEventMaskLeftMouseUp handler:^(NSEvent *_Nonnull event) {
+//        [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskPressure handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
+//
+//            return event;
+//        }];
+
+        [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskLeftMouseDragged | NSEventMaskLeftMouseUp | NSEventMaskPressure handler:^(NSEvent *_Nonnull event) {
             const NSInteger eventNumber = event.eventNumber;
+
+            const NSEventType eventType = event.type;
+            if (eventType == NSEventMaskPressure) { // TODO: global NSEventMaskPressure isnt working
+
+            }
+
             if (eventNumber == self->_ignoreEventNumber) {
                 // first drag event does not yep adds elements to pasteboard
                 if ([self->_lastPasteboardItems isEqualToArray:self->_dragPasteboard.pasteboardItems]) // todo: refactor
@@ -82,7 +101,7 @@ static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
                 self->_ignoreEventNumber = 0;
             }
 
-            if (event.type == NSEventTypeLeftMouseUp) {
+            if (eventType == NSEventTypeLeftMouseUp) {
                 if (self->_eventNumber) {
                     self->_eventNumber = 0;
 
@@ -117,12 +136,14 @@ static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
                 }
 
                 // https://stackoverflow.com/questions/56199062/get-uti-of-nspasteboardtypefileurl
-                //            NSArray<NSURL*>* urls = [_dragPasteboard readObjectsForClasses:_classes options:nil]; // slow if there are a lot of elements
+//                            NSArray<NSURL*>* urls = [_dragPasteboard readObjectsForClasses:@[ NSURL.class ] options:nil]; // slow if there are a lot of elements
 
                 bool anyUrlFound = false;
+                NSPasteboardType type;
                 for (NSPasteboardItem *item in pasteboardItems) {
-                    if ([item availableTypeFromArray:self->_acceptedPasteboardTypes] != nil) {
+                    if ((type = [item availableTypeFromArray:self->_acceptedPasteboardTypes])) {
                         anyUrlFound = true;
+                        self.current = [NSURL URLFromPasteboard:self->_dragPasteboard];
                         break;
                     }
                 }
@@ -140,8 +161,7 @@ static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
                 [self->_hudWindow orderFrontRegardless]; // todo: what if previous (close) animation still active
                 [NSAnimationContext beginGrouping];
                 [NSAnimationContext.currentContext setDuration:0.25];
-                NSAnimationContext.currentContext.completionHandler = ^
-                {
+                NSAnimationContext.currentContext.completionHandler = ^{
                     self->_stopTracking = true;
                 };
                 self->_hudWindow.animator.alphaValue = 1;
@@ -153,6 +173,16 @@ static NSString* const DragTargetViewStoryboardName = @"DragTargetView";
         }];
     }
     return self;
+}
+
++ (instancetype)sharedInstance {
+    static id _sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+
+    return _sharedInstance;
 }
 
 @end

@@ -9,13 +9,9 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
-    var dragSessionManager : DragSessionManager?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-        
-        dragSessionManager = DragSessionManager()
+        DragSessionManager.shared()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

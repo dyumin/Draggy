@@ -10,54 +10,82 @@ import Cocoa
 class DragTargetViewItem: NSCollectionViewItem {
     
     @IBOutlet weak var icon: NSImageView!
+
+    override var highlightState: NSCollectionViewItem.HighlightState
+    {
+        didSet
+        {
+            if (highlightState != oldValue)
+            {
+                let backgroundColor = { () ->  CGColor? in
+                if #available(OSX 10.14, *) {
+                    return (highlightState == .asDropTarget) ? NSColor.controlAccentColor.cgColor.copy(alpha: 0.30) : nil
+                } else {
+                    return (highlightState == .asDropTarget) ? NSColor.systemBlue.cgColor.copy(alpha: 0.30) : nil
+                } }()
+            
+                guard self.view.layer!.backgroundColor != backgroundColor else {
+                    return
+                }
+
+//                print(self, highlightState.rawValue)
+                let colourAnim = CABasicAnimation(keyPath: "backgroundColor")
+                colourAnim.fromValue = self.view.layer!.backgroundColor
+                colourAnim.toValue = backgroundColor
+                self.view.layer!.backgroundColor = backgroundColor // TODO: fails to animate in (out is ok)
+                self.view.layer!.add(colourAnim, forKey: "colourAnimation")
+            }
+        }
+    }
+    
+    
     @IBOutlet weak var localizedName: NSTextField!
+
+    override func viewDidLoad() {
+        view.wantsLayer = true
+        view.layer!.cornerRadius = 3
+        view.layer!.masksToBounds = true
+    }
+    
+    var bundle: Bundle?
+    {
+        didSet
+        {
+            if let bundle = bundle
+            {
+                icon.image = NSWorkspace.shared.icon(forFile: bundle.bundlePath)
+
+                if let bundleDisplayName = bundle.infoDictionary?["CFBundleDisplayName"] as? String
+                {
+                    localizedName.stringValue = bundleDisplayName
+                } else if let bundleName = bundle.infoDictionary?[kCFBundleNameKey as String] as? String
+                {
+                    localizedName.stringValue = bundleName
+                }
+            }
+            else
+            {
+                prepareForReuse()
+            }
+        }
+    }
     
     var runningApplication: NSRunningApplication?
     {
         didSet
         {
-            icon.image = runningApplication?.icon
-            localizedName.stringValue = runningApplication?.localizedName ?? ""
+            if let runningApplication = runningApplication
+            {
+                icon.image = runningApplication.icon
+                localizedName.stringValue = runningApplication.localizedName ?? ""
+            }
+            else
+            {
+                prepareForReuse()
+            }
         }
     }
 
-    // 1 false load on app start
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-//        view.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
-//        icon.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
-        
-        
-        
-        // Do view setup here.
-    }
-    
-    override func becomeFirstResponder() -> Bool {
-        false
-    }
-    
-    override func validateProposedFirstResponder(_ responder: NSResponder, for event: NSEvent?) -> Bool {
-        false
-    }
-    
-    func collectionView(_ collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionView.DropOperation>) -> NSDragOperation {
-        
-        proposedDropOperation.pointee = NSCollectionView.DropOperation.on
-        
-        return .generic
-    }
-
-    func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionView.DropOperation) -> Bool {
-        return true
-    }
-    
-    
-    override func validRequestor(forSendType sendType: NSPasteboard.PasteboardType?, returnType: NSPasteboard.PasteboardType?) -> Any? {
-        nil
-    }
-    
     override func prepareForReuse() {
         icon.image = nil
         localizedName.stringValue = ""
