@@ -112,9 +112,9 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         guard let targetApplication = { () -> URL? in
             if (indexPath.section == Sections.SuggestedApps.rawValue) {
-                return suggestedApps[indexPath.item].bundleURL
+                return indexPath.item < suggestedApps.count ? suggestedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
             } else if (indexPath.section == Sections.RunningApplications.rawValue) {
-                return runningApplications[indexPath.item].bundleURL!
+                return indexPath.item < runningApplications.count ? runningApplications[indexPath.item].bundleURL! : nil // just in case, same as upper lines
             }
             return nil
         }() else {
