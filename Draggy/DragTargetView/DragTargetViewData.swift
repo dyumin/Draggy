@@ -122,44 +122,45 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             return false
         }
 
-        if #available(OSX 10.15, *) {
-            var error: Error?
-            let dispatchGroup = DispatchGroup()
-
-            dispatchGroup.enter()
-            NSWorkspace.shared.open(urls, withApplicationAt: targetApplication, configuration: NSWorkspace.OpenConfiguration()) { (runningApplication, inError) in
-                /* Queue : com.apple.launchservices.open-queue (serial), non-main */
-
-                if let inError = inError {
-                    error = inError
-                    dispatchGroup.leave()
-                    DispatchQueue.main.async {
-                        let alert = NSAlert.init(error: inError)
-                        alert.runModal()
-                    }
-                    return
-                }
-
-                dispatchGroup.leave()
-            }
-
-            dispatchGroup.wait()
-
-            if (error == nil) {
-                return true
-            }
-        } else {
-            do {
-                try NSWorkspace.shared.open(urls, withApplicationAt: targetApplication, options: [NSWorkspace.LaunchOptions.async], configuration: [:])
-                return true
-            } catch {
-                DispatchQueue.main.async {
-                    let alert = NSAlert.init(error: error)
-                    alert.runModal()
-                }
-                return false
-            }
-        }
+        // TODO: debug disabled
+//        if #available(OSX 10.15, *) {
+//            var error: Error?
+//            let dispatchGroup = DispatchGroup()
+//
+//            dispatchGroup.enter()
+//            NSWorkspace.shared.open(urls, withApplicationAt: targetApplication, configuration: NSWorkspace.OpenConfiguration()) { (runningApplication, inError) in
+//                /* Queue : com.apple.launchservices.open-queue (serial), non-main */
+//
+//                if let inError = inError {
+//                    error = inError
+//                    dispatchGroup.leave()
+//                    DispatchQueue.main.async {
+//                        let alert = NSAlert.init(error: inError)
+//                        alert.runModal()
+//                    }
+//                    return
+//                }
+//
+//                dispatchGroup.leave()
+//            }
+//
+//            dispatchGroup.wait()
+//
+//            if (error == nil) {
+//                return true
+//            }
+//        } else {
+//            do {
+//                try NSWorkspace.shared.open(urls, withApplicationAt: targetApplication, options: [NSWorkspace.LaunchOptions.async], configuration: [:])
+//                return true
+//            } catch {
+//                DispatchQueue.main.async {
+//                    let alert = NSAlert.init(error: error)
+//                    alert.runModal()
+//                }
+//                return false
+//            }
+//        }
 
         return false
     }
