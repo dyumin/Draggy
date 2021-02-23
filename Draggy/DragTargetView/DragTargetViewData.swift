@@ -94,6 +94,17 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                             self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
                         }
                     }
+
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                        let recentApps = RecentAppsManager.shared.recentApps(for: newValue, .PerType)
+                        DispatchQueue.main.async {
+                            guard let self = self else {
+                                return
+                            }
+                            self.recentlyUsedApps = recentApps // TODO: what if drop file already changed
+                            self.collectionView.reloadSections([Sections.RecentApps.rawValue])
+                        }
+                    }
                 }
             }
         }
@@ -114,10 +125,8 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         guard let targetApplication = { () -> URL? in
             if (indexPath.section == Sections.RecentApps.rawValue) {
-                let recentApps = RecentAppsManager.shared.recentApps()
-                return indexPath.item < recentApps.count ? recentApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
-            }
-            else if (indexPath.section == Sections.SuggestedApps.rawValue) {
+                return indexPath.item < recentlyUsedApps.count ? recentlyUsedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
+            } else if (indexPath.section == Sections.SuggestedApps.rawValue) {
                 return indexPath.item < suggestedApps.count ? suggestedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
             } else if (indexPath.section == Sections.RunningApplications.rawValue) {
                 return indexPath.item < runningApplications.count ? runningApplications[indexPath.item].bundleURL! : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
@@ -189,7 +198,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
 
         if (section == Sections.RecentApps.rawValue) {
-            return RecentAppsManager.shared.recentApps().count // todo: large overhead
+            return recentlyUsedApps.count
         } else if (section == Sections.SuggestedApps.rawValue) {
             return suggestedApps.count
         } else if (section == Sections.RunningApplications.rawValue) {
@@ -205,8 +214,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         if (indexPath.section == Sections.RecentApps.rawValue) {
             headerView.stringValue = NSLocalizedString("recent_apps_section_header_title", comment: "")
-        }
-        else if (indexPath.section == Sections.SuggestedApps.rawValue) {
+        } else if (indexPath.section == Sections.SuggestedApps.rawValue) {
             headerView.stringValue = NSLocalizedString("suggested_apps_section_header_title", comment: "")
 
         } else if (indexPath.section == Sections.RunningApplications.rawValue) {
@@ -220,13 +228,11 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DragTargetViewItem"), for: indexPath) as? DragTargetViewItem
 
         if (indexPath.section == Sections.RecentApps.rawValue) {
-            item?.bundle = RecentAppsManager.shared.recentApps()[indexPath.item] // todo: large overhead
-        }
-        else if (indexPath.section == Sections.SuggestedApps.rawValue) {
+            item?.bundle = recentlyUsedApps[indexPath.item]
+        } else if (indexPath.section == Sections.SuggestedApps.rawValue) {
             item?.bundle = suggestedApps[indexPath.item]
 
-        }
-        else if (indexPath.section == Sections.RunningApplications.rawValue) {
+        } else if (indexPath.section == Sections.RunningApplications.rawValue) {
             item?.runningApplication = runningApplications[indexPath.item]
         }
 
