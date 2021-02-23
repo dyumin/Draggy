@@ -76,9 +76,17 @@
 			path = Todo;
 			sourceTree = "<group>";
 		};
+		CC5DEFA625E515E500D40438 /* External */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
 		CC797D6A25DDE95F00DF1435 = {
 			isa = PBXGroup;
 			children = (
+				CC5DEFA625E515E500D40438 /* External */,
 				CC797D7525DDE95F00DF1435 /* Draggy */,
 				CC797D7425DDE95F00DF1435 /* Products */,
 			);
