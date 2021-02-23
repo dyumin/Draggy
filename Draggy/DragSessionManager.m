@@ -173,7 +173,10 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
             }
 
             if (!self->_stopTracking)
-                [self->_hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x, NSEvent.mouseLocation.y, self->_hudWindow.frame.size.width, self->_hudWindow.frame.size.height) display:YES animate:NO];
+            {
+                const __auto_type hudWindowHeight = self->_hudWindow.frame.size.height;
+                [self->_hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x + 10, NSEvent.mouseLocation.y - hudWindowHeight, self->_hudWindow.frame.size.width, hudWindowHeight) display:YES animate:NO];
+            }
         }];
     }
     return self;
