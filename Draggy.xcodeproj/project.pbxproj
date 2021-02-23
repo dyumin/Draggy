@@ -10,6 +10,8 @@
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
 		CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */; };
+		CC692A9E25E52F44007FFC49 /* GRDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC692A8D25E52EFD007FFC49 /* GRDB.framework */; };
+		CC692A9F25E52F44007FFC49 /* GRDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC692A8D25E52EFD007FFC49 /* GRDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797D7625DDE95F00DF1435 /* AppDelegate.swift */; };
 		CC797D7B25DDE96100DF1435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC797D7A25DDE96100DF1435 /* Assets.xcassets */; };
 		CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC797DA425E1701700DF1435 /* DragSessionManager.m */; };
@@ -82,6 +84,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CC692AA025E52F44007FFC49 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CC692A9F25E52F44007FFC49 /* GRDB.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		CC4C2F7D25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CC4C2F7F25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -112,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC692A9E25E52F44007FFC49 /* GRDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,12 +176,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC692A9D25E52F44007FFC49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CC797D6A25DDE95F00DF1435 = {
 			isa = PBXGroup;
 			children = (
 				CC5DEFA625E515E500D40438 /* External */,
 				CC797D7525DDE95F00DF1435 /* Draggy */,
 				CC797D7425DDE95F00DF1435 /* Products */,
+				CC692A9D25E52F44007FFC49 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,6 +244,7 @@
 				CC797D6F25DDE95F00DF1435 /* Sources */,
 				CC797D7025DDE95F00DF1435 /* Frameworks */,
 				CC797D7125DDE95F00DF1435 /* Resources */,
+				CC692AA025E52F44007FFC49 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
