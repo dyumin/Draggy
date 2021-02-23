@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
-static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWindow";
+static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWindow"; // stored in ~/Library/Preferences/io.github.dyumin.Draggy.plist and! somewhere else (e.g. plist deletion won't help)
 
 @interface DragSessionManager ()
 
