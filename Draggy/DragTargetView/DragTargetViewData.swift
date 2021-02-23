@@ -83,14 +83,14 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                         }
 
                         let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL] // TODO: what if drop file already changed and another request already finished?
-                        self.suggestedApps.removeAll()
-                        if let suggestedApps = suggestedApps {
-                            for url in suggestedApps {
-                                self.suggestedApps.append(Bundle(url: url)!)
-                            }
-                        }
 
                         DispatchQueue.main.async {
+                            self.suggestedApps.removeAll()
+                            if let suggestedApps = suggestedApps {
+                                for url in suggestedApps {
+                                    self.suggestedApps.append(Bundle(url: url)!)
+                                }
+                            }
                             self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
                         }
                     }
