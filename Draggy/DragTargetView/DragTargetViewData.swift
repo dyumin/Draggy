@@ -148,10 +148,13 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             collectionView.reloadSections([Sections.RecentApps.rawValue]) // todo: do it better
         }
 
-        // TODO: debug disabled
-//        return DragTargetViewData.open(urls, with: targetApplication)
-
-        return false
+        let result = DragTargetViewData.open(urls, with: targetApplication)
+        if (result)
+        {
+            DragSessionManager.shared().closeWindow()
+        }
+        
+        return result
     }
 
     @discardableResult
