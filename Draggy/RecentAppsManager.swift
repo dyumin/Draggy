@@ -115,7 +115,7 @@ class RecentAppsManager {
                     recentApps.insert(app, at: 0)
                     recentAppsPerType[pathExtension] = recentApps // wtf swift
                 }
-            } else {
+            } else { // never executed because func recentApps(for file: URL, _ type: RecentType) -> [Bundle] call always adds this key
                 recentAppsPerType[pathExtension] = [app]
             }
         }

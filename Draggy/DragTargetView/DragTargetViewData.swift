@@ -76,6 +76,9 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         // async because of dispatch_once reenter
         DispatchQueue.main.async {
             self.suggestedAppsObservation = DragSessionManager.shared().observe(\.current, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
+                // clear previous recent apps
+//                self?.recentlyUsedApps = []
+//                self?.collectionView.reloadSections([Sections.RecentApps.rawValue])
                 if let newValueOptional = keyValueObservedChange.newValue, let newValue = newValueOptional /* wtf swift */ {
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
                         guard let self = self else {
@@ -149,11 +152,10 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         }
 
         let result = DragTargetViewData.open(urls, with: targetApplication)
-        if (result)
-        {
+        if (result) {
             DragSessionManager.shared().closeWindow()
         }
-        
+
         return result
     }
 
@@ -200,10 +202,9 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         return false
     }
-    
+
     func ClearRecent() {
-        if let current = DragSessionManager.shared().current
-        {
+        if let current = DragSessionManager.shared().current {
             RecentAppsManager.shared.clearRecent(for: current, .PerType)
             recentlyUsedApps = []
             collectionView.reloadSections([Sections.RecentApps.rawValue])
