@@ -93,10 +93,6 @@ class DragTargetViewItem: NSCollectionViewItem {
         }
     }
 
-    func prepareForReuseImpl() {
-
-    }
-
     override func prepareForReuse() {
         runningApplication = nil
         bundle = nil

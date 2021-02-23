@@ -112,7 +112,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionView.DropOperation>) -> NSDragOperation {
 
-        if (draggingInfo.draggingPasteboard.pasteboardItems?.count != 1) {
+        if (draggingInfo.draggingPasteboard.pasteboardItems?.count != 1) { // multiple items support currently disabled
             return [] // NSDragOperationNone
         }
 
@@ -197,6 +197,15 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         return false
     }
+    
+    func ClearRecent() {
+        if let current = DragSessionManager.shared().current
+        {
+            RecentAppsManager.shared.clearRecent(for: current, .PerType)
+            recentlyUsedApps = []
+            collectionView.reloadSections([Sections.RecentApps.rawValue])
+        }
+    }
 
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         Sections.SectionsCount.rawValue
@@ -221,6 +230,9 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         if (indexPath.section == Sections.RecentApps.rawValue) {
             headerView.stringValue = NSLocalizedString("recent_apps_section_header_title", comment: "")
+            headerView.clear.isHidden = false
+            headerView.clear.title = NSLocalizedString("recent_apps_section_header_clear_button_title", comment: "")
+            headerView.dragTargetViewData = self
         } else if (indexPath.section == Sections.SuggestedApps.rawValue) {
             headerView.stringValue = NSLocalizedString("suggested_apps_section_header_title", comment: "")
 

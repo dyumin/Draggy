@@ -21,12 +21,25 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hSF-h3-U2n">
+                    <rect key="frame" x="225" y="27" width="34" height="15"/>
+                    <buttonCell key="cell" type="roundRect" title="Clear" bezelStyle="roundedRect" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="4PP-G8-dpX">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onClearPressed:" target="c22-O7-iKe" id="Byi-oD-r0p"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="xmr-po-BoP" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="1hu-Ef-cS7"/>
+                <constraint firstItem="xmr-po-BoP" firstAttribute="firstBaseline" secondItem="hSF-h3-U2n" secondAttribute="baseline" id="DbB-tm-gWJ"/>
+                <constraint firstItem="hSF-h3-U2n" firstAttribute="leading" secondItem="xmr-po-BoP" secondAttribute="trailing" constant="8" symbolic="YES" id="Ua0-Pa-iSK"/>
                 <constraint firstItem="xmr-po-BoP" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="Ymj-mg-dkX"/>
             </constraints>
             <connections>
+                <outlet property="clear" destination="hSF-h3-U2n" id="h7r-R6-lg6"/>
                 <outlet property="header" destination="xmr-po-BoP" id="VUP-5A-N1q"/>
             </connections>
             <point key="canvasLocation" x="97.5" y="50"/>

@@ -22,14 +22,13 @@ class RecentAppsManager {
     public static let shared = try! RecentAppsManager()
 
     private init() throws {
-        
+
         let appSupportDirectory = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(Bundle.main.bundleIdentifier!)
-        if(!FileManager.default.fileExists(atPath: appSupportDirectory.path))
-        {
+        if (!FileManager.default.fileExists(atPath: appSupportDirectory.path)) {
             try! FileManager.default.createDirectory(at: appSupportDirectory, withIntermediateDirectories: false, attributes: nil)
         }
         let dbURL = appSupportDirectory.appendingPathComponent("records.sqlite3")
-        
+
         db = try! DatabasePool(path: dbURL.path)
 
         var migrator = DatabaseMigrator.init()
@@ -91,6 +90,16 @@ class RecentAppsManager {
         recentAppsPerType[pathExtension] = data
 
         return data
+    }
+
+    func clearRecent(for file: URL, _ type: RecentType) {
+        let pathExtension = file.pathExtension
+        if !pathExtension.isEmpty {
+            recentAppsPerType[pathExtension] = []
+            try! db!.write { db in
+                try db.execute(sql: "DELETE FROM open_records WHERE pathExtension = ?", arguments: [pathExtension])
+            }
+        }
     }
 
     func didOpen(_ file: URL, with app: Bundle) {

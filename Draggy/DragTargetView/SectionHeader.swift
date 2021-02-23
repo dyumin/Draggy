@@ -14,12 +14,21 @@ class SectionHeader: NSView {
     static let Identifier = NSUserInterfaceItemIdentifier(rawValue: "SectionHeader")
 
     @IBOutlet weak var header: NSTextField!
-    
-    var stringValue: String = ""
-    {
-        didSet
-        {
+    @IBOutlet weak var clear: NSButton!
+
+    weak var dragTargetViewData: DragTargetViewData!
+
+    var stringValue: String = "" {
+        didSet {
             header!.stringValue = stringValue
         }
+    }
+
+    @IBAction func onClearPressed(_ sender: Any) {
+        dragTargetViewData?.ClearRecent()
+    }
+
+    override func prepareForReuse() {
+        clear.isHidden = true
     }
 }
