@@ -8,28 +8,24 @@
 import Cocoa
 
 class DragTargetViewItem: NSCollectionViewItem {
-    
-    @IBOutlet weak var icon: NSImageView!
-    {
-        didSet
-        {
+
+    @IBOutlet weak var icon: NSImageView! {
+        didSet {
             icon.unregisterDraggedTypes() // https://stackoverflow.com/questions/5892464/cocoa-nsview-subview-blocking-drag-drop
         }
     }
 
-    override var highlightState: NSCollectionViewItem.HighlightState
-    {
-        didSet
-        {
-            if (highlightState != oldValue)
-            {
-                let backgroundColor = { () ->  CGColor? in
-                if #available(OSX 10.14, *) {
-                    return (highlightState == .asDropTarget) ? NSColor.controlAccentColor.cgColor.copy(alpha: 0.30) : nil
-                } else {
-                    return (highlightState == .asDropTarget) ? NSColor.systemBlue.cgColor.copy(alpha: 0.30) : nil
-                } }()
-            
+    override var highlightState: NSCollectionViewItem.HighlightState {
+        didSet {
+            if (highlightState != oldValue) {
+                let backgroundColor = { () -> CGColor? in
+                    if #available(OSX 10.14, *) {
+                        return (highlightState == .asDropTarget) ? NSColor.controlAccentColor.cgColor.copy(alpha: 0.30) : nil
+                    } else {
+                        return (highlightState == .asDropTarget) ? NSColor.systemBlue.cgColor.copy(alpha: 0.30) : nil
+                    }
+                }()
+
                 guard self.view.layer!.backgroundColor != backgroundColor else {
                     return
                 }
@@ -43,8 +39,8 @@ class DragTargetViewItem: NSCollectionViewItem {
             }
         }
     }
-    
-    
+
+
     @IBOutlet weak var localizedName: NSTextField!
 
     override func viewDidLoad() {
@@ -52,47 +48,59 @@ class DragTargetViewItem: NSCollectionViewItem {
         view.layer!.cornerRadius = 3
         view.layer!.masksToBounds = true
     }
-    
-    var bundle: Bundle?
-    {
-        didSet
-        {
-            if let bundle = bundle
-            {
+
+    var bundle: Bundle? {
+        didSet {
+            if let bundle = bundle {
                 icon.image = NSWorkspace.shared.icon(forFile: bundle.bundlePath)
 
-                if let bundleDisplayName = bundle.infoDictionary?["CFBundleDisplayName"] as? String
-                {
+                if let bundleDisplayName = bundle.infoDictionary?["CFBundleDisplayName"] as? String {
                     localizedName.stringValue = bundleDisplayName
-                } else if let bundleName = bundle.infoDictionary?[kCFBundleNameKey as String] as? String
-                {
+                } else if let bundleName = bundle.infoDictionary?[kCFBundleNameKey as String] as? String {
                     localizedName.stringValue = bundleName
                 }
             }
-            else
-            {
-                prepareForReuse()
-            }
         }
     }
-    
-    var runningApplication: NSRunningApplication?
-    {
-        didSet
-        {
-            if let runningApplication = runningApplication
-            {
+
+    var runningApplication: NSRunningApplication? {
+        didSet {
+            if let runningApplication = runningApplication {
                 icon.image = runningApplication.icon
                 localizedName.stringValue = runningApplication.localizedName ?? ""
-            }
-            else
-            {
-                prepareForReuse()
             }
         }
     }
 
+    override func mouseDown(with event: NSEvent) {
+        if let current = DragSessionManager.shared().current {
+            guard let app: URL = { () -> URL? in
+                if let bundle = bundle {
+                    return bundle.bundleURL
+                } else if let runningApplication = runningApplication {
+                    return runningApplication.bundleURL
+                }
+                return nil
+            }()
+                    else {
+                return
+            }
+
+            if (DragTargetViewData.open([current], with: app)) {
+                RecentAppsManager.shared.didOpen(current, with: Bundle(url: app)!)
+                DragSessionManager.shared().closeWindow()
+            }
+        }
+    }
+
+    func prepareForReuseImpl() {
+
+    }
+
     override func prepareForReuse() {
+        runningApplication = nil
+        bundle = nil
+
         icon.image = nil
         localizedName.stringValue = ""
     }

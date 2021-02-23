@@ -76,7 +76,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         // async because of dispatch_once reenter
         DispatchQueue.main.async {
             self.suggestedAppsObservation = DragSessionManager.shared().observe(\.current, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
-                if let newValue = keyValueObservedChange.newValue {
+                if let newValueOptional = keyValueObservedChange.newValue, let newValue = newValueOptional /* wtf swift */ {
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
                         guard let self = self else {
                             return
@@ -149,44 +149,51 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         }
 
         // TODO: debug disabled
-//        if #available(OSX 10.15, *) {
-//            var error: Error?
-//            let dispatchGroup = DispatchGroup()
-//
-//            dispatchGroup.enter()
-//            NSWorkspace.shared.open(urls, withApplicationAt: targetApplication, configuration: NSWorkspace.OpenConfiguration()) { (runningApplication, inError) in
-//                /* Queue : com.apple.launchservices.open-queue (serial), non-main */
-//
-//                if let inError = inError {
-//                    error = inError
-//                    dispatchGroup.leave()
-//                    DispatchQueue.main.async {
-//                        let alert = NSAlert.init(error: inError)
-//                        alert.runModal()
-//                    }
-//                    return
-//                }
-//
-//                dispatchGroup.leave()
-//            }
-//
-//            dispatchGroup.wait()
-//
-//            if (error == nil) {
-//                return true
-//            }
-//        } else {
-//            do {
-//                try NSWorkspace.shared.open(urls, withApplicationAt: targetApplication, options: [NSWorkspace.LaunchOptions.async], configuration: [:])
-//                return true
-//            } catch {
-//                DispatchQueue.main.async {
-//                    let alert = NSAlert.init(error: error)
-//                    alert.runModal()
-//                }
-//                return false
-//            }
-//        }
+//        return DragTargetViewData.open(urls, with: targetApplication)
+
+        return false
+    }
+
+    @discardableResult
+    public class func open(_ urls: [URL], with application: URL) -> Bool {
+        if #available(OSX 10.15, *) {
+            var error: Error?
+            let dispatchGroup = DispatchGroup()
+
+            dispatchGroup.enter()
+            NSWorkspace.shared.open(urls, withApplicationAt: application, configuration: NSWorkspace.OpenConfiguration()) { (runningApplication, inError) in
+                /* Queue : com.apple.launchservices.open-queue (serial), non-main */
+
+                if let inError = inError {
+                    error = inError
+                    dispatchGroup.leave()
+                    DispatchQueue.main.async {
+                        let alert = NSAlert.init(error: inError)
+                        alert.runModal()
+                    }
+                    return
+                }
+
+                dispatchGroup.leave()
+            }
+
+            dispatchGroup.wait()
+
+            if (error == nil) {
+                return true
+            }
+        } else {
+            do {
+                try NSWorkspace.shared.open(urls, withApplicationAt: application, options: [NSWorkspace.LaunchOptions.async], configuration: [:])
+                return true
+            } catch {
+                DispatchQueue.main.async {
+                    let alert = NSAlert.init(error: error)
+                    alert.runModal()
+                }
+                return false
+            }
+        }
 
         return false
     }

@@ -111,14 +111,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
                     self->_lastPasteboardItems = self->_dragPasteboard.pasteboardItems;
 
                     // TODO: debug disabled
-//                    [NSAnimationContext beginGrouping];
-//                    [NSAnimationContext.currentContext setCompletionHandler:^{
-////                        NSLog(@"All done! _hudWindow close");
-//                        [self->_hudWindow close];
-//                    }];
-//                    [NSAnimationContext.currentContext setDuration:0.3];
-//                    self->_hudWindow.animator.alphaValue = 0;
-//                    [NSAnimationContext endGrouping];
+//                    [self closeWindow];
                 }
 
                 return;
@@ -180,6 +173,18 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
         }];
     }
     return self;
+}
+
+- (void)closeWindow
+{
+    [NSAnimationContext beginGrouping];
+    [NSAnimationContext.currentContext setCompletionHandler:^{
+//                        NSLog(@"All done! _hudWindow close");
+        [self->_hudWindow close];
+    }];
+    [NSAnimationContext.currentContext setDuration:0.3];
+    self->_hudWindow.animator.alphaValue = 0;
+    [NSAnimationContext endGrouping];
 }
 
 + (instancetype)sharedInstance {
