@@ -101,6 +101,10 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionView.DropOperation>) -> NSDragOperation {
 
+        if (draggingInfo.draggingPasteboard.pasteboardItems?.count != 1) {
+            return [] // NSDragOperationNone
+        }
+
         proposedDropOperation.pointee = NSCollectionView.DropOperation.on
 
         return .generic
