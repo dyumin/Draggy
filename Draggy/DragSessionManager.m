@@ -182,7 +182,6 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
 //                        NSLog(@"All done! _hudWindow close");
         [self->_hudWindow close];
     }];
-    [NSAnimationContext.currentContext setDuration:0.3];
     self->_hudWindow.animator.alphaValue = 0;
     [NSAnimationContext endGrouping];
 }
