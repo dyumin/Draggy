@@ -22,6 +22,8 @@
 		CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */; };
 		CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */; };
 		CC797DC225E1D25700DF1435 /* DragTargetViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */; };
+		CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; };
+		CC9BE1B625E6D3BB00FEE307 /* libfile.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4354925E403AA00E86C57 /* SectionHeader.swift */; };
 		CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF4354C25E403CD00E86C57 /* SectionHeader.xib */; };
 /* End PBXBuildFile section */
@@ -83,6 +85,20 @@
 			remoteGlobalIDString = AAA4DDD4230F262000C74B15;
 			remoteInfo = GRDBtvOSTests;
 		};
+		CC705DE325E6BC17007C8332 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC705DDB25E6BC17007C8332 /* file.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FD9307FD10A8FDBC007DD96A;
+			remoteInfo = libmagic;
+		};
+		CC705DE525E6BC17007C8332 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC705DDB25E6BC17007C8332 /* file.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FD93080C10A8FEC3007DD96A;
+			remoteInfo = file;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,6 +108,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CC9BE1B625E6D3BB00FEE307 /* libfile.dylib in Embed Frameworks */,
 				CC692A9F25E52F44007FFC49 /* GRDB.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -107,6 +124,7 @@
 		CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAppsManager.swift; sourceTree = "<group>"; };
 		CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRDB.xcodeproj; path = GRDB.swift/GRDB.xcodeproj; sourceTree = "<group>"; };
 		CC692AA125E5AF95007FFC49 /* RemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveButton.swift; sourceTree = "<group>"; };
+		CC705DDB25E6BC17007C8332 /* file.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = file.xcodeproj; path = file/file.xcodeproj; sourceTree = "<group>"; };
 		CC797D7325DDE95F00DF1435 /* Draggy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draggy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC797D7625DDE95F00DF1435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC797D7A25DDE96100DF1435 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */,
 				CC692A9E25E52F44007FFC49 /* GRDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +177,7 @@
 		CC5DEFA625E515E500D40438 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				CC705DDB25E6BC17007C8332 /* file.xcodeproj */,
 				CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */,
 			);
 			path = External;
@@ -183,6 +203,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CC705DDC25E6BC17007C8332 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC705DE425E6BC17007C8332 /* libmagic.a */,
+				CC705DE625E6BC17007C8332 /* libfile.dylib */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CC797D6A25DDE95F00DF1435 = {
@@ -286,6 +315,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = CC705DDC25E6BC17007C8332 /* Products */;
+					ProjectRef = CC705DDB25E6BC17007C8332 /* file.xcodeproj */;
+				},
+				{
 					ProductGroup = CC692A8225E52EFD007FFC49 /* Products */;
 					ProjectRef = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
 				},
@@ -352,6 +385,20 @@
 			fileType = wrapper.cfbundle;
 			path = GRDBtvOSTests.xctest;
 			remoteRef = CC692A9A25E52EFD007FFC49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC705DE425E6BC17007C8332 /* libmagic.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libmagic.a;
+			remoteRef = CC705DE325E6BC17007C8332 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC705DE625E6BC17007C8332 /* libfile.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libfile.dylib;
+			remoteRef = CC705DE525E6BC17007C8332 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
