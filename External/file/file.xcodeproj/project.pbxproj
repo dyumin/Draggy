@@ -240,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				FD9307FD10A8FDBC007DD96A /* libmagic.a */,
-				FD93080C10A8FEC3007DD96A /* libfile */,
+				FD93080C10A8FEC3007DD96A /* libfile.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -330,7 +330,7 @@
 			);
 			name = file;
 			productName = file;
-			productReference = FD93080C10A8FEC3007DD96A /* libfile */;
+			productReference = FD93080C10A8FEC3007DD96A /* libfile.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -571,12 +571,12 @@
 				DEAD_CODE_STRIPPING = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = /usr/local/lib;
+				DYLIB_INSTALL_NAME_BASE = "";
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = lib;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = /usr/local/lib;
-				LD_DYLIB_INSTALL_NAME = /usr/local/lib/libfile.dylib;
+				INSTALL_PATH = "";
+				LD_DYLIB_INSTALL_NAME = "@rpath/libfile.dylib";
 				MACH_O_TYPE = mh_dylib;
 				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
 				PRODUCT_NAME = file;
