@@ -192,10 +192,15 @@ private void applyparam(magic_t);
 
 /*
  * main - parse arguments and handle options
+ * ownership follows create rule (you are responsible for freeing fileDescription)
  */
 int
-main(int argc, char *argv[])
+copy_file_description(int argc, char *argv[], char** fileDescription)
 {
+    if (!fileDescription)
+    {
+        return 1;
+    }
 	int c;
 	size_t i;
 	int action = 0, didsomefiles = 0, errflg = 0;

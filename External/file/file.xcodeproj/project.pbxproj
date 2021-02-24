@@ -59,6 +59,7 @@
 		C1CB5B3724A3B27500CFD91B /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C1CB5B3624A3B27500CFD91B /* libbz2.dylib */; };
 		C1CF2E20220781A30024FFDA /* is_json.c in Sources */ = {isa = PBXBuildFile; fileRef = C1CF2E1F220781960024FFDA /* is_json.c */; };
 		C1CF2E21220781A40024FFDA /* is_json.c in Sources */ = {isa = PBXBuildFile; fileRef = C1CF2E1F220781960024FFDA /* is_json.c */; };
+		CCF018FC25E6C2E500B689BF /* file.h in Headers */ = {isa = PBXBuildFile; fileRef = CCF018F525E6C0F300B689BF /* file.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD52DB9519F09E8600ECE87F /* softmagic.c in Sources */ = {isa = PBXBuildFile; fileRef = FD93083E10A91079007DD96A /* softmagic.c */; };
 		FD52DB9619F09E8800ECE87F /* readmacho.c in Sources */ = {isa = PBXBuildFile; fileRef = FD93083D10A91079007DD96A /* readmacho.c */; };
 		FD52DB9719F09E8B00ECE87F /* readelf.c in Sources */ = {isa = PBXBuildFile; fileRef = FD93083C10A91079007DD96A /* readelf.c */; };
@@ -148,10 +149,11 @@
 		C11ABD7F23A88B80007141D1 /* is_csv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = is_csv.c; sourceTree = "<group>"; };
 		C1CB5B3624A3B27500CFD91B /* libbz2.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = /usr/lib/libbz2.dylib; sourceTree = "<absolute>"; };
 		C1CF2E1F220781960024FFDA /* is_json.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = is_json.c; sourceTree = "<group>"; };
+		CCF018F525E6C0F300B689BF /* file.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = file.h; sourceTree = "<group>"; };
 		FD52DB8C19F09C8F00ECE87F /* file.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = file.xcconfig; sourceTree = "<group>"; };
 		FD52DB8D19F09C8F00ECE87F /* libmagic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = libmagic.xcconfig; sourceTree = "<group>"; };
 		FD9307FD10A8FDBC007DD96A /* libmagic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmagic.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD93080C10A8FEC3007DD96A /* file */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = file; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD93080C10A8FEC3007DD96A /* libfile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libfile; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD93082F10A91079007DD96A /* apprentice.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = apprentice.c; sourceTree = "<group>"; };
 		FD93083010A91079007DD96A /* apptype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = apptype.c; sourceTree = "<group>"; };
 		FD93083110A91079007DD96A /* ascmagic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ascmagic.c; sourceTree = "<group>"; };
@@ -196,6 +198,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CCF018F425E6C0CB00B689BF /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CCF018F525E6C0F300B689BF /* file.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		FD52DB8B19F09C8F00ECE87F /* xcconfigs */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +218,7 @@
 		FD5511DD19F0A3250094A551 /* file */ = {
 			isa = PBXGroup;
 			children = (
+				CCF018F425E6C0CB00B689BF /* include */,
 				FD93084F10A9107C007DD96A /* src */,
 			);
 			name = file;
@@ -229,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				FD9307FD10A8FDBC007DD96A /* libmagic.a */,
-				FD93080C10A8FEC3007DD96A /* file */,
+				FD93080C10A8FEC3007DD96A /* libfile */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -267,6 +278,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		CCF018FB25E6C2DD00B689BF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCF018FC25E6C2E500B689BF /* file.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FD9307F910A8FDBC007DD96A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,6 +319,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD93082D10A8FF09007DD96A /* Build configuration list for PBXNativeTarget "file" */;
 			buildPhases = (
+				CCF018FB25E6C2DD00B689BF /* Headers */,
 				FD93080910A8FEC3007DD96A /* Sources */,
 				FD93080A10A8FEC3007DD96A /* Frameworks */,
 				FD52DBA619F0A1DA00ECE87F /* Install Man Pages and Open Source Info */,
@@ -310,7 +330,7 @@
 			);
 			name = file;
 			productName = file;
-			productReference = FD93080C10A8FEC3007DD96A /* file */;
+			productReference = FD93080C10A8FEC3007DD96A /* libfile */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -547,6 +567,21 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = /usr/local/lib;
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = lib;
+				INSTALL_PATH = /usr/local/lib;
+				LD_DYLIB_INSTALL_NAME = /usr/local/lib/libfile.dylib;
+				MACH_O_TYPE = mh_dylib;
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
+				PRODUCT_NAME = file;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include;
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = debugging;
 			};
 			name = Release;
 		};

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD93080B10A8FEC3007DD96A"
-               BuildableName = "libfile"
-               BlueprintName = "file"
+               BlueprintIdentifier = "FD9307FC10A8FDBC007DD96A"
+               BuildableName = "libmagic.a"
+               BlueprintName = "libmagic"
                ReferencedContainer = "container:file.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,15 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD93080B10A8FEC3007DD96A"
-            BuildableName = "libfile"
-            BlueprintName = "file"
-            ReferencedContainer = "container:file.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -56,16 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD93080B10A8FEC3007DD96A"
-            BuildableName = "libfile"
-            BlueprintName = "file"
+            BlueprintIdentifier = "FD9307FC10A8FDBC007DD96A"
+            BuildableName = "libmagic.a"
+            BlueprintName = "libmagic"
             ReferencedContainer = "container:file.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Release">
