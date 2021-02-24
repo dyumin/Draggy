@@ -48,8 +48,6 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
         _hudWindow.hasShadow = NO;
         _hudWindow.backgroundColor = NSColor.clearColor;
 
-        _hudWindow.level = NSPopUpMenuWindowLevel;
-
         NSVisualEffectView *hudBackground = [NSVisualEffectView new];
         if (@available(macOS 10.14, *)) {
             hudBackground.material = NSVisualEffectMaterialHUDWindow;
@@ -110,6 +108,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
                     self->_eventNumber = 0;
 
                     self->_lastPasteboardItems = self->_dragPasteboard.pasteboardItems;
+                    self->_hudWindow.level = NSNormalWindowLevel;
 
                     // TODO: debug disabled
 //                    [self closeWindow];
@@ -156,6 +155,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
             if (self->_eventNumber != eventNumber) {
                 self->_eventNumber = eventNumber;
                 self->_stopTracking = false;
+                self->_hudWindow.level = NSPopUpMenuWindowLevel;
                 [self->_hudWindow orderFrontRegardless]; // todo: what if previous (close) animation still active
                 [NSAnimationContext beginGrouping];
                 [NSAnimationContext.currentContext setDuration:0.05];
