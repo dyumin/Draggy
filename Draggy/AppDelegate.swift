@@ -11,7 +11,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        DragSessionManager.shared()
+        _ = DragSessionManager.shared // init shared instance
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

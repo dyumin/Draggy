@@ -97,14 +97,14 @@ class DragTargetViewItem: NSCollectionViewItem {
     }
 
     override func mouseDown(with event: NSEvent) {
-        if let current = DragSessionManager.shared().current {
+        if let current = DragSessionManager.shared.current {
             guard let app = getAppBundleUrl() else {
                 return
             }
 
             if (DragTargetViewData.open([current], with: app)) {
                 RecentAppsManager.shared.didOpen(current, with: Bundle(url: app)!)
-                DragSessionManager.shared().closeWindow()
+                DragSessionManager.shared.closeWindow()
             }
         }
     }

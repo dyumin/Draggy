@@ -28,7 +28,7 @@ class RemoveButton: NSButton {
             return
         }
 
-        if (!DragSessionManager.shared().willCloseWindow && controller?.highlightState != .asDropTarget) {
+        if (!DragSessionManager.shared.willCloseWindow && controller?.highlightState != .asDropTarget) {
             self.isEnabled = true
             self.layer!.opacity = 1
         }

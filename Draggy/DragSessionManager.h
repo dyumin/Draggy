@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly) BOOL willCloseWindow;
 
-+ (instancetype)sharedInstance NS_SWIFT_NAME(shared());
+@property(class, readonly) DragSessionManager* sharedInstance NS_SWIFT_NAME(shared);
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -75,7 +75,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         // async because of dispatch_once reenter
         DispatchQueue.main.async {
-            self.suggestedAppsObservation = DragSessionManager.shared().observe(\.current, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
+            self.suggestedAppsObservation = DragSessionManager.shared.observe(\.current, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
                 // clear previous recent apps
 //                self?.recentlyUsedApps = []
 //                self?.collectionView.reloadSections([Sections.RecentApps.rawValue])
@@ -153,7 +153,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         let result = DragTargetViewData.open(urls, with: targetApplication)
         if (result) {
-            DragSessionManager.shared().closeWindow()
+            DragSessionManager.shared.closeWindow()
         }
 
         return result
@@ -204,7 +204,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     }
 
     func ClearRecent() {
-        if let current = DragSessionManager.shared().current {
+        if let current = DragSessionManager.shared.current {
             RecentAppsManager.shared.clearRecent(for: current, .PerType)
             recentlyUsedApps = []
             collectionView.reloadSections([Sections.RecentApps.rawValue])
@@ -212,7 +212,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     }
 
     func clearRecent(_ app: Bundle, _ type: RecentType) {
-        if let current = DragSessionManager.shared().current {
+        if let current = DragSessionManager.shared.current {
             RecentAppsManager.shared.clearRecent(app, for: current, .PerType)
             let index = recentlyUsedApps.firstIndex(of: app)!
             recentlyUsedApps.remove(at: index)
