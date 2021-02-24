@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD93080B10A8FEC3007DD96A"
-               BuildableName = "libfile"
+               BuildableName = "libfile.dylib"
                BlueprintName = "file"
                ReferencedContainer = "container:file.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD93080B10A8FEC3007DD96A"
-            BuildableName = "libfile"
+            BuildableName = "libfile.dylib"
             BlueprintName = "file"
             ReferencedContainer = "container:file.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD93080B10A8FEC3007DD96A"
-            BuildableName = "libfile"
+            BuildableName = "libfile.dylib"
             BlueprintName = "file"
             ReferencedContainer = "container:file.xcodeproj">
          </BuildableReference>
