@@ -14,6 +14,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
 @interface DragSessionManager ()
 
 @property(nonatomic) NSURL *current;
+@property(nonatomic) BOOL willCloseWindow;
 
 @end
 
@@ -37,7 +38,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
         _dragPasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
         _lastPasteboardItems = _dragPasteboard.pasteboardItems;
 
-        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 263, 403) styleMask:(NSWindowStyleMaskResizable|NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskFullSizeContentView) backing:NSBackingStoreBuffered defer:YES /* saves a couple mb on start */];
+        _hudWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 263, 403) styleMask:(NSWindowStyleMaskResizable | NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskFullSizeContentView) backing:NSBackingStoreBuffered defer:YES /* saves a couple mb on start */];
         _hudWindow.frameAutosaveName = WindowRestorationFrameName;
 
         _hudWindow.releasedWhenClosed = NO;
@@ -165,8 +166,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
                 [NSAnimationContext endGrouping];
             }
 
-            if (!self->_stopTracking)
-            {
+            if (!self->_stopTracking) {
                 const __auto_type hudWindowHeight = self->_hudWindow.frame.size.height;
                 [self->_hudWindow setFrame:NSMakeRect(NSEvent.mouseLocation.x + 10, NSEvent.mouseLocation.y - hudWindowHeight, self->_hudWindow.frame.size.width, hudWindowHeight) display:YES animate:NO];
             }
@@ -175,12 +175,13 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
     return self;
 }
 
-- (void)closeWindow
-{
+- (void)closeWindow {
+    self->_willCloseWindow = true;
     [NSAnimationContext beginGrouping];
     [NSAnimationContext.currentContext setCompletionHandler:^{
 //                        NSLog(@"All done! _hudWindow close");
         [self->_hudWindow close];
+        self->_willCloseWindow = false;
     }];
     self->_hudWindow.animator.alphaValue = 0;
     [NSAnimationContext endGrouping];

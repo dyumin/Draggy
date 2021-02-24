@@ -15,6 +15,21 @@ class DragTargetViewItem: NSCollectionViewItem {
         }
     }
 
+    weak var dataSource: DragTargetViewData!
+
+    @IBOutlet weak var removeButton: RemoveButton! {
+        didSet {
+            removeButton?.controller = self
+        }
+    }
+
+    @IBAction func removeButtonPressed(_ sender: Any) {
+        guard let app = getAppBundleUrl() else {
+            return
+        }
+        dataSource?.clearRecent(Bundle(url: app)!, .PerType)
+    }
+
     override var highlightState: NSCollectionViewItem.HighlightState {
         didSet {
             if (highlightState != oldValue) {
@@ -72,17 +87,18 @@ class DragTargetViewItem: NSCollectionViewItem {
         }
     }
 
+    public func getAppBundleUrl() -> URL? {
+        if let bundle = bundle {
+            return bundle.bundleURL
+        } else if let runningApplication = runningApplication {
+            return runningApplication.bundleURL
+        }
+        return nil
+    }
+
     override func mouseDown(with event: NSEvent) {
         if let current = DragSessionManager.shared().current {
-            guard let app: URL = { () -> URL? in
-                if let bundle = bundle {
-                    return bundle.bundleURL
-                } else if let runningApplication = runningApplication {
-                    return runningApplication.bundleURL
-                }
-                return nil
-            }()
-                    else {
+            guard let app = getAppBundleUrl() else {
                 return
             }
 
@@ -97,6 +113,8 @@ class DragTargetViewItem: NSCollectionViewItem {
         runningApplication = nil
         bundle = nil
 
+        self.view.layer?.backgroundColor = nil // sometimes highlightState doest work as expected, leaving highlight color (why?)
+        removeButton.isHidden = true
         icon.image = nil
         localizedName.stringValue = ""
     }

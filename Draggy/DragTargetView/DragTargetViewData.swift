@@ -211,6 +211,17 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         }
     }
 
+    func clearRecent(_ app: Bundle, _ type: RecentType) {
+        if let current = DragSessionManager.shared().current {
+            RecentAppsManager.shared.clearRecent(app, for: current, .PerType)
+            let index = recentlyUsedApps.firstIndex(of: app)!
+            recentlyUsedApps.remove(at: index)
+            collectionView.performBatchUpdates {
+                collectionView.animator().deleteItems(at: [IndexPath(item: index, section: Sections.RecentApps.rawValue)])
+            }
+        }
+    }
+
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         Sections.SectionsCount.rawValue
     }
@@ -252,6 +263,8 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
         if (indexPath.section == Sections.RecentApps.rawValue) {
             item?.bundle = recentlyUsedApps[indexPath.item]
+            item?.removeButton.isHidden = false
+            item?.dataSource = self
         } else if (indexPath.section == Sections.SuggestedApps.rawValue) {
             item?.bundle = suggestedApps[indexPath.item]
 

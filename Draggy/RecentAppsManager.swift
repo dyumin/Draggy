@@ -102,6 +102,18 @@ class RecentAppsManager {
         }
     }
 
+    func clearRecent(_ app: Bundle, for file: URL, _ type: RecentType) {
+        let pathExtension = file.pathExtension
+        if !pathExtension.isEmpty {
+            var recentApps = recentAppsPerType[pathExtension]!
+            recentApps.remove(at: recentApps.firstIndex(of: app)!)
+            recentAppsPerType[pathExtension] = recentApps
+            try! db!.write { db in
+                try db.execute(sql: "DELETE FROM open_records WHERE pathExtension = ? and bundlePath = ?", arguments: [pathExtension, app.bundleURL])
+            }
+        }
+    }
+
     func didOpen(_ file: URL, with app: Bundle) {
 
         guard let db = db else {

@@ -29,9 +29,21 @@
                         <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lVW-tZ-1kt" customClass="RemoveButton" customModule="Draggy" customModuleProvider="target">
+                    <rect key="frame" x="159" y="97" width="32" height="31"/>
+                    <buttonCell key="cell" type="round" bezelStyle="circular" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="YGp-ed-1O3">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removeButtonPressed:" target="iI1-Ip-2tD" id="gWq-CH-61C"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="lVW-tZ-1kt" firstAttribute="trailing" secondItem="b7q-Qw-i0Y" secondAttribute="trailing" constant="5" id="9tJ-Cc-iuB"/>
                 <constraint firstItem="X76-9q-6td" firstAttribute="centerX" secondItem="b7q-Qw-i0Y" secondAttribute="centerX" id="Jmm-Ah-sfo"/>
+                <constraint firstItem="lVW-tZ-1kt" firstAttribute="top" secondItem="b7q-Qw-i0Y" secondAttribute="top" constant="-5" id="fIm-N2-S0a"/>
                 <constraint firstItem="b7q-Qw-i0Y" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="hoP-7C-txL"/>
                 <constraint firstAttribute="bottom" secondItem="X76-9q-6td" secondAttribute="bottom" constant="20" symbolic="YES" id="jMw-kN-Pti"/>
                 <constraint firstItem="X76-9q-6td" firstAttribute="top" secondItem="b7q-Qw-i0Y" secondAttribute="bottom" constant="8" symbolic="YES" id="ntK-JJ-L7U"/>
@@ -43,8 +55,12 @@
             <connections>
                 <outlet property="icon" destination="b7q-Qw-i0Y" id="SoK-1P-pwz"/>
                 <outlet property="localizedName" destination="X76-9q-6td" id="1oV-3B-FZz"/>
+                <outlet property="removeButton" destination="lVW-tZ-1kt" id="Llm-SP-PtT"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="w8i-up-TnR"/>
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
+    </resources>
 </document>
