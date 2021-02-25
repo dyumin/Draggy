@@ -237,6 +237,7 @@ copy_file_description(int argc, char *argv[], char** fileDescription)
 	flags |=  (unix03 || posixly) ? MAGIC_SYMLINK : 0;
 #endif
 	if (unix03) flags |= MAGIC_RAW; /* See 5747343. */
+    optind = 1; // reset getopt_long's cursor, refer to man getopt_long
 	while ((c = getopt_long(argc, argv, unix03 ? OPTSTRING03 : OPTSTRING, long_options,
 	    &longindex)) != -1)
 		switch (c) {
@@ -477,6 +478,20 @@ copy_file_description(int argc, char *argv[], char** fileDescription)
 	}
 
 out:
+	do {
+		char* const outFileDescription = malloc(sizeof(char) * (magic->o.blen + /* null-terminator */ 1));
+		if (!outFileDescription) {
+			e = 1; // out of memory
+			break;
+		}
+        if (magic->o.buf)
+        {
+            memcpy(outFileDescription, magic->o.buf, magic->o.blen);
+        }
+        outFileDescription[magic->o.blen] = '\0';
+		*fileDescription = outFileDescription;
+	} while (0);
+
 	if (magic)
 		magic_close(magic);
 	return e;

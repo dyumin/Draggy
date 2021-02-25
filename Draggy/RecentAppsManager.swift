@@ -53,7 +53,7 @@ class RecentAppsManager {
         recentAppsPerType = [:]
     }
 
-    var db: DatabasePool?
+    private var db: DatabasePool?
 
     func applicationWillTerminate() {
         db = nil // close db connection
@@ -68,9 +68,9 @@ class RecentAppsManager {
     private var recentAppsPerType: [String: [Bundle]]
 
     func recentApps(for file: URL, _ type: RecentType) -> [Bundle] { // TODO: synchronisation?
-        let pathExtension = file.pathExtension
-        if (pathExtension.isEmpty) {
-            return [] // todo: use advanced file type calculation
+        let pathExtension = getPathExtension(for: file)
+        guard !pathExtension.isEmpty else {
+            return []
         }
 
         if let recentApps = recentAppsPerType[pathExtension] {
@@ -93,7 +93,7 @@ class RecentAppsManager {
     }
 
     func clearRecent(for file: URL, _ type: RecentType) {
-        let pathExtension = file.pathExtension
+        let pathExtension = getPathExtension(for: file)
         if !pathExtension.isEmpty {
             recentAppsPerType[pathExtension] = []
             try! db!.write { db in
@@ -103,7 +103,7 @@ class RecentAppsManager {
     }
 
     func clearRecent(_ app: Bundle, for file: URL, _ type: RecentType) {
-        let pathExtension = file.pathExtension
+        let pathExtension = getPathExtension(for: file)
         if !pathExtension.isEmpty {
             var recentApps = recentAppsPerType[pathExtension]!
             recentApps.remove(at: recentApps.firstIndex(of: app)!)
@@ -113,14 +113,30 @@ class RecentAppsManager {
             }
         }
     }
-
+    
+    @inline(__always) // will optimise unused isAdvanced
+     func getPathExtension(for file: URL, _ isAdvanced: inout Bool) -> String {
+        var pathExtension = file.pathExtension
+        if (pathExtension.isEmpty) {
+            pathExtension = FileDescription.getForFile(file) ?? ""
+            isAdvanced = !pathExtension.isEmpty
+        }
+        return pathExtension
+    }
+    
+     private func getPathExtension(for file: URL) -> String {
+        var isAdvanced = false
+        return getPathExtension(for: file, &isAdvanced)
+    }
+    
     func didOpen(_ file: URL, with app: Bundle) {
 
         guard let db = db else {
             return
         }
 
-        let pathExtension = file.pathExtension
+        var advancedFileExtension = false
+        let pathExtension = getPathExtension(for: file, &advancedFileExtension)
         if (!pathExtension.isEmpty) {
             if var recentApps = recentAppsPerType[pathExtension] { // TODO: sync?
                 if (!recentApps.contains(app)) {
@@ -139,7 +155,7 @@ class RecentAppsManager {
         }
 
         let literal: SQLLiteral = """
-                                  INSERT INTO open_records (absolutePath, isDirectory, advancedFileExtension, pathExtension, time, bundlePath) VALUES (\(file.absoluteURL), \(isDirectory.boolValue), \(false), \(pathExtension), \(Date()), \(app.bundleURL))
+                                  INSERT INTO open_records (absolutePath, isDirectory, advancedFileExtension, pathExtension, time, bundlePath) VALUES (\(file.absoluteURL), \(isDirectory.boolValue), \(advancedFileExtension), \(pathExtension), \(Date()), \(app.bundleURL))
                                   """
 
         do {

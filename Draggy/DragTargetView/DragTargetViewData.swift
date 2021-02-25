@@ -203,7 +203,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         return false
     }
 
-    func ClearRecent() {
+    public func ClearRecent() {
         if let current = DragSessionManager.shared.current {
             RecentAppsManager.shared.clearRecent(for: current, .PerType)
             recentlyUsedApps = []
@@ -211,7 +211,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         }
     }
 
-    func clearRecent(_ app: Bundle, _ type: RecentType) {
+    public func clearRecent(_ app: Bundle, _ type: RecentType) {
         if let current = DragSessionManager.shared.current {
             RecentAppsManager.shared.clearRecent(app, for: current, .PerType)
             let index = recentlyUsedApps.firstIndex(of: app)!

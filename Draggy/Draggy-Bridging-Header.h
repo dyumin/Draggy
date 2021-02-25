@@ -3,3 +3,4 @@
 //
 
 #import "DragSessionManager.h"
+#import "FileDescription.h"
