@@ -18,8 +18,9 @@
     std::array<char*, 3> argv;
     
     std::string app = NSBundle.mainBundle.executableURL.path.UTF8String;
-    std::string arguments = "-I";
+    std::string arguments = "--mime-type";
     std::string fileString = file.path.UTF8String;
+
     argv[0] = &*app.begin();
     argv[1] = &*arguments.begin();
     argv[2] = &*fileString.begin();

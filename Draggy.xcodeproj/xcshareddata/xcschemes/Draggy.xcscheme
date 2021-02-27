@@ -28,10 +28,11 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CC4C2F8E25E47AAC00D50857"
+               BlueprintIdentifier = "CC11C77225E9CC2E00C2D03C"
                BuildableName = "DraggyTests.xctest"
                BlueprintName = "DraggyTests"
                ReferencedContainer = "container:Draggy.xcodeproj">

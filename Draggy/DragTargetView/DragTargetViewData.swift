@@ -80,11 +80,24 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 //                self?.recentlyUsedApps = []
 //                self?.collectionView.reloadSections([Sections.RecentApps.rawValue])
                 if let newValueOptional = keyValueObservedChange.newValue, let newValue = newValueOptional /* wtf swift */ {
+                    
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                        let recentApps = RecentAppsManager.shared.recentApps(for: newValue, .PerType)
+                        DispatchQueue.main.async {
+                            guard let self = self else {
+                                return
+                            }
+                            self.recentlyUsedApps = recentApps // TODO: what if drop file already changed
+                            self.collectionView.reloadSections([Sections.RecentApps.rawValue])
+                        }
+                    }
+                    
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
                         guard let self = self else {
                             return
                         }
 
+                        // binds symbols on first call
                         let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL] // TODO: what if drop file already changed and another request already finished?
 
                         DispatchQueue.main.async {
@@ -95,17 +108,6 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                                 }
                             }
                             self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
-                        }
-                    }
-
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                        let recentApps = RecentAppsManager.shared.recentApps(for: newValue, .PerType)
-                        DispatchQueue.main.async {
-                            guard let self = self else {
-                                return
-                            }
-                            self.recentlyUsedApps = recentApps // TODO: what if drop file already changed
-                            self.collectionView.reloadSections([Sections.RecentApps.rawValue])
                         }
                     }
                 }

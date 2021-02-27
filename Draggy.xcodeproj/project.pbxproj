@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */; };
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
 		CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */; };
@@ -30,6 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CC11C77825E9CC2E00C2D03C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC797D6B25DDE95F00DF1435 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC797D7225DDE95F00DF1435;
+			remoteInfo = Draggy;
+		};
 		CC692A8C25E52EFD007FFC49 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
@@ -118,6 +126,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DraggyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggyTests.swift; sourceTree = "<group>"; };
+		CC11C77725E9CC2E00C2D03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC4C2F7D25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CC4C2F7F25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CC4C2F8525E42FC200D50857 /* Screenshot 2021-02-22 at 21.29.28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2021-02-22 at 21.29.28.png"; sourceTree = "<group>"; };
@@ -147,6 +158,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CC11C77025E9CC2E00C2D03C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CC797D7025DDE95F00DF1435 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -159,6 +177,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC11C77425E9CC2E00C2D03C /* DraggyTests */ = {
+			isa = PBXGroup;
+			children = (
+				CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */,
+				CC11C77725E9CC2E00C2D03C /* Info.plist */,
+			);
+			path = DraggyTests;
+			sourceTree = "<group>";
+		};
 		CC4C2F7B25E41D2800D50857 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +249,7 @@
 			children = (
 				CC5DEFA625E515E500D40438 /* External */,
 				CC797D7525DDE95F00DF1435 /* Draggy */,
+				CC11C77425E9CC2E00C2D03C /* DraggyTests */,
 				CC797D7425DDE95F00DF1435 /* Products */,
 				CC692A9D25E52F44007FFC49 /* Frameworks */,
 			);
@@ -231,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				CC797D7325DDE95F00DF1435 /* Draggy.app */,
+				CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,6 +303,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CC11C77225E9CC2E00C2D03C /* DraggyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC11C77A25E9CC2E00C2D03C /* Build configuration list for PBXNativeTarget "DraggyTests" */;
+			buildPhases = (
+				CC11C76F25E9CC2E00C2D03C /* Sources */,
+				CC11C77025E9CC2E00C2D03C /* Frameworks */,
+				CC11C77125E9CC2E00C2D03C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC11C77925E9CC2E00C2D03C /* PBXTargetDependency */,
+			);
+			name = DraggyTests;
+			productName = DraggyTests;
+			productReference = CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CC797D7225DDE95F00DF1435 /* Draggy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC797D8325DDE96100DF1435 /* Build configuration list for PBXNativeTarget "Draggy" */;
@@ -301,6 +348,10 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					CC11C77225E9CC2E00C2D03C = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = CC797D7225DDE95F00DF1435;
+					};
 					CC797D7225DDE95F00DF1435 = {
 						CreatedOnToolsVersion = 12.4;
 						LastSwiftMigration = 1240;
@@ -331,6 +382,7 @@
 			projectRoot = "";
 			targets = (
 				CC797D7225DDE95F00DF1435 /* Draggy */,
+				CC11C77225E9CC2E00C2D03C /* DraggyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -409,6 +461,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CC11C77125E9CC2E00C2D03C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CC797D7125DDE95F00DF1435 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -425,6 +484,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CC11C76F25E9CC2E00C2D03C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CC797D6F25DDE95F00DF1435 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -443,6 +510,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CC11C77925E9CC2E00C2D03C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC797D7225DDE95F00DF1435 /* Draggy */;
+			targetProxy = CC11C77825E9CC2E00C2D03C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CC4C2F7C25E41D2800D50857 /* Localizable.strings */ = {
@@ -464,6 +539,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CC11C77B25E9CC2E00C2D03C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UCTQDPM624;
+				INFOPLIST_FILE = DraggyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.dyumin.DraggyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Draggy.app/Contents/MacOS/Draggy";
+			};
+			name = Debug;
+		};
+		CC11C77C25E9CC2E00C2D03C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UCTQDPM624;
+				INFOPLIST_FILE = DraggyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.dyumin.DraggyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Draggy.app/Contents/MacOS/Draggy";
+			};
+			name = Release;
+		};
 		CC797D8125DDE96100DF1435 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -632,6 +749,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CC11C77A25E9CC2E00C2D03C /* Build configuration list for PBXNativeTarget "DraggyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC11C77B25E9CC2E00C2D03C /* Debug */,
+				CC11C77C25E9CC2E00C2D03C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CC797D6E25DDE95F00DF1435 /* Build configuration list for PBXProject "Draggy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -12,6 +12,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         _ = DragSessionManager.shared // init shared instance
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            _ = RecentAppsManager.shared // open db connection
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
