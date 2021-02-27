@@ -10,19 +10,15 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="285" height="139"/>
+            <rect key="frame" x="0.0" y="0.0" width="162" height="158"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b7q-Qw-i0Y">
-                    <rect key="frame" x="105" y="44" width="75" height="75"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="aDm-pm-My2"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="qbw-rq-CQD"/>
-                    </constraints>
+                    <rect key="frame" x="20" y="44" width="122" height="94"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="gJp-bE-bAQ"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X76-9q-6td">
-                    <rect key="frame" x="124" y="20" width="37" height="16"/>
+                    <rect key="frame" x="63" y="20" width="37" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Im2-UM-KkL">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -30,7 +26,7 @@
                     </textFieldCell>
                 </textField>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lVW-tZ-1kt" customClass="RemoveButton" customModule="Draggy" customModuleProvider="target">
-                    <rect key="frame" x="159" y="97" width="32" height="31"/>
+                    <rect key="frame" x="121" y="116" width="32" height="31"/>
                     <buttonCell key="cell" type="round" bezelStyle="circular" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="YGp-ed-1O3">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -41,15 +37,17 @@
                 </button>
             </subviews>
             <constraints>
+                <constraint firstItem="b7q-Qw-i0Y" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="7RF-PM-beO"/>
                 <constraint firstItem="lVW-tZ-1kt" firstAttribute="trailing" secondItem="b7q-Qw-i0Y" secondAttribute="trailing" constant="5" id="9tJ-Cc-iuB"/>
                 <constraint firstItem="X76-9q-6td" firstAttribute="centerX" secondItem="b7q-Qw-i0Y" secondAttribute="centerX" id="Jmm-Ah-sfo"/>
+                <constraint firstAttribute="trailing" secondItem="b7q-Qw-i0Y" secondAttribute="trailing" constant="20" symbolic="YES" id="RJm-N4-kia"/>
                 <constraint firstItem="lVW-tZ-1kt" firstAttribute="top" secondItem="b7q-Qw-i0Y" secondAttribute="top" constant="-5" id="fIm-N2-S0a"/>
                 <constraint firstItem="b7q-Qw-i0Y" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="hoP-7C-txL"/>
                 <constraint firstAttribute="bottom" secondItem="X76-9q-6td" secondAttribute="bottom" constant="20" symbolic="YES" id="jMw-kN-Pti"/>
                 <constraint firstItem="X76-9q-6td" firstAttribute="top" secondItem="b7q-Qw-i0Y" secondAttribute="bottom" constant="8" symbolic="YES" id="ntK-JJ-L7U"/>
                 <constraint firstItem="b7q-Qw-i0Y" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="qSo-Lv-uHP"/>
             </constraints>
-            <point key="canvasLocation" x="-144.5" y="121.5"/>
+            <point key="canvasLocation" x="-63" y="15"/>
         </customView>
         <customObject id="iI1-Ip-2tD" customClass="DragTargetViewItem" customModule="Draggy" customModuleProvider="target">
             <connections>
