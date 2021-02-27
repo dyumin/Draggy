@@ -14,6 +14,7 @@
 		CC692A9E25E52F44007FFC49 /* GRDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC692A8D25E52EFD007FFC49 /* GRDB.framework */; };
 		CC692A9F25E52F44007FFC49 /* GRDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC692A8D25E52EFD007FFC49 /* GRDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CC692AA225E5AF95007FFC49 /* RemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC692AA125E5AF95007FFC49 /* RemoveButton.swift */; };
+		CC7785D225EAC53000B1E7ED /* SimpleBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */; };
 		CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797D7625DDE95F00DF1435 /* AppDelegate.swift */; };
 		CC797D7B25DDE96100DF1435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC797D7A25DDE96100DF1435 /* Assets.xcassets */; };
 		CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC797DA425E1701700DF1435 /* DragSessionManager.m */; };
@@ -137,6 +138,7 @@
 		CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRDB.xcodeproj; path = GRDB.swift/GRDB.xcodeproj; sourceTree = "<group>"; };
 		CC692AA125E5AF95007FFC49 /* RemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveButton.swift; sourceTree = "<group>"; };
 		CC705DDB25E6BC17007C8332 /* file.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = file.xcodeproj; path = file/file.xcodeproj; sourceTree = "<group>"; };
+		CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBundle.swift; sourceTree = "<group>"; };
 		CC797D7325DDE95F00DF1435 /* Draggy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draggy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC797D7625DDE95F00DF1435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC797D7A25DDE96100DF1435 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */,
 				CC9BE21B25E71D2500FEE307 /* FileDescription.h */,
 				CC9BE21C25E71D2500FEE307 /* FileDescription.mm */,
+				CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */,
 			);
 			path = Draggy;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
 				CC797DB725E180C300DF1435 /* DragTargetView.swift in Sources */,
+				CC7785D225EAC53000B1E7ED /* SimpleBundle.swift in Sources */,
 				CC692AA225E5AF95007FFC49 /* RemoveButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

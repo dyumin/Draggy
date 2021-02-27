@@ -21,7 +21,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     var suggestedApps: [Bundle]
     var suggestedAppsObservation: NSKeyValueObservation?
 
-    var recentlyUsedApps: [Bundle]
+    var recentlyUsedApps: [SimpleBundle]
     var recentlyUsedAppsObservation: NSKeyValueObservation?
 
     weak var collectionView: NSCollectionView! {
@@ -128,7 +128,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionView.DropOperation) -> Bool {
 
-        guard let targetApplication = { () -> URL? in
+        guard let targetApplicationUrl = { () -> URL? in
             if (indexPath.section == Sections.RecentApps.rawValue) {
                 return indexPath.item < recentlyUsedApps.count ? recentlyUsedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
             } else if (indexPath.section == Sections.SuggestedApps.rawValue) {
@@ -138,9 +138,9 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             }
             return nil
         }() else {
-
             return false
         }
+        let targetApplication = SimpleBundle(targetApplicationUrl)
 
         let pb = draggingInfo.draggingPasteboard
         let classes = [NSURL.self]
@@ -148,7 +148,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             return false
         }
 
-        RecentAppsManager.shared.didOpen(urls.first!, with: Bundle(url: targetApplication)!)
+        RecentAppsManager.shared.didOpen(urls.first!, with: targetApplication)
         DispatchQueue.main.async {
             collectionView.reloadSections([Sections.RecentApps.rawValue]) // todo: do it better
         }
@@ -162,13 +162,13 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     }
 
     @discardableResult
-    public class func open(_ urls: [URL], with application: URL) -> Bool {
+    public class func open(_ urls: [URL], with application: SimpleBundle) -> Bool {
         if #available(OSX 10.15, *) {
             var error: Error?
             let dispatchGroup = DispatchGroup()
 
             dispatchGroup.enter()
-            NSWorkspace.shared.open(urls, withApplicationAt: application, configuration: NSWorkspace.OpenConfiguration()) { (runningApplication, inError) in
+            NSWorkspace.shared.open(urls, withApplicationAt: application.bundleURL, configuration: NSWorkspace.OpenConfiguration()) { (runningApplication, inError) in
                 /* Queue : com.apple.launchservices.open-queue (serial), non-main */
 
                 if let inError = inError {
@@ -191,7 +191,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             }
         } else {
             do {
-                try NSWorkspace.shared.open(urls, withApplicationAt: application, options: [NSWorkspace.LaunchOptions.async], configuration: [:])
+                try NSWorkspace.shared.open(urls, withApplicationAt: application.bundleURL, options: [NSWorkspace.LaunchOptions.async], configuration: [:])
                 return true
             } catch {
                 DispatchQueue.main.async {
@@ -213,7 +213,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         }
     }
 
-    public func clearRecent(_ app: Bundle, _ type: RecentType) {
+    public func clearRecent(_ app: SimpleBundle, _ type: RecentType) {
         if let current = DragSessionManager.shared.current {
             RecentAppsManager.shared.clearRecent(app, for: current, .PerType)
             let index = recentlyUsedApps.firstIndex(of: app)!
@@ -268,7 +268,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             item?.removeButton.isHidden = false
             item?.dataSource = self
         } else if (indexPath.section == Sections.SuggestedApps.rawValue) {
-            item?.bundle = suggestedApps[indexPath.item]
+            item?.bundle = SimpleBundle(suggestedApps[indexPath.item])
 
         } else if (indexPath.section == Sections.RunningApplications.rawValue) {
             item?.runningApplication = runningApplications[indexPath.item]

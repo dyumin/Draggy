@@ -24,15 +24,15 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
         
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file2, with: app2, FileInfo(extension: "foo", mimetype: "not_bar"))
         
         let file3 = URL(fileURLWithPath: "/System/Applications/Utilities/Boot Camp Assistant.app")
-        let app3 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app3 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file3, with: app3, FileInfo(extension: "not_foo", mimetype: "bar"))
         
         let recentAppsFooBar = RecentAppsManager.shared.recentApps(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "foo", mimetype: "bar"))
@@ -50,7 +50,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: ""))
         
         let recentAppsFoo = RecentAppsManager.shared.recentApps(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "foo", mimetype: ""))
@@ -75,11 +75,11 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: ""))
         
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file2, with: app2, FileInfo(extension: "foo", mimetype: "bar"))
         
         let recentAppsFoo = RecentAppsManager.shared.recentApps(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "foo", mimetype: ""))
@@ -103,7 +103,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "", mimetype: "bar"))
         
         let recentAppsFoo = RecentAppsManager.shared.recentApps(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "", mimetype: "bar"))
@@ -127,11 +127,11 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "", mimetype: "bar"))
         
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file2, with: app2, FileInfo(extension: "foo", mimetype: "bar"))
         
         let recentAppsFoo = RecentAppsManager.shared.recentApps(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "", mimetype: "bar"))
@@ -155,11 +155,11 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "", mimetype: ""))
         
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file2, with: app2, FileInfo(extension: "", mimetype: ""))
         
         let recentAppsFoo = RecentAppsManager.shared.recentApps(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "", mimetype: "bar"))
@@ -182,15 +182,15 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
         
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file2, with: app2, FileInfo(extension: "foo", mimetype: "not_bar"))
         
         let file3 = URL(fileURLWithPath: "/System/Applications/Utilities/Boot Camp Assistant.app")
-        let app3 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app3 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file3, with: app3, FileInfo(extension: "not_foo", mimetype: "bar"))
         
         RecentAppsManager.shared.clearRecent(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "foo", mimetype: ""))
@@ -215,15 +215,15 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
 
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file2, with: app2, FileInfo(extension: "foo", mimetype: "not_bar"))
 
         let file3 = URL(fileURLWithPath: "/System/Applications/Utilities/Boot Camp Assistant.app")
-        let app3 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app3 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file3, with: app3, FileInfo(extension: "not_foo", mimetype: "bar"))
 
         RecentAppsManager.shared.clearRecent(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "", mimetype: "bar"))
@@ -248,15 +248,15 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
 
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file2, with: app2, FileInfo(extension: "foo", mimetype: "not_bar"))
 
         let file3 = URL(fileURLWithPath: "/System/Applications/Utilities/Boot Camp Assistant.app")
-        let app3 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app3 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file3, with: app3, FileInfo(extension: "not_foo", mimetype: "bar"))
 
         RecentAppsManager.shared.clearRecent(for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "foo", mimetype: "bar"))
@@ -281,7 +281,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
 
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
@@ -291,11 +291,11 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.didOpen(file3, with: app1, FileInfo(extension: "not_foo", mimetype: "bar"))
         
         let file4 = URL(fileURLWithPath: "/System/Applications/Utilities/Console.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/Bluetooth File Exchange.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/Bluetooth File Exchange.app")
         RecentAppsManager.shared.didOpen(file4, with: app2, FileInfo(extension: "extra_foo", mimetype: "extra_bar"))
         
         let file5 = URL(fileURLWithPath: "/System/Applications/Utilities/Console.app")
-        let app3 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app3 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file5, with: app3, FileInfo(extension: "randomgkbskhgcsgmx", mimetype: "not_bar"))
 
         RecentAppsManager.shared.clearRecent(app1, for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "foo", mimetype: ""))
@@ -320,7 +320,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
 
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
@@ -330,7 +330,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.didOpen(file3, with: app1, FileInfo(extension: "not_foo", mimetype: "bar"))
         
         let file4 = URL(fileURLWithPath: "/System/Applications/Utilities/Console.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file4, with: app2, FileInfo(extension: "extra_foo", mimetype: "extra_bar"))
 
         RecentAppsManager.shared.clearRecent(app1, for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "", mimetype: "bar"))
@@ -349,7 +349,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
 
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
@@ -359,7 +359,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.didOpen(file3, with: app1, FileInfo(extension: "not_foo", mimetype: "bar"))
         
         let file4 = URL(fileURLWithPath: "/System/Applications/Utilities/Console.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file4, with: app2, FileInfo(extension: "extra_foo", mimetype: "extra_bar"))
 
         RecentAppsManager.shared.clearRecent(app1, for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "foo", mimetype: "bar"))
@@ -378,7 +378,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.test_db_reset()
         
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
-        let app1 = Bundle(path: "/System/Applications/Utilities/AirPort Utility.app")!
+        let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
 
         let file2 = URL(fileURLWithPath: "/System/Applications/Utilities/Audio MIDI Setup.app")
@@ -388,7 +388,7 @@ class DraggyTests: XCTestCase {
         RecentAppsManager.shared.didOpen(file3, with: app1, FileInfo(extension: "not_foo", mimetype: "bar"))
         
         let file4 = URL(fileURLWithPath: "/System/Applications/Utilities/Console.app")
-        let app2 = Bundle(path: "/System/Applications/Utilities/ColorSync Utility.app")!
+        let app2 = SimpleBundle("/System/Applications/Utilities/ColorSync Utility.app")
         RecentAppsManager.shared.didOpen(file4, with: app2, FileInfo(extension: "extra_foo", mimetype: "extra_bar"))
 
         RecentAppsManager.shared.clearRecent(app1, for: /* unused */ URL(fileURLWithPath: ""), .PerType, FileInfo(extension: "", mimetype: ""))

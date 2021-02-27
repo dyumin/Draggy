@@ -24,10 +24,10 @@ class DragTargetViewItem: NSCollectionViewItem {
     }
 
     @IBAction func removeButtonPressed(_ sender: Any) {
-        guard let app = getAppBundleUrl() else {
+        guard let app = getSimpleBundle() else {
             return
         }
-        dataSource?.clearRecent(Bundle(url: app)!, .PerType)
+        dataSource?.clearRecent(app, .PerType)
     }
 
     override var highlightState: NSCollectionViewItem.HighlightState {
@@ -64,15 +64,20 @@ class DragTargetViewItem: NSCollectionViewItem {
         view.layer!.masksToBounds = true
     }
 
-    var bundle: Bundle? {
+    var bundle: SimpleBundle? {
         didSet {
-            if let bundle = bundle {
-                icon.image = NSWorkspace.shared.icon(forFile: bundle.bundlePath)
+            if let simpleBundle = bundle {
+                if let bundle = Bundle(url: simpleBundle.bundleURL) {
+                    icon.image = NSWorkspace.shared.icon(forFile: bundle.bundlePath)
 
-                if let bundleDisplayName = bundle.infoDictionary?["CFBundleDisplayName"] as? String {
-                    localizedName.stringValue = bundleDisplayName
-                } else if let bundleName = bundle.infoDictionary?[kCFBundleNameKey as String] as? String {
-                    localizedName.stringValue = bundleName
+                    if let bundleDisplayName = bundle.infoDictionary?["CFBundleDisplayName"] as? String {
+                        localizedName.stringValue = bundleDisplayName
+                    } else if let bundleName = bundle.infoDictionary?[kCFBundleNameKey as String] as? String {
+                        localizedName.stringValue = bundleName
+                    }
+                } else {
+                    icon.image = #imageLiteral(resourceName: "BundleNotFound")
+                    localizedName.stringValue = simpleBundle.bundleURL.path
                 }
             }
         }
@@ -87,23 +92,22 @@ class DragTargetViewItem: NSCollectionViewItem {
         }
     }
 
-    public func getAppBundleUrl() -> URL? {
+    public func getSimpleBundle() -> SimpleBundle? {
         if let bundle = bundle {
-            return bundle.bundleURL
-        } else if let runningApplication = runningApplication {
-            return runningApplication.bundleURL
+            return bundle
+        } else if let runningApplicationBundleURL = runningApplication?.bundleURL {
+            return SimpleBundle(runningApplicationBundleURL)
         }
         return nil
     }
 
     override func mouseDown(with event: NSEvent) {
         if let current = DragSessionManager.shared.current {
-            guard let app = getAppBundleUrl() else {
+            guard let app = getSimpleBundle() else {
                 return
             }
-
             if (DragTargetViewData.open([current], with: app)) {
-                RecentAppsManager.shared.didOpen(current, with: Bundle(url: app)!)
+                RecentAppsManager.shared.didOpen(current, with: app)
                 DragSessionManager.shared.closeWindow()
             }
         }

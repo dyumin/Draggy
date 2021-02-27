@@ -90,7 +90,7 @@ class RecentAppsManager {
 
     // acceptable race conditions with DispatchQoS.QoSClass.utility in func didOpen(_ file: URL, with app: Bundle, _ testFileInfo: FileInfo? = nil)
     // worst case scenario - recent app will not be shown to user once
-    func recentApps(for file: URL, _ type: RecentType, /* tests only*/ _ testFileInfo: FileInfo? = nil) -> [Bundle] { // TODO: synchronisation?
+    func recentApps(for file: URL, _ type: RecentType, /* tests only*/ _ testFileInfo: FileInfo? = nil) -> [SimpleBundle] { // TODO: synchronisation?
 
         let fileInfo = testFileInfo == nil ? FileInfo(extension: file.pathExtension, mimetype: FileDescription.getForFile(file) ?? "") : testFileInfo!
 
@@ -111,7 +111,7 @@ class RecentAppsManager {
         }
 
 
-        var data = [Bundle]()
+        var data = [SimpleBundle]()
         try! db!.read({ (db) in
             do {
                 if (!fileInfo.mimetype.isEmpty) {
@@ -139,8 +139,8 @@ class RecentAppsManager {
 
             do {
                 // https://stackoverflow.com/questions/5391564/how-to-use-distinct-and-order-by-in-same-select-statement
-                data = try URL.fetchAll(db, sql: "SELECT bundlePath, MAX(time) FROM open_records WHERE (extension IN (\(extensionsForMimetypeContecanated)) OR mimetype IN (\(mimetypesForExtensionContecanated))) GROUP BY bundlePath ORDER BY MAX(time) DESC, bundlePath").map {
-                    Bundle(url: $0)!
+                data = try String.fetchAll(db, sql: "SELECT bundlePath, MAX(time) FROM open_records WHERE (extension IN (\(extensionsForMimetypeContecanated)) OR mimetype IN (\(mimetypesForExtensionContecanated))) GROUP BY bundlePath ORDER BY MAX(time) DESC, bundlePath").map {
+                    SimpleBundle($0)
                 }
             }
         })
@@ -150,6 +150,7 @@ class RecentAppsManager {
 
     func clearRecent(for file: URL, _ type: RecentType, /* tests only*/ _ testFileInfo: FileInfo? = nil) {
         let fileInfo = testFileInfo == nil ? FileInfo(extension: file.pathExtension, mimetype: FileDescription.getForFile(file) ?? "") : testFileInfo!
+        
         if !fileInfo.isEmpty {
             try! db!.write { db in
                 try db.execute(sql: "DELETE FROM open_records WHERE extension = ? OR mimetype = ?", arguments: [fileInfo.extension, fileInfo.mimetype])
@@ -157,16 +158,16 @@ class RecentAppsManager {
         }
     }
 
-    func clearRecent(_ app: Bundle, for file: URL, _ type: RecentType, /* tests only*/ _ testFileInfo: FileInfo? = nil) {
+    func clearRecent(_ app: SimpleBundle, for file: URL, _ type: RecentType, /* tests only*/ _ testFileInfo: FileInfo? = nil) {
         let fileInfo = testFileInfo == nil ? FileInfo(extension: file.pathExtension, mimetype: FileDescription.getForFile(file) ?? "") : testFileInfo!
         if !fileInfo.isEmpty {
             try! db!.write { db in
-                try db.execute(sql: "DELETE FROM open_records WHERE (extension = ? OR mimetype = ?) AND bundlePath = ?", arguments: [fileInfo.extension, fileInfo.mimetype, app.bundleURL])
+                try db.execute(sql: "DELETE FROM open_records WHERE (extension = ? OR mimetype = ?) AND bundlePath = ?", arguments: [fileInfo.extension, fileInfo.mimetype, app.bundleURL.path])
             }
         }
     }
 
-    func didOpen(_ file: URL, with app: Bundle, /* tests only*/ _ testFileInfo: FileInfo? = nil) {
+    func didOpen(_ file: URL, with app: SimpleBundle, /* tests only*/ _ testFileInfo: FileInfo? = nil) {
 
         guard let db = db else {
             return
@@ -184,8 +185,12 @@ class RecentAppsManager {
                 return testFileInfo!
             }()
 
+            // Dont serialise app.bundleURL URL directly
+            // URL threats folders and files differently, folders get trailing slash in the representation, nonexistent folders treated as nonexistent files and dont get a trailing slash.
+            // Existence check performed each time URL instance is created it seems
+            // This may lead to inconsistent behaviour if app bundle is removed
             let literal: SQLLiteral = """
-                                      INSERT INTO open_records (absolutePath, isDirectory, extension, mimetype, time, bundlePath) VALUES (\(file.absoluteURL), \(isDirectory.boolValue), \(fileInfo.extension.isEmpty ? nil : fileInfo.extension), \(fileInfo.mimetype.isEmpty ? nil : fileInfo.mimetype), \(Date()), \(app.bundleURL))
+                                      INSERT INTO open_records (absolutePath, isDirectory, extension, mimetype, time, bundlePath) VALUES (\(file.absoluteURL), \(isDirectory.boolValue), \(fileInfo.extension.isEmpty ? nil : fileInfo.extension), \(fileInfo.mimetype.isEmpty ? nil : fileInfo.mimetype), \(Date()), \(app.bundleURL.path))
                                       """
 
             try! db.write { db in
