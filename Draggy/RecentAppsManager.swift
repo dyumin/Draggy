@@ -40,7 +40,14 @@ class RecentAppsManager {
         if (!FileManager.default.fileExists(atPath: appSupportDirectory.path)) {
             try! FileManager.default.createDirectory(at: appSupportDirectory, withIntermediateDirectories: false, attributes: nil)
         }
-        let dbURL = appSupportDirectory.appendingPathComponent("records.sqlite3")
+
+        let dbURL = { () -> URL in
+            if NSClassFromString("XCTest") != nil { // not reliable, but will do
+                let tmp = FileManager.default.temporaryDirectory.appendingPathComponent(Bundle.main.bundleIdentifier!)
+                return tmp.appendingPathComponent("records.sqlite3")
+            }
+            return appSupportDirectory.appendingPathComponent("records.sqlite3")
+        }()
 
         var config = Configuration()
         config.prepareDatabase { db in
