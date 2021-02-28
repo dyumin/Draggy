@@ -104,7 +104,9 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                             self.suggestedApps.removeAll()
                             if let suggestedApps = suggestedApps {
                                 for url in suggestedApps {
-                                    self.suggestedApps.append(Bundle(url: url)!)
+                                    if let bundle = Bundle(url: url) { // May fail if bundle isnt accessible (sandbox for example)
+                                        self.suggestedApps.append(bundle)
+                                    }
                                 }
                             }
                             self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
