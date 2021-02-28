@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DB925E185CA00DF1435 /* DragTargetViewData.swift */; };
 		CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797DBF25E1D25700DF1435 /* DragTargetViewItem.swift */; };
 		CC797DC225E1D25700DF1435 /* DragTargetViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */; };
+		CC7EE52E25EBD4F900546FD4 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC7EE52D25EBD4F900546FD4 /* LaunchAtLogin */; };
 		CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; };
 		CC9BE1B625E6D3BB00FEE307 /* libfile.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CC9BE21D25E71D2600FEE307 /* FileDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC9BE21C25E71D2500FEE307 /* FileDescription.mm */; };
@@ -171,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC7EE52E25EBD4F900546FD4 /* LaunchAtLogin in Frameworks */,
 				CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */,
 				CC692A9E25E52F44007FFC49 /* GRDB.framework in Frameworks */,
 			);
@@ -332,12 +334,16 @@
 				CC797D7025DDE95F00DF1435 /* Frameworks */,
 				CC797D7125DDE95F00DF1435 /* Resources */,
 				CC692AA025E52F44007FFC49 /* Embed Frameworks */,
+				CC7EE53D25EBD58800546FD4 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Draggy;
+			packageProductDependencies = (
+				CC7EE52D25EBD4F900546FD4 /* LaunchAtLogin */,
+			);
 			productName = Draggy;
 			productReference = CC797D7325DDE95F00DF1435 /* Draggy.app */;
 			productType = "com.apple.product-type.application";
@@ -370,6 +376,9 @@
 				Base,
 			);
 			mainGroup = CC797D6A25DDE95F00DF1435;
+			packageReferences = (
+				CC7EE52C25EBD4F900546FD4 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+			);
 			productRefGroup = CC797D7425DDE95F00DF1435 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -485,6 +494,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CC7EE53D25EBD58800546FD4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Embed LaunchAtLogin helper application\n\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CC11C76F25E9CC2E00C2D03C /* Sources */ = {
@@ -782,6 +811,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CC7EE52C25EBD4F900546FD4 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CC7EE52D25EBD4F900546FD4 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC7EE52C25EBD4F900546FD4 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CC797D6B25DDE95F00DF1435 /* Project object */;
 }
