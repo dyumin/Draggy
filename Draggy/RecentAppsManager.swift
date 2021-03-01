@@ -36,19 +36,18 @@ class RecentAppsManager {
 
     private init() throws {
 
-        let appSupportDirectory = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(Bundle.main.bundleIdentifier!)
+        let appSupportDirectory = { () -> URL in
+            if NSClassFromString("XCTest") != nil { // not reliable, but will do
+                return FileManager.default.temporaryDirectory.appendingPathComponent(Bundle.main.bundleIdentifier!)
+            }
+            return try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(Bundle.main.bundleIdentifier!)
+        }()
         if (!FileManager.default.fileExists(atPath: appSupportDirectory.path)) {
             try! FileManager.default.createDirectory(at: appSupportDirectory, withIntermediateDirectories: false, attributes: nil)
         }
 
-        let dbURL = { () -> URL in
-            if NSClassFromString("XCTest") != nil { // not reliable, but will do
-                let tmp = FileManager.default.temporaryDirectory.appendingPathComponent(Bundle.main.bundleIdentifier!)
-                return tmp.appendingPathComponent("records.sqlite3")
-            }
-            return appSupportDirectory.appendingPathComponent("records.sqlite3")
-        }()
-
+        let dbURL = appSupportDirectory.appendingPathComponent("records.sqlite3")
+        
         var config = Configuration()
         config.prepareDatabase { db in
             db.trace(options: .profile) { event in
