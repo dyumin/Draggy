@@ -26,7 +26,7 @@
     argv[2] = &*fileString.begin();
 
     std::string description;
-    if (!file::copy_file_description(argv.size(), argv.data(), description) && !description.empty())
+    if (!file::copy_file_description(argv.size(), argv.data(), description) && !description.empty()) // Todo: file error access message gets written as mimetype
     {
         return [NSString stringWithUTF8String:description.c_str()];
     }
