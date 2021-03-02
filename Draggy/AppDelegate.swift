@@ -8,7 +8,6 @@
 import Cocoa
 import Foundation
 
-@main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
