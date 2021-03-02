@@ -204,9 +204,9 @@ class RecentAppsManager {
             }
         }
 
-        if Thread.isMainThread && testFileInfo == nil { // run tests syncroniously
+        if Thread.isMainThread && testFileInfo == nil {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.utility).async(execute: block) // may block userInteractive queue (func recentApps(for file: URL, _ type: RecentType, _ testFileInfo: FileInfo? = nil) -> [Bundle]) later if user drags again
-        } else {
+        } else { // run tests syncroniously
             block()
         }
     }

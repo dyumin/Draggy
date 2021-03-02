@@ -103,6 +103,8 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                         if let suggestedApps = suggestedApps {
                             for url in suggestedApps {
                                 if let bundle = Bundle(url: url) { // May fail if bundle isnt accessible (sandbox for example)
+                                                                   // Todo: display as simple path
+                                                                   // Fun fact: you can still get this bundle from NSWorkspace.shared.runningApplications if it is running
                                     self.suggestedApps.append(bundle)
                                 }
                             }
