@@ -44,6 +44,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
 
         _hudWindow.releasedWhenClosed = NO;
         _hudWindow.titlebarAppearsTransparent = YES;
+        _hudWindow.titleVisibility = NSWindowTitleHidden;
 
         _hudWindow.opaque = NO;
         _hudWindow.hasShadow = NO;
