@@ -50,9 +50,26 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="jb9-fU-o25" id="P1j-hR-0yy"/>
+                        <outlet property="menu" destination="lys-Bx-V6H" id="K9J-pk-PCj"/>
                     </connections>
                 </viewController>
                 <customObject id="ULL-gP-TE9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="lys-Bx-V6H">
+                    <items>
+                        <menuItem title="Äütöstärt" state="on" id="wIO-Xi-UPb">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="onAutostartPressed:" target="nNG-gP-O51" id="XTs-LV-IKg"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Ëxït" tag="1" id="KHo-ya-mKJ">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="onExitPressed:" target="nNG-gP-O51" id="2bl-LO-BbZ"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-595" y="-642"/>
         </scene>

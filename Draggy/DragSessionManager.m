@@ -6,6 +6,7 @@
 //
 
 #import "DragSessionManager.h"
+#import "Draggy-Swift.h" // onMenuButtonPressed selector decraration
 #import <Cocoa/Cocoa.h>
 
 static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
@@ -67,17 +68,19 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
         NSStoryboard *dragTargetViewStoryboard = [NSStoryboard storyboardWithName:DragTargetViewStoryboardName bundle:nil];
 
         _dragTargetViewController = dragTargetViewStoryboard.instantiateInitialController;
+        [self setUpMenuButtonForWindow:_hudWindow targetController:_dragTargetViewController];
+
         NSView *contentView = _dragTargetViewController.view;
         [hudBackground addSubview:contentView];
 
         contentView.wantsLayer = YES;
 
+        contentView.translatesAutoresizingMaskIntoConstraints = NO;
+
         [contentView.topAnchor constraintEqualToAnchor:hudBackground.topAnchor].active = YES;
         [contentView.bottomAnchor constraintEqualToAnchor:hudBackground.bottomAnchor].active = YES;
         [contentView.leadingAnchor constraintEqualToAnchor:hudBackground.leadingAnchor].active = YES;
         [contentView.trailingAnchor constraintEqualToAnchor:hudBackground.trailingAnchor].active = YES;
-
-        contentView.translatesAutoresizingMaskIntoConstraints = NO;
 
 //        [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskPressure handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
 //
@@ -173,6 +176,27 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
         }];
     }
     return self;
+}
+
+- (void)setUpMenuButtonForWindow:(NSWindow *)window targetController:(__kindof NSViewController *)controller {
+    NSButton *settingsButton = [NSButton buttonWithImage:[NSImage imageNamed:@"NSAdvanced"] target:nil action:nil];
+    settingsButton.translatesAutoresizingMaskIntoConstraints = NO;
+    settingsButton.bezelStyle = NSBezelStyleShadowlessSquare;
+    settingsButton.bordered = NO;
+    settingsButton.imagePosition = NSImageOnly;
+    settingsButton.imageScaling = NSImageScaleProportionallyUpOrDown;
+
+    NSButton *expandButton = [window standardWindowButton:NSWindowZoomButton];
+    [expandButton.superview addSubview:settingsButton];
+
+    [settingsButton.widthAnchor constraintEqualToAnchor:expandButton.widthAnchor].active = YES;
+    [settingsButton.heightAnchor constraintEqualToAnchor:expandButton.heightAnchor].active = YES;
+    [settingsButton.centerYAnchor constraintEqualToAnchor:expandButton.centerYAnchor].active = YES;
+
+    [settingsButton.trailingAnchor constraintEqualToAnchor:expandButton.superview.trailingAnchor constant: /* TODO: dont hardcode */ -7].active = YES;
+
+    settingsButton.target = controller;
+    settingsButton.action = @selector(onMenuButtonPressed);
 }
 
 - (void)closeWindow {
