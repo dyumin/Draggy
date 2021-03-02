@@ -50,6 +50,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="jb9-fU-o25" id="P1j-hR-0yy"/>
+                        <outlet property="collectionViewScrollView" destination="gzH-TW-4vY" id="gxO-pj-R45"/>
                         <outlet property="menu" destination="lys-Bx-V6H" id="K9J-pk-PCj"/>
                     </connections>
                 </viewController>

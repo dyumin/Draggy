@@ -13,6 +13,22 @@ class DragTargetView: NSViewController {
     @IBOutlet weak var collectionView: NSCollectionView!
     let dataSource = DragTargetViewData()
 
+    // AppKit Release Notes for macOS Big Sur 11
+    // https://developer.apple.com/documentation/macos-release-notes/appkit-release-notes-for-macos-11
+    // NSScrollView
+    //  When linked on macOS Big Sur 11 or later, an NSScrollView with automaticallyAdjustsContentInsets set to true will continue to respect the safe-area insets of the window even when titlebarAppearsTransparent is set to true. For apps linked earlier than macOS Big Sur 11 NSScrollView will ignore the automatic insets when titlebarAppearsTransparent is set to true.
+    @IBOutlet weak var collectionViewScrollView: NSScrollView!
+    {
+        didSet
+        {
+            collectionViewScrollView.automaticallyAdjustsContentInsets = false
+            if let zoomButtonYOrigin = HudWindow.shared.hudWindow.standardWindowButton(NSWindow.ButtonType.zoomButton)?.frame.origin.y {
+                collectionViewScrollView.contentInsets.top = zoomButtonYOrigin
+            }
+        }
+    }
+    
+    
     var _menu: NSMenu? = nil
     override var menu: NSMenu? {
         set {
