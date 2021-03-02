@@ -73,44 +73,41 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             }
         }
 
-        // async because of dispatch_once reenter
-        DispatchQueue.main.async {
-            self.suggestedAppsObservation = DragSessionManager.shared.observe(\.current, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
-                // clear previous recent apps
+        self.suggestedAppsObservation = DragSessionManager.shared.observe(\.current, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
+            // clear previous recent apps
 //                self?.recentlyUsedApps = []
 //                self?.collectionView.reloadSections([Sections.RecentApps.rawValue])
-                if let newValueOptional = keyValueObservedChange.newValue, let newValue = newValueOptional /* wtf swift */ {
-                    
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                        let recentApps = RecentAppsManager.shared.recentApps(for: newValue, .PerType)
-                        DispatchQueue.main.async {
-                            guard let self = self else {
-                                return
-                            }
-                            self.recentlyUsedApps = recentApps // TODO: what if drop file already changed
-                            self.collectionView.reloadSections([Sections.RecentApps.rawValue])
-                        }
-                    }
-                    
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+            if let newValueOptional = keyValueObservedChange.newValue, let newValue = newValueOptional /* wtf swift */ {
+                
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                    let recentApps = RecentAppsManager.shared.recentApps(for: newValue, .PerType)
+                    DispatchQueue.main.async {
                         guard let self = self else {
                             return
                         }
+                        self.recentlyUsedApps = recentApps // TODO: what if drop file already changed
+                        self.collectionView.reloadSections([Sections.RecentApps.rawValue])
+                    }
+                }
+                
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+                    guard let self = self else {
+                        return
+                    }
 
-                        // binds symbols on first call
-                        let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL] // TODO: what if drop file already changed and another request already finished?
+                    // binds symbols on first call
+                    let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL] // TODO: what if drop file already changed and another request already finished?
 
-                        DispatchQueue.main.async {
-                            self.suggestedApps.removeAll()
-                            if let suggestedApps = suggestedApps {
-                                for url in suggestedApps {
-                                    if let bundle = Bundle(url: url) { // May fail if bundle isnt accessible (sandbox for example)
-                                        self.suggestedApps.append(bundle)
-                                    }
+                    DispatchQueue.main.async {
+                        self.suggestedApps.removeAll()
+                        if let suggestedApps = suggestedApps {
+                            for url in suggestedApps {
+                                if let bundle = Bundle(url: url) { // May fail if bundle isnt accessible (sandbox for example)
+                                    self.suggestedApps.append(bundle)
                                 }
                             }
-                            self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
                         }
+                        self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
                     }
                 }
             }

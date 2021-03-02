@@ -15,7 +15,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if #available(OSX 10.14, *) {
             App.shared.appearance = NSAppearance(named: .darkAqua)
         }
-        _ = DragSessionManager.shared // init shared instance
+        
+        do {
+            // it is better to initialise in this order
+            let dragSessionManager = DragSessionManager.shared // init shared instance
+            let hudWindow = HudWindow.shared // init shared instance
+            hudWindow.loadContentView()
+            dragSessionManager.hudWindow = hudWindow.hudWindow
+        }
+        
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             _ = RecentAppsManager.shared // open db connection
         }

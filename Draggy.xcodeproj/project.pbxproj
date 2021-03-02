@@ -28,6 +28,7 @@
 		CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; };
 		CC9BE1B625E6D3BB00FEE307 /* libfile.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CC9BE21D25E71D2600FEE307 /* FileDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC9BE21C25E71D2500FEE307 /* FileDescription.mm */; };
+		CCAA865825EE4E7E00B41B16 /* HudWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA865725EE4E7E00B41B16 /* HudWindow.m */; };
 		CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4354925E403AA00E86C57 /* SectionHeader.swift */; };
 		CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF4354C25E403CD00E86C57 /* SectionHeader.xib */; };
 /* End PBXBuildFile section */
@@ -156,6 +157,8 @@
 		CC797DC025E1D25700DF1435 /* DragTargetViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DragTargetViewItem.xib; sourceTree = "<group>"; };
 		CC9BE21B25E71D2500FEE307 /* FileDescription.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileDescription.h; sourceTree = "<group>"; };
 		CC9BE21C25E71D2500FEE307 /* FileDescription.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FileDescription.mm; sourceTree = "<group>"; };
+		CCAA865625EE4E7E00B41B16 /* HudWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HudWindow.h; sourceTree = "<group>"; };
+		CCAA865725EE4E7E00B41B16 /* HudWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HudWindow.m; sourceTree = "<group>"; };
 		CCF4354925E403AA00E86C57 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CCF4354C25E403CD00E86C57 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -280,6 +283,8 @@
 				CC797D8725DDE9B300DF1435 /* Draggy-Bridging-Header.h */,
 				CC797DA325E1701700DF1435 /* DragSessionManager.h */,
 				CC797DA425E1701700DF1435 /* DragSessionManager.m */,
+				CCAA865625EE4E7E00B41B16 /* HudWindow.h */,
+				CCAA865725EE4E7E00B41B16 /* HudWindow.m */,
 				CC797DA725E1738D00DF1435 /* App.swift */,
 				CC797DC625E2B37A00DF1435 /* DragTargetView */,
 				CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */,
@@ -532,6 +537,7 @@
 				CC797DA825E1738D00DF1435 /* App.swift in Sources */,
 				CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */,
 				CC9BE21D25E71D2600FEE307 /* FileDescription.mm in Sources */,
+				CCAA865825EE4E7E00B41B16 /* HudWindow.m in Sources */,
 				CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */,
 				CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */,
 				CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */,

@@ -4,3 +4,4 @@
 
 #import "DragSessionManager.h"
 #import "FileDescription.h"
+#import "HudWindow.h"

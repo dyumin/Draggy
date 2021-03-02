@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly, nullable) NSURL *current;
 
 @property(nonatomic, readonly) BOOL willCloseWindow;
+
+@property(nonatomic) NSWindow *hudWindow; // supposed to be set right after initialisation
 
 @property(class, readonly) DragSessionManager* sharedInstance NS_SWIFT_NAME(shared);
 
