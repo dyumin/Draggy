@@ -21,9 +21,8 @@
     NSInteger _ignoreEventNumber;
     NSPasteboard *_dragPasteboard;
     NSArray<NSPasteboardItem *> *_lastPasteboardItems;
-    __kindof NSViewController *_dragTargetViewController;
     bool _stopTracking;
-    bool _dontCloseOnMouseUp;
+    dispatch_block_t _postponedCloseWindow;
 }
 
 - (instancetype)init {
@@ -65,8 +64,21 @@
                     self->_lastPasteboardItems = self->_dragPasteboard.pasteboardItems;
                     self->_hudWindow.level = NSNormalWindowLevel;
 
-                    // TODO: debug disabled
-//                    [self closeWindow];
+                    [self resetPostponedClose];
+                    if (!NSApplication.sharedApplication.isActive) {
+                        const __auto_type wself = self;
+                        // close window automatically if no user interaction will happen in 1 minute
+                        self->_postponedCloseWindow = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
+                            const __auto_type sself = wself;
+                            if (!sself) {
+                                return;
+                            }
+                            const NSTimeInterval animationDuration = 1.2;
+                            [sself closeWindowWithAnimationDuration:&animationDuration];
+                            sself->_postponedCloseWindow = nil;
+                        });
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 60 * NSEC_PER_SEC), dispatch_get_main_queue(), self->_postponedCloseWindow);
+                    }
                 }
 
                 return;
@@ -108,10 +120,12 @@
             }
 
             if (self->_eventNumber != eventNumber) {
+                self->_willCloseWindow = false; // prevent previous (close) animation (if any) from closing window in [NSAnimationContext.currentContext setCompletionHandler:]
+                [self resetPostponedClose];
                 self->_eventNumber = eventNumber;
                 self->_stopTracking = false;
                 self->_hudWindow.level = NSPopUpMenuWindowLevel;
-                [self->_hudWindow orderFrontRegardless]; // todo: what if previous (close) animation still active
+                [self->_hudWindow orderFrontRegardless];
                 [NSAnimationContext beginGrouping];
                 [NSAnimationContext.currentContext setDuration:0.05];
                 NSAnimationContext.currentContext.completionHandler = ^{
@@ -130,14 +144,45 @@
     return self;
 }
 
+- (void)applicationDidBecomeActive {
+    [self resetPostponedClose];
+    if (self->_willCloseWindow) { // prevent previous (close) animation (if any) from closing window in [NSAnimationContext.currentContext setCompletionHandler:] and restore _hudWindow alphaValue
+        self->_willCloseWindow = false;
+        self->_hudWindow.animator.alphaValue = 1;
+    }
+}
+
+- (void)resetPostponedClose {
+    if (self->_postponedCloseWindow) {
+        dispatch_block_cancel(self->_postponedCloseWindow);
+        self->_postponedCloseWindow = nil;
+    }
+}
+
 - (void)closeWindow {
+    [self resetPostponedClose];
+    if (self->_willCloseWindow) { // already closing, _postponedCloseWindow block was able to run (?)
+        // actually I have no idea how to get to this case, but lets leave it here
+        // initial idea was that func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionView.DropOperation) -> Bool
+        // may be triggered while window is closing, but that currently should be impossible
+        return;
+    }
+    [self closeWindowWithAnimationDuration:nil];
+}
+
+- (void)closeWindowWithAnimationDuration:(const NSTimeInterval *const)duration {
     self->_willCloseWindow = true;
     [NSAnimationContext beginGrouping];
     [NSAnimationContext.currentContext setCompletionHandler:^{
 //                        NSLog(@"All done! _hudWindow close");
-        [self->_hudWindow close];
-        self->_willCloseWindow = false;
+        if (self->_willCloseWindow) {
+            [self->_hudWindow close];
+            self->_willCloseWindow = false;
+        }
     }];
+    if (duration) {
+        NSAnimationContext.currentContext.duration = *duration;
+    }
     self->_hudWindow.animator.alphaValue = 0;
     [NSAnimationContext endGrouping];
 }

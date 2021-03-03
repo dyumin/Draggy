@@ -18,13 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic) NSWindow *hudWindow; // supposed to be set right after initialisation
 
-@property(class, readonly) DragSessionManager* sharedInstance NS_SWIFT_NAME(shared);
+@property(class, readonly) DragSessionManager *sharedInstance NS_SWIFT_NAME(shared);
 
 - (instancetype)init NS_UNAVAILABLE;
 
 + (instancetype)new NS_UNAVAILABLE;
 
 - (void)closeWindow;
+
+- (void)applicationDidBecomeActive;
 
 @end
 
