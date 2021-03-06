@@ -7,3 +7,5 @@ From getopt_long's man:
 BUGS
      The argv argument is not really const as its elements may be permuted (unless POSIXLY_CORRECT is set).
 May lead to crashes since we pass internal std::string pointer
+
+3. Duplicate swift runtime in Draggy.app/Contents/Frameworks and Draggy.app/Contents/Library/LoginItems/LaunchAtLoginHelper.app/Contents/Frameworks
