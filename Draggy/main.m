@@ -11,14 +11,15 @@
 int main(const int argc, const char *argv[]) {
     @autoreleasepool {
         __auto_type const mainBundleIdentifier = NSBundle.mainBundle.bundleIdentifier;
+        __auto_type const currentProcessIdentifier = NSRunningApplication.currentApplication.processIdentifier;
         __block NSRunningApplication *anotherInstance;
         // may be unreliable, but should do the job
         const __auto_type index = [NSWorkspace.sharedWorkspace.runningApplications indexOfObjectPassingTest:^BOOL(NSRunningApplication *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-            const bool isEqual = [obj.bundleIdentifier isEqualToString:mainBundleIdentifier];
-            if (isEqual) {
+            const bool anotherInstanceFound = [obj.bundleIdentifier isEqualToString:mainBundleIdentifier] && obj.processIdentifier != currentProcessIdentifier;
+            if (anotherInstanceFound) {
                 anotherInstance = obj;
             }
-            return isEqual;
+            return anotherInstanceFound;
         }];
 
         if (index != NSNotFound) {
