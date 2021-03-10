@@ -22,5 +22,5 @@ jobs:
     - name: Build
       run: xcodebuild -scheme Draggy build
 
-#    - name: Run tests
-#      run: swift test -v
+    - name: Run tests
+      run: xcodebuild test -scheme Draggy
