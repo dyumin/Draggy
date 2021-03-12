@@ -9,12 +9,11 @@
 /* Begin PBXBuildFile section */
 		CC05F64225EEB0FB00255B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05F64125EEB0FB00255B03 /* main.m */; };
 		CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */; };
+		CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = CC25103B25FB836C00CCFCA3 /* GRDB */; };
 		CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */; };
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
 		CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */; };
-		CC692A9E25E52F44007FFC49 /* GRDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC692A8D25E52EFD007FFC49 /* GRDB.framework */; };
-		CC692A9F25E52F44007FFC49 /* GRDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC692A8D25E52EFD007FFC49 /* GRDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CC692AA225E5AF95007FFC49 /* RemoveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC692AA125E5AF95007FFC49 /* RemoveButton.swift */; };
 		CC7785D225EAC53000B1E7ED /* SimpleBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */; };
 		CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC797D7625DDE95F00DF1435 /* AppDelegate.swift */; };
@@ -42,62 +41,6 @@
 			remoteGlobalIDString = CC797D7225DDE95F00DF1435;
 			remoteInfo = Draggy;
 		};
-		CC692A8C25E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC3773F319C8CBB3004FCF85;
-			remoteInfo = GRDBOSX;
-		};
-		CC692A8E25E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 56E5D7F91B4D422D00430942;
-			remoteInfo = GRDBOSXTests;
-		};
-		CC692A9025E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 56553C181C3E906C00522B5C;
-			remoteInfo = GRDBOSXCrashTests;
-		};
-		CC692A9225E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 56E5D7CA1B4D3FED00430942;
-			remoteInfo = GRDBiOS;
-		};
-		CC692A9425E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 56E5D7D31B4D3FEE00430942;
-			remoteInfo = GRDBiOSTests;
-		};
-		CC692A9625E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 565490A01D5A4798005622CB;
-			remoteInfo = GRDBWatchOS;
-		};
-		CC692A9825E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AAA4DCFE230F1E0600C74B15;
-			remoteInfo = GRDBtvOS;
-		};
-		CC692A9A25E52EFD007FFC49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AAA4DDD4230F262000C74B15;
-			remoteInfo = GRDBtvOSTests;
-		};
 		CC705DE325E6BC17007C8332 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CC705DDB25E6BC17007C8332 /* file.xcodeproj */;
@@ -122,7 +65,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				CC9BE1B625E6D3BB00FEE307 /* libfile.dylib in Embed Frameworks */,
-				CC692A9F25E52F44007FFC49 /* GRDB.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,7 +81,6 @@
 		CC4C2F8525E42FC200D50857 /* Screenshot 2021-02-22 at 21.29.28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2021-02-22 at 21.29.28.png"; sourceTree = "<group>"; };
 		CC4C2F8625E42FD400D50857 /* Todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAppsManager.swift; sourceTree = "<group>"; };
-		CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRDB.xcodeproj; path = GRDB.swift/GRDB.xcodeproj; sourceTree = "<group>"; };
 		CC692AA125E5AF95007FFC49 /* RemoveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveButton.swift; sourceTree = "<group>"; };
 		CC705DDB25E6BC17007C8332 /* file.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = file.xcodeproj; path = file/file.xcodeproj; sourceTree = "<group>"; };
 		CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBundle.swift; sourceTree = "<group>"; };
@@ -177,9 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */,
 				CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */,
 				CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */,
-				CC692A9E25E52F44007FFC49 /* GRDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,24 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				CC705DDB25E6BC17007C8332 /* file.xcodeproj */,
-				CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */,
 			);
 			path = External;
-			sourceTree = "<group>";
-		};
-		CC692A8225E52EFD007FFC49 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CC692A8D25E52EFD007FFC49 /* GRDB.framework */,
-				CC692A8F25E52EFD007FFC49 /* GRDBOSXTests.xctest */,
-				CC692A9125E52EFD007FFC49 /* GRDBOSXCrashTests.xctest */,
-				CC692A9325E52EFD007FFC49 /* GRDB.framework */,
-				CC692A9525E52EFD007FFC49 /* GRDBiOSTests.xctest */,
-				CC692A9725E52EFD007FFC49 /* GRDB.framework */,
-				CC692A9925E52EFD007FFC49 /* GRDB.framework */,
-				CC692A9B25E52EFD007FFC49 /* GRDBtvOSTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		CC692A9D25E52F44007FFC49 /* Frameworks */ = {
@@ -351,6 +276,7 @@
 			name = Draggy;
 			packageProductDependencies = (
 				CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */,
+				CC25103B25FB836C00CCFCA3 /* GRDB */,
 			);
 			productName = Draggy;
 			productReference = CC797D7325DDE95F00DF1435 /* Draggy.app */;
@@ -386,6 +312,7 @@
 			mainGroup = CC797D6A25DDE95F00DF1435;
 			packageReferences = (
 				CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+				CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 			);
 			productRefGroup = CC797D7425DDE95F00DF1435 /* Products */;
 			projectDirPath = "";
@@ -393,10 +320,6 @@
 				{
 					ProductGroup = CC705DDC25E6BC17007C8332 /* Products */;
 					ProjectRef = CC705DDB25E6BC17007C8332 /* file.xcodeproj */;
-				},
-				{
-					ProductGroup = CC692A8225E52EFD007FFC49 /* Products */;
-					ProjectRef = CC692A8125E52EFD007FFC49 /* GRDB.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -408,62 +331,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		CC692A8D25E52EFD007FFC49 /* GRDB.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GRDB.framework;
-			remoteRef = CC692A8C25E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC692A8F25E52EFD007FFC49 /* GRDBOSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = GRDBOSXTests.xctest;
-			remoteRef = CC692A8E25E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC692A9125E52EFD007FFC49 /* GRDBOSXCrashTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = GRDBOSXCrashTests.xctest;
-			remoteRef = CC692A9025E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC692A9325E52EFD007FFC49 /* GRDB.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GRDB.framework;
-			remoteRef = CC692A9225E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC692A9525E52EFD007FFC49 /* GRDBiOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = GRDBiOSTests.xctest;
-			remoteRef = CC692A9425E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC692A9725E52EFD007FFC49 /* GRDB.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GRDB.framework;
-			remoteRef = CC692A9625E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC692A9925E52EFD007FFC49 /* GRDB.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GRDB.framework;
-			remoteRef = CC692A9825E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC692A9B25E52EFD007FFC49 /* GRDBtvOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = GRDBtvOSTests.xctest;
-			remoteRef = CC692A9A25E52EFD007FFC49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CC705DE425E6BC17007C8332 /* libmagic.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -832,6 +699,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.5.0;
+			};
+		};
 		CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dyumin/LaunchAtLogin";
@@ -843,6 +718,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CC25103B25FB836C00CCFCA3 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
+		};
 		CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
