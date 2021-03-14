@@ -1,0 +1,24 @@
+name: Continuous Integration
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  continuous-integration:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macOS-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Test (Python 2)
+        run: swift test --enable-test-discovery
+        env:
+          PYTHON_VERSION: 2
+      - name: Test (Python 3)
+        run: swift test --enable-test-discovery
+        env:
+          PYTHON_VERSION: 3
