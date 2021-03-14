@@ -657,6 +657,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LLVM_LTO = YES;
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.dyumin.Draggy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
