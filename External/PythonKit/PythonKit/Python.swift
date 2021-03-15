@@ -19,14 +19,16 @@
 //
 //===----------------------------------------------------------------------===//
 
+private let ctypes = Python.import("ctypes")
+
 //===----------------------------------------------------------------------===//
 // `PyReference` definition
 //===----------------------------------------------------------------------===//
 
 /// Typealias used when passing or returning a `PyObject` pointer with
 /// implied ownership.
-@usableFromInline
-typealias OwnedPyObjectPointer = PyObjectPointer
+//@usableFromInline
+public typealias OwnedPyObjectPointer = PyObjectPointer
 
 /// A primitive reference to a Python C API `PyObject`.
 ///
@@ -97,10 +99,10 @@ public struct PythonObject {
     }
     
     /// Creates a new instance and a new reference.
-    init(_ pointer: OwnedPyObjectPointer) {
+    public init(_ pointer: OwnedPyObjectPointer) {
         reference = PyReference(pointer)
     }
-    
+
     /// Creates a new instance consuming the specified `PyObject` pointer.
     init(consuming pointer: PyObjectPointer) {
         reference = PyReference(consuming: pointer)
@@ -725,6 +727,16 @@ public extension PythonObject {
     }
 }
 
+public extension PythonObject {
+    init(_ closure: @escaping @convention(c) (UnsafeMutableRawPointer) -> ()) {
+        let py_object_type = ctypes.py_object
+        let closureSignature = ctypes.PYFUNCTYPE(/* returns void */Python.None, py_object_type)
+        let closureAddress = Int(bitPattern: unsafeBitCast(closure, to: UnsafeRawPointer.self)) // TODO: anything better than Int?
+        let pythonCallable = closureSignature(closureAddress)
+        self.init(pythonCallable)
+    }
+}
+
 //===----------------------------------------------------------------------===//
 // `PythonConvertible` conformance for basic Swift types
 //===----------------------------------------------------------------------===//
@@ -1045,7 +1057,7 @@ where Key : PythonConvertible, Value : PythonConvertible {
 extension Dictionary : ConvertibleFromPython
 where Key : ConvertibleFromPython, Value : ConvertibleFromPython {
     public init?(_ pythonDict: PythonObject) {
-        self = [:]
+        self.init()
         
         // Iterate over the Python dictionary, converting its keys and values to
         // Swift `Key` and `Value` pairs.
