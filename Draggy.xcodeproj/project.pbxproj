@@ -10,6 +10,7 @@
 		CC05F64225EEB0FB00255B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05F64125EEB0FB00255B03 /* main.m */; };
 		CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */; };
 		CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = CC25103B25FB836C00CCFCA3 /* GRDB */; };
+		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
 		CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */; };
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
@@ -76,6 +77,8 @@
 		CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DraggyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggyTests.swift; sourceTree = "<group>"; };
 		CC11C77725E9CC2E00C2D03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC37810025FE586A0092E145 /* PythonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonKit; sourceTree = "<group>"; };
+		CC37810C25FF70AD0092E145 /* youtube_dl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = youtube_dl; path = "youtube-dl/youtube_dl"; sourceTree = "<group>"; };
 		CC4C2F7D25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CC4C2F7F25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CC4C2F8525E42FC200D50857 /* Screenshot 2021-02-22 at 21.29.28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2021-02-22 at 21.29.28.png"; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 				CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */,
 				CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */,
 				CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */,
+				CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +161,8 @@
 		CC5DEFA625E515E500D40438 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				CC37810C25FF70AD0092E145 /* youtube_dl */,
+				CC37810025FE586A0092E145 /* PythonKit */,
 				CC705DDB25E6BC17007C8332 /* file.xcodeproj */,
 			);
 			path = External;
@@ -267,7 +273,8 @@
 				CC797D7025DDE95F00DF1435 /* Frameworks */,
 				CC797D7125DDE95F00DF1435 /* Resources */,
 				CC692AA025E52F44007FFC49 /* Embed Frameworks */,
-				CC7EE53D25EBD58800546FD4 /* ShellScript */,
+				CC7EE53D25EBD58800546FD4 /* Install LaunchAtLogin */,
+				CC37775E25FE46430092E145 /* Install youtube_dl */,
 			);
 			buildRules = (
 			);
@@ -277,6 +284,7 @@
 			packageProductDependencies = (
 				CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */,
 				CC25103B25FB836C00CCFCA3 /* GRDB */,
+				CC376DBD25FE431B0092E145 /* PythonKit */,
 			);
 			productName = Draggy;
 			productReference = CC797D7325DDE95F00DF1435 /* Draggy.app */;
@@ -313,6 +321,7 @@
 			packageReferences = (
 				CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */,
 			);
 			productRefGroup = CC797D7425DDE95F00DF1435 /* Products */;
 			projectDirPath = "";
@@ -371,7 +380,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CC7EE53D25EBD58800546FD4 /* ShellScript */ = {
+		CC37775E25FE46430092E145 /* Install youtube_dl */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -381,6 +390,25 @@
 			);
 			inputPaths = (
 			);
+			name = "Install youtube_dl";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nmkdir -p \"$TARGET_BUILD_DIR/$SCRIPTS_FOLDER_PATH\"\ncp -rf \"$SRCROOT\"/External/youtube-dl/youtube_dl \"$TARGET_BUILD_DIR/$SCRIPTS_FOLDER_PATH\"/youtube_dl\n\n";
+		};
+		CC7EE53D25EBD58800546FD4 /* Install LaunchAtLogin */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Install LaunchAtLogin";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -708,6 +736,14 @@
 				minimumVersion = 5.5.0;
 			};
 		};
+		CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pvieito/PythonKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dyumin/LaunchAtLogin";
@@ -723,6 +759,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
+		};
+		CC376DBD25FE431B0092E145 /* PythonKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */;
+			productName = PythonKit;
 		};
 		CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
