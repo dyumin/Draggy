@@ -73,45 +73,50 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             }
         }
 
-        self.suggestedAppsObservation = DragSessionManager.shared.observe(\.current, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
-            // clear previous recent apps
+        self.suggestedAppsObservation = DragSessionManager.shared.observe(\.currentPasteboardURL, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
+
+            switch (dragSessionManager.currentPasteboardItem) {
+            case .file(let url):
+                self?.onFileDragged(url)
+            case .empty:
+                return
+            case .url(_):
+                fallthrough
+            @unknown default:
+                fatalError()
+            }
+        }
+    }
+
+    private func onFileDragged(_ file: URL) {
+        // clear previous recent apps
 //                self?.recentlyUsedApps = []
 //                self?.collectionView.reloadSections([Sections.RecentApps.rawValue])
-            if let newValueOptional = keyValueObservedChange.newValue, let newValue = newValueOptional /* wtf swift */ {
-                
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
-                    let recentApps = RecentAppsManager.shared.recentApps(for: newValue, .PerType)
-                    DispatchQueue.main.async {
-                        guard let self = self else {
-                            return
+
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+            let recentApps = RecentAppsManager.shared.recentApps(for: file, .PerType)
+            DispatchQueue.main.async {
+                self.recentlyUsedApps = recentApps // TODO: what if drop file already changed
+                self.collectionView.reloadSections([Sections.RecentApps.rawValue])
+            }
+        }
+
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+            // binds symbols on first call
+            let suggestedApps = LSCopyApplicationURLsForURL(file as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL] // TODO: what if drop file already changed and another request already finished?
+
+            DispatchQueue.main.async {
+                self.suggestedApps.removeAll()
+                if let suggestedApps = suggestedApps {
+                    for url in suggestedApps {
+                        if let bundle = Bundle(url: url) { // May fail if bundle isnt accessible (sandbox for example)
+                            // Todo: display as simple path
+                            // Fun fact: you can still get this bundle from NSWorkspace.shared.runningApplications if it is running
+                            self.suggestedApps.append(bundle)
                         }
-                        self.recentlyUsedApps = recentApps // TODO: what if drop file already changed
-                        self.collectionView.reloadSections([Sections.RecentApps.rawValue])
                     }
                 }
-                
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
-                    guard let self = self else {
-                        return
-                    }
-
-                    // binds symbols on first call
-                    let suggestedApps = LSCopyApplicationURLsForURL(newValue as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL] // TODO: what if drop file already changed and another request already finished?
-
-                    DispatchQueue.main.async {
-                        self.suggestedApps.removeAll()
-                        if let suggestedApps = suggestedApps {
-                            for url in suggestedApps {
-                                if let bundle = Bundle(url: url) { // May fail if bundle isnt accessible (sandbox for example)
-                                                                   // Todo: display as simple path
-                                                                   // Fun fact: you can still get this bundle from NSWorkspace.shared.runningApplications if it is running
-                                    self.suggestedApps.append(bundle)
-                                }
-                            }
-                        }
-                        self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
-                    }
-                }
+                self.collectionView.reloadSections([Sections.SuggestedApps.rawValue])
             }
         }
     }
@@ -207,7 +212,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     }
 
     public func ClearRecent() {
-        if let current = DragSessionManager.shared.current {
+        if case .file(let current) = DragSessionManager.shared.currentPasteboardItem {
             RecentAppsManager.shared.clearRecent(for: current, .PerType)
             recentlyUsedApps = []
             collectionView.reloadSections([Sections.RecentApps.rawValue])
@@ -215,7 +220,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
     }
 
     public func clearRecent(_ app: SimpleBundle, _ type: RecentType) {
-        if let current = DragSessionManager.shared.current {
+        if case .file(let current) = DragSessionManager.shared.currentPasteboardItem {
             RecentAppsManager.shared.clearRecent(app, for: current, .PerType)
             let index = recentlyUsedApps.firstIndex(of: app)!
             recentlyUsedApps.remove(at: index)

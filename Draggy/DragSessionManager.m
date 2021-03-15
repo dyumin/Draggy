@@ -6,15 +6,16 @@
 //
 
 #import "DragSessionManager.h"
+#import "Draggy-Swift.h" // DragSessionManager
 
-@interface DragSessionManager ()
+@interface DragSessionManagerImpl ()
 
-@property(nonatomic) NSURL *current;
+@property(nonatomic) NSURL *currentPasteboardURL;
 @property(nonatomic) BOOL willCloseWindow;
 
 @end
 
-@implementation DragSessionManager {
+@implementation DragSessionManagerImpl {
     NSArray<NSPasteboardType> *_acceptedPasteboardTypes;
     NSWindow *_hudWindow;
     NSInteger _eventNumber;
@@ -28,7 +29,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _acceptedPasteboardTypes = @[NSPasteboardTypeFileURL];
+        _acceptedPasteboardTypes = @[NSPasteboardTypeFileURL, NSPasteboardTypeString];
 
         _dragPasteboard = [NSPasteboard pasteboardWithName:NSPasteboardNameDrag];
         _lastPasteboardItems = _dragPasteboard.pasteboardItems;
@@ -106,9 +107,26 @@
                 NSPasteboardType type;
                 for (NSPasteboardItem *item in pasteboardItems) {
                     if ((type = [item availableTypeFromArray:self->_acceptedPasteboardTypes])) {
-                        anyUrlFound = true;
-                        self.current = [NSURL URLFromPasteboard:self->_dragPasteboard];
-                        break;
+                        if ([type isEqualToString:NSPasteboardTypeFileURL]) {
+                            NSURL *url = [NSURL URLFromPasteboard:self->_dragPasteboard];
+                            if (url) {
+                                anyUrlFound = true;
+                                [DragSessionManager.shared setPasteboardItem:url with:FileURL];
+                                self.currentPasteboardURL = url;
+                                break;
+                            }
+                        } else if ([type isEqualToString:NSPasteboardTypeString]) {
+                            NSString *pasteboardText = [self->_dragPasteboard stringForType:NSPasteboardTypeString];
+                            if (![pasteboardText containsString:@"youtube.com/watch?"]) // TODO: use appopriate regex
+                                continue;
+                            NSURL *url = [NSURL URLWithString:pasteboardText];
+                            if (url) {
+                                anyUrlFound = true;
+                                [DragSessionManager.shared setPasteboardItem:url with:URL];
+                                self.currentPasteboardURL = url;
+                                break;
+                            }
+                        }
                     }
                 }
 

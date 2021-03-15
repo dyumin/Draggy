@@ -13,6 +13,7 @@
 		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
 		CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37811025FF73DC0092E145 /* PythonRunner.swift */; };
 		CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */; };
+		CC3CFF2525FFD21300A62DE5 /* DragSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */; };
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
 		CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */; };
@@ -81,6 +82,7 @@
 		CC37810025FE586A0092E145 /* PythonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonKit; sourceTree = "<group>"; };
 		CC37810C25FF70AD0092E145 /* youtube_dl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = youtube_dl; path = "youtube-dl/youtube_dl"; sourceTree = "<group>"; };
 		CC37811025FF73DC0092E145 /* PythonRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonRunner.swift; sourceTree = "<group>"; };
+		CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragSessionManager.swift; sourceTree = "<group>"; };
 		CC4C2F7D25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CC4C2F7F25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CC4C2F8525E42FC200D50857 /* Screenshot 2021-02-22 at 21.29.28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2021-02-22 at 21.29.28.png"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				CC797D8725DDE9B300DF1435 /* Draggy-Bridging-Header.h */,
 				CC797DA325E1701700DF1435 /* DragSessionManager.h */,
 				CC797DA425E1701700DF1435 /* DragSessionManager.m */,
+				CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */,
 				CCAA865625EE4E7E00B41B16 /* HudWindow.h */,
 				CCAA865725EE4E7E00B41B16 /* HudWindow.m */,
 				CC797DA725E1738D00DF1435 /* App.swift */,
@@ -466,6 +469,7 @@
 				CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */,
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
+				CC3CFF2525FFD21300A62DE5 /* DragSessionManager.swift in Sources */,
 				CC797DB725E180C300DF1435 /* DragTargetView.swift in Sources */,
 				CC7785D225EAC53000B1E7ED /* SimpleBundle.swift in Sources */,
 				CC692AA225E5AF95007FFC49 /* RemoveButton.swift in Sources */,
