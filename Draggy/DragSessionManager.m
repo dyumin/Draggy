@@ -111,7 +111,7 @@
                             NSURL *url = [NSURL URLFromPasteboard:self->_dragPasteboard];
                             if (url) {
                                 anyUrlFound = true;
-                                [DragSessionManager.shared setPasteboardItem:url with:FileURL];
+                                [(DragSessionManager*)self setPasteboardItem:url with:FileURL];
                                 self.currentPasteboardURL = url;
                                 break;
                             }
@@ -122,7 +122,7 @@
                             NSURL *url = [NSURL URLWithString:pasteboardText];
                             if (url) {
                                 anyUrlFound = true;
-                                [DragSessionManager.shared setPasteboardItem:url with:URL];
+                                [(DragSessionManager*)self setPasteboardItem:url with:URL];
                                 self.currentPasteboardURL = url;
                                 break;
                             }
