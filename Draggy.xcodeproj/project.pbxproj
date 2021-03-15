@@ -272,6 +272,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC797D8325DDE96100DF1435 /* Build configuration list for PBXNativeTarget "Draggy" */;
 			buildPhases = (
+				CC3CFEDD25FFC16800A62DE5 /* Fix swift import header */,
 				CC797D6F25DDE95F00DF1435 /* Sources */,
 				CC797D7025DDE95F00DF1435 /* Frameworks */,
 				CC797D7125DDE95F00DF1435 /* Resources */,
@@ -401,6 +402,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nmkdir -p \"$TARGET_BUILD_DIR/$SCRIPTS_FOLDER_PATH\"\ncp -rf \"$SRCROOT\"/External/youtube-dl/youtube_dl \"$TARGET_BUILD_DIR/$SCRIPTS_FOLDER_PATH\"/youtube_dl\n\n";
+		};
+		CC3CFEDD25FFC16800A62DE5 /* Fix swift import header */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fix swift import header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# https://forums.swift.org/t/dispatchqueue-extension/4206\n# https://stackoverflow.com/questions/16745988/sed-command-with-i-option-in-place-editing-works-fine-on-ubuntu-but-not-mac\n\nset -x\n\nsed \"s/OS_dispatch_queue/NSObject/\" \"$DERIVED_FILES_DIR/$PRODUCT_MODULE_NAME-Swift-Broken.h\" > \"$DERIVED_FILES_DIR/$PRODUCT_MODULE_NAME-Swift.h\"\necho \"$?\" # set exit code to success\n";
 		};
 		CC7EE53D25EBD58800546FD4 /* Install LaunchAtLogin */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -665,6 +685,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Draggy/Draggy-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift-Broken.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -695,6 +716,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Draggy/Draggy-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift-Broken.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

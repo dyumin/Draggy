@@ -6,7 +6,7 @@
 //
 
 #import "HudWindow.h"
-//#import "Draggy-Swift.h" // onMenuButtonPressed selector decraration // https://forums.swift.org/t/dispatchqueue-extension/4206
+#import "Draggy-Swift.h" // onMenuButtonPressed selector decraration // https://forums.swift.org/t/dispatchqueue-extension/4206
 
 static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
 static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWindow"; // stored in ~/Library/Preferences/io.github.dyumin.Draggy.plist and! somewhere else (e.g. plist deletion won't help)
