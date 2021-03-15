@@ -6,7 +6,7 @@
 //
 
 #import "HudWindow.h"
-#import "Draggy-Swift.h" // onMenuButtonPressed selector decraration
+//#import "Draggy-Swift.h" // onMenuButtonPressed selector decraration // https://forums.swift.org/t/dispatchqueue-extension/4206
 
 static NSString *const DragTargetViewStoryboardName = @"DragTargetView";
 static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWindow"; // stored in ~/Library/Preferences/io.github.dyumin.Draggy.plist and! somewhere else (e.g. plist deletion won't help)
@@ -90,7 +90,7 @@ static NSWindowFrameAutosaveName const WindowRestorationFrameName = @"DraggyWind
     [settingsButton.trailingAnchor constraintEqualToAnchor:expandButton.superview.trailingAnchor constant: /* TODO: dont hardcode */ -7].active = YES;
 
     settingsButton.target = controller;
-    settingsButton.action = @selector(onMenuButtonPressed);
+    settingsButton.action = @selector(onMenuButtonPressed); // https://forums.swift.org/t/dispatchqueue-extension/4206
 }
 
 + (instancetype)sharedInstance {

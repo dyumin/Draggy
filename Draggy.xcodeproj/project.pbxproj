@@ -11,6 +11,7 @@
 		CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */; };
 		CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = CC25103B25FB836C00CCFCA3 /* GRDB */; };
 		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
+		CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37811025FF73DC0092E145 /* PythonRunner.swift */; };
 		CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */; };
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
@@ -79,6 +80,7 @@
 		CC11C77725E9CC2E00C2D03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC37810025FE586A0092E145 /* PythonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonKit; sourceTree = "<group>"; };
 		CC37810C25FF70AD0092E145 /* youtube_dl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = youtube_dl; path = "youtube-dl/youtube_dl"; sourceTree = "<group>"; };
+		CC37811025FF73DC0092E145 /* PythonRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonRunner.swift; sourceTree = "<group>"; };
 		CC4C2F7D25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CC4C2F7F25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CC4C2F8525E42FC200D50857 /* Screenshot 2021-02-22 at 21.29.28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2021-02-22 at 21.29.28.png"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				CC9BE21C25E71D2500FEE307 /* FileDescription.mm */,
 				CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */,
 				CC05F64125EEB0FB00255B03 /* main.m */,
+				CC37811025FF73DC0092E145 /* PythonRunner.swift */,
 			);
 			path = Draggy;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				CCAA865825EE4E7E00B41B16 /* HudWindow.m in Sources */,
 				CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */,
 				CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */,
+				CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */,
 				CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */,
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
