@@ -23,6 +23,8 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
     var recentlyUsedApps: [SimpleBundle]
     var recentlyUsedAppsObservation: NSKeyValueObservation?
+    
+    var currentPasteboardItem = PasteboardItem.empty
 
     weak var collectionView: NSCollectionView! {
         didSet {
@@ -73,11 +75,17 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             }
         }
 
-        self.suggestedAppsObservation = DragSessionManager.shared.observe(\.currentPasteboardURL, options: [.new]) { [weak self] (dragSessionManager, keyValueObservedChange) in
+        suggestedAppsObservation = DragSessionManager.shared.observe(\.currentPasteboardURL, options: [.new]) { [weak self] (dragSessionManager, _) in
 
+            guard let self = self else {
+                return
+            }
+            
+            self.currentPasteboardItem = dragSessionManager.currentPasteboardItem
+            
             switch (dragSessionManager.currentPasteboardItem) {
             case .file(let url):
-                self?.onFileDragged(url)
+                self.onFileDragged(url)
             case .empty:
                 return
             case .url(_):
@@ -148,18 +156,16 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         }
         let targetApplication = SimpleBundle(targetApplicationUrl)
 
-        let pb = draggingInfo.draggingPasteboard
-        let classes = [NSURL.self]
-        guard let urls = pb.readObjects(forClasses: classes, options: nil) as? [URL] else {
+        guard case .file(let url) = currentPasteboardItem else {
             return false
         }
 
-        RecentAppsManager.shared.didOpen(urls.first!, with: targetApplication)
+        RecentAppsManager.shared.didOpen(url, with: targetApplication)
         DispatchQueue.main.async {
             collectionView.reloadSections([Sections.RecentApps.rawValue]) // todo: do it better
         }
 
-        let result = DragTargetViewData.open(urls, with: targetApplication)
+        let result = DragTargetViewData.open([url], with: targetApplication)
         if (result) {
             DragSessionManager.shared.closeWindow()
         }
