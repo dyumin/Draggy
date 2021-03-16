@@ -10,7 +10,7 @@
 
 /// An ordered set is an ordered collection of instances of `Element` in which
 /// uniqueness of the objects is guaranteed.
-public struct OrderedSet<E: Hashable>: Equatable, Collection {
+public struct OrderedSet<E: Hashable & Comparable>: Equatable, Collection {
     public typealias Element = E
     public typealias Index = Int
 
@@ -60,14 +60,22 @@ public struct OrderedSet<E: Hashable>: Equatable, Collection {
     ///
     /// If it already contains the element, then the set is unchanged.
     ///
-    /// - returns: True if the item was inserted.
+    /// - returns: Index of element in sorted array
     @discardableResult
-    public mutating func append(_ newElement: Element) -> Bool {
+    public mutating func append(_ newElement: Element) -> Array<E>.Index {
         let inserted = set.insert(newElement).inserted
         if inserted {
-            array.append(newElement)
+            let insertIndex = { () -> Array<E>.Index in
+                let lastIndex = array.lastIndex { (element) -> Bool in
+                    // NOTE: binary search is better, but linear currently will do
+                    element < newElement
+                }
+                return (lastIndex == nil) ? 0 : lastIndex! + 1
+            }()
+            array.insert(newElement, at: insertIndex)
+            return insertIndex
         }
-        return inserted
+        return array.firstIndex(of: newElement)!
     }
 
     /// Remove and return the element at the beginning of the ordered set.
