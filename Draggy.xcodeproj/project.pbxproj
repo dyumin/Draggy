@@ -32,6 +32,7 @@
 		CC9BE1B625E6D3BB00FEE307 /* libfile.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CC9BE21D25E71D2600FEE307 /* FileDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC9BE21C25E71D2500FEE307 /* FileDescription.mm */; };
 		CCAA865825EE4E7E00B41B16 /* HudWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA865725EE4E7E00B41B16 /* HudWindow.m */; };
+		CCCCC12C2600222F00EDFDEC /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCCC1262600222F00EDFDEC /* OrderedSet.swift */; };
 		CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4354925E403AA00E86C57 /* SectionHeader.swift */; };
 		CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF4354C25E403CD00E86C57 /* SectionHeader.xib */; };
 /* End PBXBuildFile section */
@@ -109,6 +110,7 @@
 		CC9BE21C25E71D2500FEE307 /* FileDescription.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FileDescription.mm; sourceTree = "<group>"; };
 		CCAA865625EE4E7E00B41B16 /* HudWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HudWindow.h; sourceTree = "<group>"; };
 		CCAA865725EE4E7E00B41B16 /* HudWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HudWindow.m; sourceTree = "<group>"; };
+		CCCCC1262600222F00EDFDEC /* OrderedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
 		CCF4354925E403AA00E86C57 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CCF4354C25E403CD00E86C57 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 		CC5DEFA625E515E500D40438 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				CCCCC1262600222F00EDFDEC /* OrderedSet.swift */,
 				CC37810C25FF70AD0092E145 /* youtube_dl */,
 				CC37810025FE586A0092E145 /* PythonKit */,
 				CC705DDB25E6BC17007C8332 /* file.xcodeproj */,
@@ -470,6 +473,7 @@
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
 				CC3CFF2525FFD21300A62DE5 /* DragSessionManager.swift in Sources */,
+				CCCCC12C2600222F00EDFDEC /* OrderedSet.swift in Sources */,
 				CC797DB725E180C300DF1435 /* DragTargetView.swift in Sources */,
 				CC7785D225EAC53000B1E7ED /* SimpleBundle.swift in Sources */,
 				CC692AA225E5AF95007FFC49 /* RemoveButton.swift in Sources */,
