@@ -728,7 +728,7 @@ public extension PythonObject {
 }
 
 public extension PythonObject {
-    init(_ closure: @escaping @convention(c) (UnsafeMutableRawPointer) -> ()) {
+    init(_ closure: @escaping @convention(c) (UnsafeMutableRawPointer) -> ()) { // todo: should lambda consume UnsafeMutableRawPointer? need to read PYFUNCTYPE docs..
         let py_object_type = ctypes.py_object
         let closureSignature = ctypes.PYFUNCTYPE(/* returns void */Python.None, py_object_type)
         let closureAddress = Int(bitPattern: unsafeBitCast(closure, to: UnsafeRawPointer.self)) // TODO: anything better than Int?
