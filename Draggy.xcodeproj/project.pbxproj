@@ -10,9 +10,12 @@
 		CC05F64225EEB0FB00255B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05F64125EEB0FB00255B03 /* main.m */; };
 		CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */; };
 		CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = CC25103B25FB836C00CCFCA3 /* GRDB */; };
+		CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33553926021021008A3E94 /* YoutubeTests.swift */; };
 		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
 		CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37811025FF73DC0092E145 /* PythonRunner.swift */; };
 		CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */; };
+		CC39939226017A5700046ADF /* Logger.py in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC39938E26017A4B00046ADF /* Logger.py */; };
+		CC3993962602069D00046ADF /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3993952602069D00046ADF /* Youtube.swift */; };
 		CC3CFF2525FFD21300A62DE5 /* DragSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */; };
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
@@ -62,6 +65,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		CC399389260179E900046ADF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Scripts;
+			dstSubfolderSpec = 7;
+			files = (
+				CC39939226017A5700046ADF /* Logger.py in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CC692AA025E52F44007FFC49 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,9 +93,12 @@
 		CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DraggyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggyTests.swift; sourceTree = "<group>"; };
 		CC11C77725E9CC2E00C2D03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC33553926021021008A3E94 /* YoutubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTests.swift; sourceTree = "<group>"; };
 		CC37810025FE586A0092E145 /* PythonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonKit; sourceTree = "<group>"; };
 		CC37810C25FF70AD0092E145 /* youtube_dl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = youtube_dl; path = "youtube-dl/youtube_dl"; sourceTree = "<group>"; };
 		CC37811025FF73DC0092E145 /* PythonRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonRunner.swift; sourceTree = "<group>"; };
+		CC39938E26017A4B00046ADF /* Logger.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Logger.py; sourceTree = "<group>"; };
+		CC3993952602069D00046ADF /* Youtube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
 		CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragSessionManager.swift; sourceTree = "<group>"; };
 		CC4C2F7D25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CC4C2F7F25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -140,10 +156,20 @@
 		CC11C77425E9CC2E00C2D03C /* DraggyTests */ = {
 			isa = PBXGroup;
 			children = (
+				CC33553926021021008A3E94 /* YoutubeTests.swift */,
 				CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */,
 				CC11C77725E9CC2E00C2D03C /* Info.plist */,
 			);
 			path = DraggyTests;
+			sourceTree = "<group>";
+		};
+		CC3993942602067900046ADF /* Youtube */ = {
+			isa = PBXGroup;
+			children = (
+				CC39938E26017A4B00046ADF /* Logger.py */,
+				CC3993952602069D00046ADF /* Youtube.swift */,
+			);
+			path = Youtube;
 			sourceTree = "<group>";
 		};
 		CC4C2F7B25E41D2800D50857 /* en.lproj */ = {
@@ -214,6 +240,7 @@
 		CC797D7525DDE95F00DF1435 /* Draggy */ = {
 			isa = PBXGroup;
 			children = (
+				CC3993942602067900046ADF /* Youtube */,
 				CC4C2F8425E42FAD00D50857 /* Todo */,
 				CC4C2F7B25E41D2800D50857 /* en.lproj */,
 				CC797D7625DDE95F00DF1435 /* AppDelegate.swift */,
@@ -285,6 +312,7 @@
 				CC692AA025E52F44007FFC49 /* Embed Frameworks */,
 				CC7EE53D25EBD58800546FD4 /* Install LaunchAtLogin */,
 				CC37775E25FE46430092E145 /* Install youtube_dl */,
+				CC399389260179E900046ADF /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -454,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */,
+				CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +498,7 @@
 				CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */,
 				CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */,
 				CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */,
+				CC3993962602069D00046ADF /* Youtube.swift in Sources */,
 				CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */,
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
