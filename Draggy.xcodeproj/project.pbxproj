@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CC05F64225EEB0FB00255B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05F64125EEB0FB00255B03 /* main.m */; };
-		CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */; };
+		CC11C77625E9CC2E00C2D03C /* RecentAppsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */; };
 		CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = CC25103B25FB836C00CCFCA3 /* GRDB */; };
 		CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33553926021021008A3E94 /* YoutubeTests.swift */; };
 		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
@@ -91,7 +91,7 @@
 /* Begin PBXFileReference section */
 		CC05F64125EEB0FB00255B03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DraggyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggyTests.swift; sourceTree = "<group>"; };
+		CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAppsManagerTests.swift; sourceTree = "<group>"; };
 		CC11C77725E9CC2E00C2D03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC33553926021021008A3E94 /* YoutubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTests.swift; sourceTree = "<group>"; };
 		CC37810025FE586A0092E145 /* PythonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonKit; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				CC33553926021021008A3E94 /* YoutubeTests.swift */,
-				CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */,
+				CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */,
 				CC11C77725E9CC2E00C2D03C /* Info.plist */,
 			);
 			path = DraggyTests;
@@ -481,7 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */,
+				CC11C77625E9CC2E00C2D03C /* RecentAppsManagerTests.swift in Sources */,
 				CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
