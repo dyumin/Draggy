@@ -117,8 +117,9 @@
                             }
                         } else if ([type isEqualToString:NSPasteboardTypeString]) {
                             NSString *pasteboardText = [self->_dragPasteboard stringForType:NSPasteboardTypeString];
-                            if (![pasteboardText containsString:@"youtube.com/watch?"]) // TODO: use appopriate regex
+                            if (![pasteboardText containsString:@"youtube.com/watch?v="]) // TODO: use appropriate regex
                                 continue;
+                            pasteboardText = [pasteboardText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                             NSURL *url = [NSURL URLWithString:pasteboardText];
                             if (url) {
                                 anyUrlFound = true;

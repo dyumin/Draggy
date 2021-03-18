@@ -15,6 +15,7 @@ private enum Sections: Int, Comparable {
     case RecentApps
     case SuggestedApps
     case RunningApplications
+    case Youtube
 }
 
 class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionViewDelegateFlowLayout {
@@ -35,7 +36,7 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
         didSet {
             collectionView.register(NSNib(nibNamed: SectionHeader.Identifier.rawValue, bundle: nil), forSupplementaryViewOfKind: NSCollectionView.SupplementaryElementKind.init("UICollectionElementKindSectionHeader"), withIdentifier: SectionHeader.Identifier)
 
-            collectionView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
+            collectionView.registerForDraggedTypes([.fileURL, .string])
             collectionView.reloadData()
         }
     }
@@ -97,12 +98,15 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
                 self.onFileDragged(url)
             case .empty:
                 return
-            case .url(_):
-                fallthrough
-            @unknown default:
-                fatalError()
+            case .url(let url):
+                self.onURLDragged(url)
             }
         }
+    }
+    
+    private func onURLDragged(_ url: URL) {
+        sections = [.Youtube]
+        collectionView.reloadData()
     }
 
     private func onFileDragged(_ file: URL) {
@@ -175,35 +179,48 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionView.DropOperation) -> Bool {
 
-        guard let targetApplicationUrl = { () -> URL? in
-            guard sections.count > indexPath.section else { // collectionView accepts drops on hidden sections
-                return nil
+        switch sections[indexPath.section] {
+        case .RecentApps, .SuggestedApps, .RunningApplications: do {
+            guard let targetApplicationUrl = { () -> URL? in
+                guard sections.count > indexPath.section else { // collectionView accepts drops on hidden sections
+                    return nil
+                }
+                switch sections[indexPath.section] {
+                case .RecentApps:
+                    return indexPath.item < recentlyUsedApps.count ? recentlyUsedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
+                case .SuggestedApps:
+                    return indexPath.item < suggestedApps.count ? suggestedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
+                case .RunningApplications:
+                    return indexPath.item < runningApplications.count ? runningApplications[indexPath.item].bundleURL! : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
+                default:
+                    fatalError()
+                }
+            }() else {
+                return false
             }
-            switch sections[indexPath.section] {
-            case .RecentApps:
-                return indexPath.item < recentlyUsedApps.count ? recentlyUsedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
-            case .SuggestedApps:
-                return indexPath.item < suggestedApps.count ? suggestedApps[indexPath.item].bundleURL : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
-            case .RunningApplications:
-                return indexPath.item < runningApplications.count ? runningApplications[indexPath.item].bundleURL! : nil // sometimes collectionView accepts drops on nonexistent items at the end if items count just changed and numberOfItemsInSection already returned new value
+            let targetApplication = SimpleBundle(targetApplicationUrl)
+
+            guard case .file(let url) = currentPasteboardItem else {
+                return false
             }
-        }() else {
-            return false
+
+            RecentAppsManager.shared.didOpen(url, with: targetApplication)
+
+            let result = DragTargetViewData.open([url], with: targetApplication)
+            if (result) {
+                DragSessionManager.shared.closeWindow()
+            }
+
+            return result
         }
-        let targetApplication = SimpleBundle(targetApplicationUrl)
-
-        guard case .file(let url) = currentPasteboardItem else {
-            return false
-        }
-
-        RecentAppsManager.shared.didOpen(url, with: targetApplication)
-
-        let result = DragTargetViewData.open([url], with: targetApplication)
-        if (result) {
+        case .Youtube:
+            guard case .url(let url) = currentPasteboardItem else {
+                return false
+            }
             DragSessionManager.shared.closeWindow()
+            Youtube.shared.download(url)
+            return true
         }
-
-        return result
     }
 
     @discardableResult
@@ -281,6 +298,8 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             return suggestedApps.count
         case .RunningApplications:
             return runningApplications.count
+        case .Youtube:
+            return 1
         }
     }
 
@@ -298,29 +317,43 @@ class DragTargetViewData: NSObject, NSCollectionViewDataSource, NSCollectionView
             headerView.stringValue = NSLocalizedString("suggested_apps_section_header_title", comment: "")
         case .RunningApplications:
             headerView.stringValue = NSLocalizedString("running_applications_section_header_title", comment: "")
+        case .Youtube:
+            headerView.stringValue = NSLocalizedString("youtube_section_header_title", comment: "")
         }
 
         return headerView
     }
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DragTargetViewItem"), for: indexPath) as? DragTargetViewItem
-
         switch sections[indexPath.section] {
         case .RecentApps:
-            item?.bundle = recentlyUsedApps[indexPath.item]
-            item?.removeButton.isHidden = false
-            item?.dataSource = self
+            let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DragTargetViewItem"), for: indexPath) as! DragTargetViewItem
+            item.bundle = recentlyUsedApps[indexPath.item]
+            item.removeButton.isHidden = false
+            item.dataSource = self
+            return item
         case .SuggestedApps:
-            item?.bundle = SimpleBundle(suggestedApps[indexPath.item])
+            let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DragTargetViewItem"), for: indexPath) as! DragTargetViewItem
+            item.bundle = SimpleBundle(suggestedApps[indexPath.item])
+            return item
         case .RunningApplications:
-            item?.runningApplication = runningApplications[indexPath.item]
+            let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DragTargetViewItem"), for: indexPath) as! DragTargetViewItem
+            item.runningApplication = runningApplications[indexPath.item]
+            return item
+        case .Youtube:
+            let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DownloadView"), for: indexPath) as! DownloadView
+            return item
         }
-
-        return item ?? NSCollectionViewItem()
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
         NSSize(width: collectionView.frame.size.width, height: 15)
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+        switch sections[indexPath.section] {
+        case .RecentApps, .SuggestedApps, .RunningApplications, .Youtube:
+            return NSSize.init(width: 125, height: 125)
+        }
     }
 }
