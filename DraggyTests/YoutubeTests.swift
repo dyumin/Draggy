@@ -41,8 +41,6 @@ class YoutubeTests: XCTestCase {
             try! FileManager.default.removeItem(at: item)
         }
     }
-    
-    var anyDownloadDir: URL?
 
     func testGetVideoID() throws {
         popularVideos.forEach { (video) in
