@@ -39,6 +39,7 @@
 		CCCCC12C2600222F00EDFDEC /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCCC1262600222F00EDFDEC /* OrderedSet.swift */; };
 		CCCF23A726037FF400EBAF2D /* DownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCCF23A026037FF300EBAF2D /* DownloadView.xib */; };
 		CCCF23A826037FF400EBAF2D /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF23A626037FF300EBAF2D /* DownloadView.swift */; };
+		CCD8E4C82603A92200DE4032 /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8E4C72603A92200DE4032 /* Power.swift */; };
 		CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4354925E403AA00E86C57 /* SectionHeader.swift */; };
 		CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF4354C25E403CD00E86C57 /* SectionHeader.xib */; };
 /* End PBXBuildFile section */
@@ -135,6 +136,7 @@
 		CCCCC1262600222F00EDFDEC /* OrderedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
 		CCCF23A026037FF300EBAF2D /* DownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadView.xib; sourceTree = "<group>"; };
 		CCCF23A626037FF300EBAF2D /* DownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
+		CCD8E4C72603A92200DE4032 /* Power.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Power.swift; sourceTree = "<group>"; };
 		CCF4354925E403AA00E86C57 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CCF4354C25E403CD00E86C57 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -270,6 +272,7 @@
 				CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */,
 				CC05F64125EEB0FB00255B03 /* main.m */,
 				CC37811025FF73DC0092E145 /* PythonRunner.swift */,
+				CCD8E4C72603A92200DE4032 /* Power.swift */,
 			);
 			path = Draggy;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCD8E4C82603A92200DE4032 /* Power.swift in Sources */,
 				CC05F64225EEB0FB00255B03 /* main.m in Sources */,
 				CC797DA825E1738D00DF1435 /* App.swift in Sources */,
 				CC797DBA25E185CA00DF1435 /* DragTargetViewData.swift in Sources */,

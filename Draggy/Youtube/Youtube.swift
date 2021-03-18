@@ -251,12 +251,15 @@ class Youtube {
 
     @discardableResult
     public func download(_ video: URL) -> Progress {
+        
+        let sleepPreventor = SleepPreventor("Downloading \(video)")
 
         let progress = Progress()
         progress.fileOperationKind = .downloading
         progress.fileTotalCount = 1
 
         PythonRunner.shared.async { [self] in
+            _ = sleepPreventor // capture sleepPreventor
 
             let progressWrapper = ProgressWrapper(PythonObject({ progressWrapper in
                 Youtube.shared.onProgressReported(PythonObject(progressWrapper))
@@ -281,6 +284,7 @@ class Youtube {
 
             let progress = progressMap.removeValue(forKey: progressWrapper)! // calculates python hash
             DispatchQueue.main.async {
+                _ = sleepPreventor // capture sleepPreventor
                 progress.completedUnitCount = progress.totalUnitCount
             }
             
