@@ -158,7 +158,7 @@ class Youtube {
 
     // --get-id
     public func getID(_ video: URL) -> String? {
-        getID(video, PythonRunner.shared)
+        getID(video, PythonRunner.shared.queue)
     }
 
     // --get-id
@@ -187,7 +187,7 @@ class Youtube {
 
     // --get-filename
     public func getFilename(_ video: URL) -> String? {
-        getFilename(video, PythonRunner.shared)
+        getFilename(video, PythonRunner.shared.queue)
     }
 
     // --get-filename

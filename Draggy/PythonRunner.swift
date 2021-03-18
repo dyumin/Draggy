@@ -8,24 +8,32 @@
 import Dispatch
 @_exported import PythonKit
 
-fileprivate var gc: PythonObject? = nil
 
 // since python interpreter is single-threaded, use serial DispatchQueue
-open class PythonRunner : DispatchQueue {
-    public static let shared = { () -> PythonRunner in
+open class PythonRunner {
+    public static let shared = PythonRunner()
+
+    private init() {
         PythonLibrary.useVersion(3)
-        
-        let queue = PythonRunner(label: "\(Bundle.main.bundleIdentifier!).PythonRunner")
-        queue.sync {
-            gc = Python.import("gc")
+        gc = queue.sync {
+            Python.import("gc")
         }
-        
-        return queue
-    }()
-    
+    }
+
+    internal let queue = DispatchQueue(label: "\(Bundle.main.bundleIdentifier!).PythonRunner")
+    private let gc: PythonObject
+
+    public func sync<T>(execute work: () throws -> T) rethrows -> T {
+        try queue.sync(execute: work)
+    }
+
+    public func async(group: DispatchGroup? = nil, qos: DispatchQoS = .unspecified, flags: DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Void) {
+        queue.async(group: group, qos: qos, flags: flags, execute: work)
+    }
+
     public func runGC() {
-        async {
-            gc!.collect()
+        queue.async {
+            self.gc.collect()
         }
     }
 }
