@@ -10,6 +10,7 @@
 		CC05F64225EEB0FB00255B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05F64125EEB0FB00255B03 /* main.m */; };
 		CC11C77625E9CC2E00C2D03C /* RecentAppsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */; };
 		CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = CC25103B25FB836C00CCFCA3 /* GRDB */; };
+		CC32423A2602347A00146803 /* ProgressWrapper.py in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC3242392602345B00146803 /* ProgressWrapper.py */; };
 		CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33553926021021008A3E94 /* YoutubeTests.swift */; };
 		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
 		CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37811025FF73DC0092E145 /* PythonRunner.swift */; };
@@ -71,6 +72,7 @@
 			dstPath = Scripts;
 			dstSubfolderSpec = 7;
 			files = (
+				CC32423A2602347A00146803 /* ProgressWrapper.py in CopyFiles */,
 				CC39939226017A5700046ADF /* Logger.py in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +95,7 @@
 		CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DraggyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAppsManagerTests.swift; sourceTree = "<group>"; };
 		CC11C77725E9CC2E00C2D03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC3242392602345B00146803 /* ProgressWrapper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ProgressWrapper.py; sourceTree = "<group>"; };
 		CC33553926021021008A3E94 /* YoutubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTests.swift; sourceTree = "<group>"; };
 		CC37810025FE586A0092E145 /* PythonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonKit; sourceTree = "<group>"; };
 		CC37810C25FF70AD0092E145 /* youtube_dl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = youtube_dl; path = "youtube-dl/youtube_dl"; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 		CC3993942602067900046ADF /* Youtube */ = {
 			isa = PBXGroup;
 			children = (
+				CC3242392602345B00146803 /* ProgressWrapper.py */,
 				CC39938E26017A4B00046ADF /* Logger.py */,
 				CC3993952602069D00046ADF /* Youtube.swift */,
 			);
