@@ -8,20 +8,32 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+// Unfortunately it still will be available in compilation units whose headers included in Draggy-Bridging-Header.h, at least for .m files (HudWindow.m)
+// NS_UNAVAILABLE seems to also fail there
+// Dunno why
+#if !defined(__swift__)
+#define ONLY_SWIFT_AVAILABLE NS_UNAVAILABLE
+#else
+#define ONLY_SWIFT_AVAILABLE
+#endif
+
+typedef NS_ENUM(NSUInteger, PasteboardItemType) {
+    FileURL,
+    URL
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DragSessionManager : NSObject
+NS_SWIFT_NAME(_DragSessionManagerImpl)
+@interface DragSessionManagerImpl : NSObject
 
-@property(nonatomic, readonly, nullable) NSURL *current;
+@property(nonatomic, readonly, nullable) NSURL *currentPasteboardURL;
 
 @property(nonatomic, readonly) BOOL willCloseWindow;
 
 @property(nonatomic) NSWindow *hudWindow; // supposed to be set right after initialisation
 
-@property(class, readonly) DragSessionManager *sharedInstance NS_SWIFT_NAME(shared);
-
-- (instancetype)init NS_UNAVAILABLE;
-
+- (instancetype)init ONLY_SWIFT_AVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
 - (void)closeWindow;

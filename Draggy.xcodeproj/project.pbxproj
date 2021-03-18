@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		CC05F64225EEB0FB00255B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05F64125EEB0FB00255B03 /* main.m */; };
-		CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */; };
+		CC11C77625E9CC2E00C2D03C /* RecentAppsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */; };
 		CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = CC25103B25FB836C00CCFCA3 /* GRDB */; };
+		CC32423A2602347A00146803 /* ProgressWrapper.py in Copy Scripts */ = {isa = PBXBuildFile; fileRef = CC3242392602345B00146803 /* ProgressWrapper.py */; };
+		CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33553926021021008A3E94 /* YoutubeTests.swift */; };
+		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
+		CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37811025FF73DC0092E145 /* PythonRunner.swift */; };
 		CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */; };
+		CC39939226017A5700046ADF /* Logger.py in Copy Scripts */ = {isa = PBXBuildFile; fileRef = CC39938E26017A4B00046ADF /* Logger.py */; };
+		CC3993962602069D00046ADF /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3993952602069D00046ADF /* Youtube.swift */; };
+		CC3CFF2525FFD21300A62DE5 /* DragSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */; };
 		CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7C25E41D2800D50857 /* Localizable.strings */; };
 		CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC4C2F7E25E41D2800D50857 /* InfoPlist.strings */; };
 		CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4C2F8825E4426D00D50857 /* RecentAppsManager.swift */; };
@@ -29,6 +36,9 @@
 		CC9BE1B625E6D3BB00FEE307 /* libfile.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC705DE625E6BC17007C8332 /* libfile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CC9BE21D25E71D2600FEE307 /* FileDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC9BE21C25E71D2500FEE307 /* FileDescription.mm */; };
 		CCAA865825EE4E7E00B41B16 /* HudWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA865725EE4E7E00B41B16 /* HudWindow.m */; };
+		CCCCC12C2600222F00EDFDEC /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCCC1262600222F00EDFDEC /* OrderedSet.swift */; };
+		CCCF23A726037FF400EBAF2D /* DownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCCF23A026037FF300EBAF2D /* DownloadView.xib */; };
+		CCCF23A826037FF400EBAF2D /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF23A626037FF300EBAF2D /* DownloadView.swift */; };
 		CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4354925E403AA00E86C57 /* SectionHeader.swift */; };
 		CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF4354C25E403CD00E86C57 /* SectionHeader.xib */; };
 /* End PBXBuildFile section */
@@ -58,6 +68,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		CC399389260179E900046ADF /* Copy Scripts */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Scripts;
+			dstSubfolderSpec = 7;
+			files = (
+				CC32423A2602347A00146803 /* ProgressWrapper.py in Copy Scripts */,
+				CC39939226017A5700046ADF /* Logger.py in Copy Scripts */,
+			);
+			name = "Copy Scripts";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CC692AA025E52F44007FFC49 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,8 +96,16 @@
 /* Begin PBXFileReference section */
 		CC05F64125EEB0FB00255B03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CC11C77325E9CC2E00C2D03C /* DraggyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DraggyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggyTests.swift; sourceTree = "<group>"; };
+		CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAppsManagerTests.swift; sourceTree = "<group>"; };
 		CC11C77725E9CC2E00C2D03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC3242392602345B00146803 /* ProgressWrapper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = ProgressWrapper.py; sourceTree = "<group>"; };
+		CC33553926021021008A3E94 /* YoutubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTests.swift; sourceTree = "<group>"; };
+		CC37810025FE586A0092E145 /* PythonKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PythonKit; sourceTree = "<group>"; };
+		CC37810C25FF70AD0092E145 /* youtube_dl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = youtube_dl; path = "youtube-dl/youtube_dl"; sourceTree = "<group>"; };
+		CC37811025FF73DC0092E145 /* PythonRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonRunner.swift; sourceTree = "<group>"; };
+		CC39938E26017A4B00046ADF /* Logger.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Logger.py; sourceTree = "<group>"; };
+		CC3993952602069D00046ADF /* Youtube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
+		CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragSessionManager.swift; sourceTree = "<group>"; };
 		CC4C2F7D25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CC4C2F7F25E41D2800D50857 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CC4C2F8525E42FC200D50857 /* Screenshot 2021-02-22 at 21.29.28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2021-02-22 at 21.29.28.png"; sourceTree = "<group>"; };
@@ -102,6 +132,9 @@
 		CC9BE21C25E71D2500FEE307 /* FileDescription.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FileDescription.mm; sourceTree = "<group>"; };
 		CCAA865625EE4E7E00B41B16 /* HudWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HudWindow.h; sourceTree = "<group>"; };
 		CCAA865725EE4E7E00B41B16 /* HudWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HudWindow.m; sourceTree = "<group>"; };
+		CCCCC1262600222F00EDFDEC /* OrderedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
+		CCCF23A026037FF300EBAF2D /* DownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadView.xib; sourceTree = "<group>"; };
+		CCCF23A626037FF300EBAF2D /* DownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		CCF4354925E403AA00E86C57 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CCF4354C25E403CD00E86C57 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +154,7 @@
 				CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */,
 				CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */,
 				CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */,
+				CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,10 +164,21 @@
 		CC11C77425E9CC2E00C2D03C /* DraggyTests */ = {
 			isa = PBXGroup;
 			children = (
-				CC11C77525E9CC2E00C2D03C /* DraggyTests.swift */,
+				CC33553926021021008A3E94 /* YoutubeTests.swift */,
+				CC11C77525E9CC2E00C2D03C /* RecentAppsManagerTests.swift */,
 				CC11C77725E9CC2E00C2D03C /* Info.plist */,
 			);
 			path = DraggyTests;
+			sourceTree = "<group>";
+		};
+		CC3993942602067900046ADF /* Youtube */ = {
+			isa = PBXGroup;
+			children = (
+				CC3242392602345B00146803 /* ProgressWrapper.py */,
+				CC39938E26017A4B00046ADF /* Logger.py */,
+				CC3993952602069D00046ADF /* Youtube.swift */,
+			);
+			path = Youtube;
 			sourceTree = "<group>";
 		};
 		CC4C2F7B25E41D2800D50857 /* en.lproj */ = {
@@ -157,6 +202,9 @@
 		CC5DEFA625E515E500D40438 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				CCCCC1262600222F00EDFDEC /* OrderedSet.swift */,
+				CC37810C25FF70AD0092E145 /* youtube_dl */,
+				CC37810025FE586A0092E145 /* PythonKit */,
 				CC705DDB25E6BC17007C8332 /* file.xcodeproj */,
 			);
 			path = External;
@@ -201,6 +249,7 @@
 		CC797D7525DDE95F00DF1435 /* Draggy */ = {
 			isa = PBXGroup;
 			children = (
+				CC3993942602067900046ADF /* Youtube */,
 				CC4C2F8425E42FAD00D50857 /* Todo */,
 				CC4C2F7B25E41D2800D50857 /* en.lproj */,
 				CC797D7625DDE95F00DF1435 /* AppDelegate.swift */,
@@ -210,6 +259,7 @@
 				CC797D8725DDE9B300DF1435 /* Draggy-Bridging-Header.h */,
 				CC797DA325E1701700DF1435 /* DragSessionManager.h */,
 				CC797DA425E1701700DF1435 /* DragSessionManager.m */,
+				CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */,
 				CCAA865625EE4E7E00B41B16 /* HudWindow.h */,
 				CCAA865725EE4E7E00B41B16 /* HudWindow.m */,
 				CC797DA725E1738D00DF1435 /* App.swift */,
@@ -219,6 +269,7 @@
 				CC9BE21C25E71D2500FEE307 /* FileDescription.mm */,
 				CC7785D125EAC53000B1E7ED /* SimpleBundle.swift */,
 				CC05F64125EEB0FB00255B03 /* main.m */,
+				CC37811025FF73DC0092E145 /* PythonRunner.swift */,
 			);
 			path = Draggy;
 			sourceTree = "<group>";
@@ -234,6 +285,8 @@
 				CCF4354925E403AA00E86C57 /* SectionHeader.swift */,
 				CCF4354C25E403CD00E86C57 /* SectionHeader.xib */,
 				CC692AA125E5AF95007FFC49 /* RemoveButton.swift */,
+				CCCF23A626037FF300EBAF2D /* DownloadView.swift */,
+				CCCF23A026037FF300EBAF2D /* DownloadView.xib */,
 			);
 			path = DragTargetView;
 			sourceTree = "<group>";
@@ -263,11 +316,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC797D8325DDE96100DF1435 /* Build configuration list for PBXNativeTarget "Draggy" */;
 			buildPhases = (
+				CC3CFEDD25FFC16800A62DE5 /* Fix swift import header */,
 				CC797D6F25DDE95F00DF1435 /* Sources */,
 				CC797D7025DDE95F00DF1435 /* Frameworks */,
 				CC797D7125DDE95F00DF1435 /* Resources */,
 				CC692AA025E52F44007FFC49 /* Embed Frameworks */,
-				CC7EE53D25EBD58800546FD4 /* ShellScript */,
+				CC7EE53D25EBD58800546FD4 /* Install LaunchAtLogin */,
+				CC37775E25FE46430092E145 /* Install youtube_dl */,
+				CC399389260179E900046ADF /* Copy Scripts */,
 			);
 			buildRules = (
 			);
@@ -277,6 +333,7 @@
 			packageProductDependencies = (
 				CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */,
 				CC25103B25FB836C00CCFCA3 /* GRDB */,
+				CC376DBD25FE431B0092E145 /* PythonKit */,
 			);
 			productName = Draggy;
 			productReference = CC797D7325DDE95F00DF1435 /* Draggy.app */;
@@ -313,6 +370,7 @@
 			packageReferences = (
 				CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */,
 			);
 			productRefGroup = CC797D7425DDE95F00DF1435 /* Products */;
 			projectDirPath = "";
@@ -359,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCCF23A726037FF400EBAF2D /* DownloadView.xib in Resources */,
 				CC4C2F8025E41D2800D50857 /* Localizable.strings in Resources */,
 				CC4C2F8125E41D2800D50857 /* InfoPlist.strings in Resources */,
 				CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */,
@@ -371,7 +430,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CC7EE53D25EBD58800546FD4 /* ShellScript */ = {
+		CC37775E25FE46430092E145 /* Install youtube_dl */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -381,6 +440,44 @@
 			);
 			inputPaths = (
 			);
+			name = "Install youtube_dl";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nmkdir -p \"$TARGET_BUILD_DIR/$SCRIPTS_FOLDER_PATH\"\ncp -rf \"$SRCROOT\"/External/youtube-dl/youtube_dl \"$TARGET_BUILD_DIR/$SCRIPTS_FOLDER_PATH\"/youtube_dl\n\n";
+		};
+		CC3CFEDD25FFC16800A62DE5 /* Fix swift import header */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fix swift import header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# https://forums.swift.org/t/dispatchqueue-extension/4206\n# https://stackoverflow.com/questions/16745988/sed-command-with-i-option-in-place-editing-works-fine-on-ubuntu-but-not-mac\n\nset -x\n\nsed \"s/OS_dispatch_queue/NSObject/\" \"$DERIVED_FILES_DIR/$PRODUCT_MODULE_NAME-Swift-Broken.h\" > \"$DERIVED_FILES_DIR/$PRODUCT_MODULE_NAME-Swift.h\"\necho \"$?\" # set exit code to success\n";
+		};
+		CC7EE53D25EBD58800546FD4 /* Install LaunchAtLogin */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Install LaunchAtLogin";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -396,7 +493,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC11C77625E9CC2E00C2D03C /* DraggyTests.swift in Sources */,
+				CC11C77625E9CC2E00C2D03C /* RecentAppsManagerTests.swift in Sources */,
+				CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,12 +509,17 @@
 				CCAA865825EE4E7E00B41B16 /* HudWindow.m in Sources */,
 				CC4C2F8925E4426D00D50857 /* RecentAppsManager.swift in Sources */,
 				CC797DA525E1701700DF1435 /* DragSessionManager.m in Sources */,
+				CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */,
+				CC3993962602069D00046ADF /* Youtube.swift in Sources */,
 				CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */,
 				CC797D7725DDE95F00DF1435 /* AppDelegate.swift in Sources */,
 				CC797DC125E1D25700DF1435 /* DragTargetViewItem.swift in Sources */,
+				CC3CFF2525FFD21300A62DE5 /* DragSessionManager.swift in Sources */,
+				CCCCC12C2600222F00EDFDEC /* OrderedSet.swift in Sources */,
 				CC797DB725E180C300DF1435 /* DragTargetView.swift in Sources */,
 				CC7785D225EAC53000B1E7ED /* SimpleBundle.swift in Sources */,
 				CC692AA225E5AF95007FFC49 /* RemoveButton.swift in Sources */,
+				CCCF23A826037FF400EBAF2D /* DownloadView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,7 +724,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
-				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/External/file/include\"";
 				INFOPLIST_FILE = Draggy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -633,6 +736,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Draggy/Draggy-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift-Broken.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -657,11 +761,13 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LLVM_LTO = YES;
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.dyumin.Draggy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Draggy/Draggy-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift-Broken.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -707,6 +813,14 @@
 				minimumVersion = 5.5.0;
 			};
 		};
+		CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pvieito/PythonKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dyumin/LaunchAtLogin";
@@ -722,6 +836,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
+		};
+		CC376DBD25FE431B0092E145 /* PythonKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */;
+			productName = PythonKit;
 		};
 		CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;

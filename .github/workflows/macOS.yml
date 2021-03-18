@@ -19,8 +19,9 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     # Runs a single command using the runners shell
+    # Compile twice (if needed) due to https://github.com/dyumin/Draggy/commit/bdef82b629c8283bbbce17fd0635c0744d47b5d8
     - name: Build
-      run: xcodebuild -scheme Draggy build
+      run: xcodebuild -scheme Draggy build || xcodebuild -scheme Draggy build
 
     - name: Run tests
       run: xcodebuild test -scheme Draggy

@@ -102,7 +102,7 @@ class DragTargetViewItem: NSCollectionViewItem {
     }
 
     override func mouseDown(with event: NSEvent) {
-        if let current = DragSessionManager.shared.current {
+        if case .file(let current) = DragSessionManager.shared.currentPasteboardItem {
             guard let app = getSimpleBundle() else {
                 return
             }
