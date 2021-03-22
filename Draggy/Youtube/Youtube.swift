@@ -191,6 +191,7 @@ class Youtube {
     }
 
     // --get-filename
+    // postprocessing may produce different filename (extension especially), there currently is no way to tell if postprocessing will happen
     private func getFilename(_ video: URL, _ queue: DispatchQueue? = nil) -> String? {
         let work = { [self] () -> String? in
             let params: Dictionary<PythonObject, PythonObject> = [
@@ -220,38 +221,40 @@ class Youtube {
     private func onProgressReported(_ progressWrapper: PythonObject) {
         let swiftProgress = progressMap[progressWrapper]!
         guard let progress = progress_hook_dictionary(from: progressWrapper.progress) else {
+
             assert(false)
             return
         }
 
         DispatchQueue.main.async {
             swiftProgress.estimatedTimeRemaining = progress.eta
-            if swiftProgress.fileURL == nil {
-                swiftProgress.fileURL = progress.filename
-            }
+            swiftProgress.fileURL = progress.filename // multiple files may download under one progress (postprocessing related)
+            // todo: currently progress reports only first file
 
             // set this before setting totalUnitCount and completedUnitCount since they affect swiftProgress.isFinished
             if progress.status == .finished {
                 swiftProgress.fileCompletedCount = (swiftProgress.fileCompletedCount == nil) ? 1 : swiftProgress.fileCompletedCount! + 1
             }
 
-            swiftProgress.totalUnitCount = Int64(progress.total_bytes ?? 0)
-            let completedUnitCount = { () -> Int64 in
-                if progress.downloaded_bytes == 0, progress.status != .downloading {
-                    return swiftProgress.totalUnitCount // mark swiftProgress as finished // doest work if both totalUnitCount an completedUnitCount are zero
-                }
-                return Int64(progress.downloaded_bytes)
-            }()
+            if swiftProgress.totalUnitCount >= Int64(progress.total_bytes ?? 0) {
+                swiftProgress.totalUnitCount = Int64(progress.total_bytes ?? 0)
+                let completedUnitCount = { () -> Int64 in
+                    if progress.downloaded_bytes == 0, progress.status != .downloading {
+                        return swiftProgress.totalUnitCount // mark swiftProgress as finished // doest work if both totalUnitCount an completedUnitCount are zero
+                    }
+                    return Int64(progress.downloaded_bytes)
+                }()
 
-            if swiftProgress.totalUnitCount != completedUnitCount { // file operations still pending after completion notification, set isFinished after YoutubeDL return
-                swiftProgress.completedUnitCount = completedUnitCount
+                if swiftProgress.totalUnitCount > completedUnitCount { // file operations still pending after completion notification, set isFinished after YoutubeDL return
+                    swiftProgress.completedUnitCount = completedUnitCount
+                }
             }
         }
     }
 
     @discardableResult
-    public func download(_ video: URL) -> Progress {
-        
+    public func download(_ video: URL, /* enables 'bestvideo+bestaudio' option in ydl (if /usr/local/bin/ffmpeg is available) */ usePostprocessing: Bool = true) -> Progress {
+
         let sleepPreventor = SleepPreventor("Downloading \(video)")
 
         let progress = Progress()
@@ -267,28 +270,57 @@ class Youtube {
 
             progressMap[progressWrapper] = progress // calculates python hash
 
-            let filePath = { () -> PythonObject in
+            let fileDir = { () -> URL in
                 if NSClassFromString("XCTest") != nil { // not reliable, but will do
-                    return URL(string: "/tmp")!.appendingPathComponent("%(id)s.%(ext)s").path.pythonObject
+                    return URL(fileURLWithPath: "/tmp")
                 }
-                return downloadsDir.appendingPathComponent("%(id)s.%(ext)s").path.pythonObject
+                return downloadsDir
             }()
 
-            let params: Dictionary<PythonObject, PythonObject> = [
-                "outtmpl": filePath
-                , "quiet": true
+            let filePath = fileDir.appendingPathComponent("%(id)s.%(ext)s")
+
+//            let merge_output_format = "mkv"
+            var params: Dictionary<PythonObject, PythonObject> = [
+                "outtmpl": filePath.path.pythonObject
+//                , "quiet": true
+//                , "merge_output_format": merge_output_format.pythonObject
                 , "progress_hooks": [progressWrapper]
             ]
 
+            var merge_output_formats: Array<String> = []
+            let ffmpegPath = "/usr/local/bin/ffmpeg" // TODO: obtain ffmpeg from env
+            if FileManager.default.fileExists(atPath: ffmpegPath) && usePostprocessing {
+                print("found ffmpeg: ", ffmpegPath)
+                params["ffmpeg_location"] = ffmpegPath.pythonObject
+                merge_output_formats = ["mkv", "mp4", "ogg", "webm", "flv"]
+            }
+
+            guard let videoID = getID(video, nil) else {
+                return
+            }
             YoutubeDL(params).download([video.absoluteString])
 
             let progress = progressMap.removeValue(forKey: progressWrapper)! // calculates python hash
             DispatchQueue.main.async {
                 _ = sleepPreventor // capture sleepPreventor
-                progress.completedUnitCount = progress.totalUnitCount
+
+                for merge_output_format in merge_output_formats {
+                    let processedFileURL = fileDir.appendingPathComponent("\(videoID).\(merge_output_format)")
+                    if FileManager.default.fileExists(atPath: processedFileURL.path) {
+                        if progress.fileURL == nil {
+                            progress.fileCompletedCount = (progress.fileCompletedCount ?? 0) + 1
+                        }
+                        progress.fileURL = processedFileURL
+                        break
+                    }
+                }
+                if (progress.totalUnitCount != 0) {
+                    progress.completedUnitCount = progress.totalUnitCount
+                } else {
+                    progress.totalUnitCount = 1
+                    progress.completedUnitCount = progress.totalUnitCount
+                }
             }
-            
-//            PythonRunner.shared.runGC()
         }
 
         return progress
@@ -298,7 +330,7 @@ class Youtube {
 extension Progress {
     public var isYoutubeDownloadSuccessful: Bool {
         get {
-            fileCompletedCount == fileTotalCount
+            fileCompletedCount ?? 0 >= fileTotalCount ?? 1
         }
     }
 }

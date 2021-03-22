@@ -31,14 +31,14 @@ class YoutubeTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        cleanup()
+        try cleanup()
     }
     
     var cleanupList = Set<URL>()
     
-    func cleanup() {
+    func cleanup() throws {
         for item in cleanupList {
-            try! FileManager.default.removeItem(at: item)
+            try FileManager.default.removeItem(at: item)
         }
     }
 
@@ -75,6 +75,46 @@ class YoutubeTests: XCTestCase {
             expectations.append(expectation)
 
             let progress = Youtube.shared.download(video.url)
+            observations.append(progress.observe(\.isFinished, options: [.initial, .new]) { [weak self] (progress, change) in
+                if change.newValue == true {
+                    XCTAssertTrue(progress.isYoutubeDownloadSuccessful)
+                    XCTAssertTrue(FileManager.default.fileExists(atPath: progress.fileURL!.path))
+                    self?.cleanupList.insert(progress.fileURL!)
+                    expectation.fulfill()
+                }
+            })
+        }
+
+        wait(for: expectations, timeout: 120)
+    }
+    
+    func testDownloadWithoutPostprocessing() throws {
+        var observations = [NSKeyValueObservation]()
+        var expectations = [XCTestExpectation]()
+
+        shortVideos.forEach { (video) in
+            // Create an expectation for a background download task.
+            let expectation = XCTestExpectation(description: "Download \(video)")
+            expectations.append(expectation)
+
+            let progress = Youtube.shared.download(video.url, usePostprocessing: false)
+            observations.append(progress.observe(\.isFinished, options: [.initial, .new]) { [weak self] (progress, change) in
+                if change.newValue == true {
+                    XCTAssertTrue(progress.isYoutubeDownloadSuccessful)
+                    XCTAssertTrue(FileManager.default.fileExists(atPath: progress.fileURL!.path))
+                    self?.cleanupList.insert(progress.fileURL!)
+                    expectation.fulfill()
+                }
+            })
+        }
+
+        // check same files
+        shortVideos.forEach { (video) in
+            // Create an expectation for a background download task.
+            let expectation = XCTestExpectation(description: "Download again \(video)")
+            expectations.append(expectation)
+
+            let progress = Youtube.shared.download(video.url, usePostprocessing: false)
             observations.append(progress.observe(\.isFinished, options: [.initial, .new]) { [weak self] (progress, change) in
                 if change.newValue == true {
                     XCTAssertTrue(progress.isYoutubeDownloadSuccessful)
