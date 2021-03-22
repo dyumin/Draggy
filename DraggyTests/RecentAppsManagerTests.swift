@@ -15,14 +15,13 @@ class RecentAppsManagerTests: XCTestCase {
         _ = RecentAppsManager.shared
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        RecentAppsManager.shared.test_db_reset()
     }
 
     // extension && mimetype -> save bundle as recent for both extension && mimetype, display as recent for both extension && mimetype
     func test_extension_and_mimetype() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
@@ -47,8 +46,6 @@ class RecentAppsManagerTests: XCTestCase {
     
     // extension -> save bundle as recent for extension (mimetype will be null), display as recent for extension and mimetypes used to match this extension
     func test_extension1() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: ""))
@@ -72,8 +69,6 @@ class RecentAppsManagerTests: XCTestCase {
     
     // extension -> save bundle as recent for extension (mimetype will be null), display as recent for extension and mimetypes used to match this extension
     func test_extension2() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: ""))
@@ -100,8 +95,6 @@ class RecentAppsManagerTests: XCTestCase {
 
     // mimetype -> save bundle as recent for mimetype (extension will be null), display as recent for mimetype and extensions used to match this mimetype
     func test_mimetype1() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "", mimetype: "bar"))
@@ -124,8 +117,6 @@ class RecentAppsManagerTests: XCTestCase {
     
     // mimetype -> save bundle as recent for mimetype (extension will be null), display as recent for mimetype and extensions used to match this mimetype
     func test_mimetype2() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "", mimetype: "bar"))
@@ -152,8 +143,6 @@ class RecentAppsManagerTests: XCTestCase {
     
     // empty && empty -> save bundle as used to open this particular file (extension and mimetype will be null), dont display as recent at all (unless display recent apps per file setting is on (not implemented yet))
     func test_empty_and_empty() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "", mimetype: ""))
@@ -179,8 +168,6 @@ class RecentAppsManagerTests: XCTestCase {
     }
     
     func test_clearRecent_for_file1() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
@@ -212,8 +199,6 @@ class RecentAppsManagerTests: XCTestCase {
     }
     
     func test_clearRecent_for_file2() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
@@ -245,8 +230,6 @@ class RecentAppsManagerTests: XCTestCase {
     }
     
     func test_clearRecent_for_file3() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
@@ -278,8 +261,6 @@ class RecentAppsManagerTests: XCTestCase {
     }
     
     func test_clearRecent_app_for_file1() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
@@ -317,8 +298,6 @@ class RecentAppsManagerTests: XCTestCase {
     }
     
     func test_clearRecent_app_for_file2() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
@@ -346,8 +325,6 @@ class RecentAppsManagerTests: XCTestCase {
     }
     
     func test_clearRecent_app_for_file3() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
@@ -375,8 +352,6 @@ class RecentAppsManagerTests: XCTestCase {
     }
     
     func test_clearRecent_app_for_file4() throws {
-        RecentAppsManager.shared.test_db_reset()
-        
         let file1 = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
         let app1 = SimpleBundle("/System/Applications/Utilities/AirPort Utility.app")
         RecentAppsManager.shared.didOpen(file1, with: app1, FileInfo(extension: "foo", mimetype: "bar"))
