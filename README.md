@@ -10,5 +10,6 @@ Draggy remembers apps used to open particular file extension and will suggest th
 
 Draggy supports youtube videos download. Just drag any url containing ```*youtube.com/watch?v=*``` and drop it on draggy\`s download icon.
 Note: in order to get the best possible quality make sure ffmpeg is available at ```/usr/local/bin/ffmpeg``` (```brew install ffmpeg```)
+![youtube_example.gif](youtube_example.gif)
 
 Send ~~nudes~~ feature requests!
