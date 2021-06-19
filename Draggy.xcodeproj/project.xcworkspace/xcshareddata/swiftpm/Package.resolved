@@ -12,11 +12,11 @@
       },
       {
         "package": "LaunchAtLogin",
-        "repositoryURL": "https://github.com/dyumin/LaunchAtLogin",
+        "repositoryURL": "https://github.com/sindresorhus/LaunchAtLogin",
         "state": {
           "branch": null,
-          "revision": "6b28ab24f9aed20d6251c3ebadd65c50f124038f",
-          "version": null
+          "revision": "6b16bcdf7d45a9d76a768a5c4912dde925cf0e95",
+          "version": "4.1.0"
         }
       }
     ]

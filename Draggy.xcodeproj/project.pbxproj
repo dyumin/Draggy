@@ -14,7 +14,6 @@
 		CC33553A26021021008A3E94 /* YoutubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33553926021021008A3E94 /* YoutubeTests.swift */; };
 		CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC376DBD25FE431B0092E145 /* PythonKit */; };
 		CC37811125FF73DC0092E145 /* PythonRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37811025FF73DC0092E145 /* PythonRunner.swift */; };
-		CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */; };
 		CC39939226017A5700046ADF /* Logger.py in Copy Scripts */ = {isa = PBXBuildFile; fileRef = CC39938E26017A4B00046ADF /* Logger.py */; };
 		CC3993962602069D00046ADF /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3993952602069D00046ADF /* Youtube.swift */; };
 		CC3CFF2525FFD21300A62DE5 /* DragSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CFF2425FFD21300A62DE5 /* DragSessionManager.swift */; };
@@ -42,6 +41,7 @@
 		CCD8E4C82603A92200DE4032 /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8E4C72603A92200DE4032 /* Power.swift */; };
 		CCF4354A25E403AA00E86C57 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4354925E403AA00E86C57 /* SectionHeader.swift */; };
 		CCF4354D25E403CD00E86C57 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF4354C25E403CD00E86C57 /* SectionHeader.xib */; };
+		CCFACE80267E1C2F00E90844 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CCFACE7F267E1C2F00E90844 /* LaunchAtLogin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,8 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC25103C25FB836C00CCFCA3 /* GRDB in Frameworks */,
-				CC37AEEC25F4453F0024BD51 /* LaunchAtLogin in Frameworks */,
 				CC9BE1B525E6D3BB00FEE307 /* libfile.dylib in Frameworks */,
+				CCFACE80267E1C2F00E90844 /* LaunchAtLogin in Frameworks */,
 				CC376DBE25FE431B0092E145 /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,9 +333,9 @@
 			);
 			name = Draggy;
 			packageProductDependencies = (
-				CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */,
 				CC25103B25FB836C00CCFCA3 /* GRDB */,
 				CC376DBD25FE431B0092E145 /* PythonKit */,
+				CCFACE7F267E1C2F00E90844 /* LaunchAtLogin */,
 			);
 			productName = Draggy;
 			productReference = CC797D7325DDE95F00DF1435 /* Draggy.app */;
@@ -370,9 +370,9 @@
 			);
 			mainGroup = CC797D6A25DDE95F00DF1435;
 			packageReferences = (
-				CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				CC25103A25FB836C00CCFCA3 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 				CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */,
+				CCFACE7E267E1C2F00E90844 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 			);
 			productRefGroup = CC797D7425DDE95F00DF1435 /* Products */;
 			projectDirPath = "";
@@ -805,12 +805,12 @@
 				kind = branch;
 			};
 		};
-		CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+		CCFACE7E267E1C2F00E90844 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dyumin/LaunchAtLogin";
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
 			requirement = {
-				kind = revision;
-				revision = 6b28ab24f9aed20d6251c3ebadd65c50f124038f;
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -826,9 +826,9 @@
 			package = CC376DBC25FE431B0092E145 /* XCRemoteSwiftPackageReference "PythonKit" */;
 			productName = PythonKit;
 		};
-		CC37AEEB25F4453F0024BD51 /* LaunchAtLogin */ = {
+		CCFACE7F267E1C2F00E90844 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CC37AEEA25F4453F0024BD51 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			package = CCFACE7E267E1C2F00E90844 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
 			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
