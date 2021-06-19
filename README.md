@@ -1,4 +1,4 @@
-## Draggy
+## Draggy [![macOS](https://github.com/dyumin/Draggy/actions/workflows/macOS.yml/badge.svg)](https://github.com/dyumin/Draggy/actions/workflows/macOS.yml)
 
 Do you drag? Do you drag a lot? Tired of dragging all the way through your screen real estate?
 Tell us no more! We got you!
