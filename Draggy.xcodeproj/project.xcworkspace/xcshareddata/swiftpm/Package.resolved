@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/groue/GRDB.swift.git",
         "state": {
           "branch": null,
-          "revision": "3b6cf4c12b91fd0827419ac4307069efbf7cb65e",
-          "version": "5.5.0"
+          "revision": "32b2923e890df320906e64cbd0faca22a8bfda14",
+          "version": "5.12.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/sindresorhus/LaunchAtLogin",
         "state": {
           "branch": null,
-          "revision": "6b16bcdf7d45a9d76a768a5c4912dde925cf0e95",
-          "version": "4.1.0"
+          "revision": "e8171b3e38a2816f579f58f3dac1522aa39efe41",
+          "version": "4.2.0"
         }
       }
     ]
