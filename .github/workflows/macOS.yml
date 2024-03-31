@@ -11,6 +11,7 @@ on:
     # * is a special character in YAML so you have to quote this string
     # “At 11:00 on Saturday.”
     - cron: '0 11 * * SAT'
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
