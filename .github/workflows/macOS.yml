@@ -29,6 +29,9 @@ jobs:
 
     - name: Run tests
       run: xcodebuild test -scheme Draggy
-      with:
-        name: build artifacts
-        path: /Users/runner/Library/Developer/Xcode/DerivedData/
+      
+    - name: Archive build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build artifacts
+          path: /Users/runner/Library/Developer/Xcode/DerivedData/
